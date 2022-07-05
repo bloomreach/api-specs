@@ -27,7 +27,7 @@ components:
       name: auth_key
       in: query
       description: >-
-        Unique key shared by your Bloomreach representative during integration phase. This is used to authenticate a merchant API call. 
+        Unique key shared by your Bloomreach representative during integration. This is used to authenticate a merchant API call. 
       required: false
       schema:
         type: string
