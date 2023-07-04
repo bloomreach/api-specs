@@ -6,21 +6,17 @@ info:
   contact:
     name: Metal
     email: recs-pathways@bloomreach.com
-
 tags:
-  - name: "Email Recommendations Widget APIs"
-    description: >-
-      External Swagger API Specificiation for Bloomreach Email Widgets
+  - name: Email Recommendations Widget APIs
+    description: External Swagger API Specificiation for Bloomreach Email Widgets
     externalDocs:
-      description: "Bloomreach Dev Docs"
-      url: "https://help.bloomreach.com/"
-
+      description: Bloomreach Dev Docs
+      url: https://help.bloomreach.com/
 servers:
   - url: https://pathways-email.dxpapi.com
     description: Production
   - url: https://pathways-email-staging.dxpapi.com
     description: Staging
-
 components:
   parameters:
     auth_key:
@@ -63,7 +59,7 @@ components:
       schema:
         type: string
         default: uid%3D1251839531436%3Av%3D15.0%3Ats%3D1606749087372%3Ahc%3D13
-    url:    
+    url:
       name: url
       in: query
       description: The absolute URL of the page where the request is initiated. Do not use a relative URL.
@@ -81,20 +77,20 @@ components:
         type: string
         format: uri
         default: https%3A%2F%2Fwww.pacific.com%2Fl%2F%3Fsearchinfo%3Dps5%2520console%26mode%3Dedu%26sel%3DItem-Condition_New-Items
-    request_id:   
+    request_id:
       name: request_id
       in: query
       description: An ID to track site visitor clicks. We recommend that you generate unique, random values of 13 digits to enable click-tracking. The request_id is also important for debugging.
       required: false
       schema:
-        type: string 
+        type: string
     view_id:
       name: view_id
       in: query
       description: A unique identifier for a specific view of your product catalog. If you have multiple versions of your site, each with their own product catalog characteristics like product titles and prices, then add view_id to your call. Bloomreach uses your view_id parameter value to display the right product information for your customers based on their individual site views. You can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and product catalog.
       required: false
       schema:
-        type: string 
+        type: string
     query:
       name: query
       in: query
@@ -114,8 +110,7 @@ components:
     rows:
       name: rows
       in: query
-      description: The number of matching items to return per results page in the API response. The maximum value is 200. The result size is used from the Dashboard if it is not sent in the API.
-                  To enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.
+      description: The number of matching items to return per results page in the API response. The maximum value is 200. The result size is used from the Dashboard if it is not sent in the API. To enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.
       required: false
       schema:
         type: integer
@@ -134,14 +129,15 @@ components:
     filter:
       name: filter
       in: query
-      description: >-
+      description: |-
         The filter parameter applies a faceted filter to the returned products, searching for products that fit your parameter values. Any facet that you want to filter must be in your feed.
-        
         Attributes must be enabled and mapped by Bloomreach. Let your Bloomreach representative know which attributes in your content feed you want to apply as filters to search results.
-
-        You can filter results based on numeric ranges. For example, &filter=-(price:["*" TO "100"]) or &filter=(price:["100" TO "*"]).
-
-        To provide multiple filters, send multiple filter parameters. For example, &filter=-(price:["*" TO "100"])&filter=-(color_groups: ("blue"))
+        You can filter results based on numeric ranges.
+        For example, &filter=(price:["100" TO "*"]).
+        
+        Please note that a negative filter on ranges is not supported.
+        
+        To provide multiple filters, send multiple filter parameters. For example, &filter=(price:["*" TO "100"])&filter=(color_groups: ("blue"))
       required: false
       schema:
         type: string
@@ -179,7 +175,7 @@ components:
     catalog_name:
       name: catalog_name
       in: query
-      description: Name of the catalog as present in the feed data.  
+      description: Name of the catalog as present in the feed data.
       required: true
       schema:
         type: string
@@ -197,19 +193,15 @@ components:
       required: false
       schema:
         type: boolean
-
 paths:
   /api/v2/widgets/image/global/{widget_id}:
     summary: Email Widget v2 api
-    description: >-
-      Email image api calls for trending products
+    description: Email image api calls for trending products
     get:
-      summary: Global Recommendation Widget products (Image API)  
-      description: >-
-        This API allows you to get the EnrichedImage for the products in global widgets like Trending products.
-        Typically used on Context less pages like your Homepage.
+      summary: Global Recommendation Widget products (Image API)
+      description: This API allows you to get the EnrichedImage for the products in global widgets like Trending products. Typically used on Context less pages like your Homepage.
       tags:
-        - "Email Recommendations Widget APIs"
+        - Email Recommendations Widget APIs
       responses:
         '302':
           description: Redirect to the enriched image for that product
@@ -222,7 +214,6 @@ paths:
           description: If the query parameters are incorrect/invalid
         '404':
           description: Must send 404 if the widget id is not valid
-
     parameters:
       - $ref: '#/components/parameters/auth_key'
       - name: widget_id
@@ -243,18 +234,14 @@ paths:
       - $ref: '#/components/parameters/rows'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/filter'
-
   /api/v2/widgets/proxy/global/{widget_id}:
     summary: Email Widget v2 api
-    description: >-
-      Email proxy api calls for trending products
+    description: Email proxy api calls for trending products
     get:
       summary: Global Recommendation Widget products (Proxy API)
-      description: >-
-        This API allows you to get the Product Description Page for the products in global widgets like Trending products.
-        Typically used on Context less pages like your Hompage.
+      description: This API allows you to get the Product Description Page for the products in global widgets like Trending products. Typically used on Context less pages like your Hompage.
       tags:
-        - "Email Recommendations Widget APIs"
+        - Email Recommendations Widget APIs
       responses:
         '302':
           description: Redirect to the PDP link
@@ -267,7 +254,6 @@ paths:
           description: If the query parameters are incorrect/invalid
         '404':
           description: Must send 404 if the widget id is not valid
-
     parameters:
       - $ref: '#/components/parameters/auth_key'
       - name: widget_id
@@ -288,18 +274,14 @@ paths:
       - $ref: '#/components/parameters/rows'
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/filter'
-
   /api/v2/widgets/image/item/{widget_id}:
     summary: Email Widget v2 api
-    description: >-
-      Email image api calls for item-based widgets such as Frequently bought together, Frequently viewed together, Similar products
+    description: Email image api calls for item-based widgets such as Frequently bought together, Frequently viewed together, Similar products
     get:
-      summary: Item-based Recommendation Widget products (Image API) 
-      description: >-
-        This API allows you to get the EnrichedImage for the products in item-based widgets such as Bestseller, Frequently bought together, Frequently viewed together, Similar products, Experience-Driven Recommendations.
-        They use the unique identifier of the item on your site to show relevant recommendations.
+      summary: Item-based Recommendation Widget products (Image API)
+      description: This API allows you to get the EnrichedImage for the products in item-based widgets such as Bestseller, Frequently bought together, Frequently viewed together, Similar products, Experience-Driven Recommendations. They use the unique identifier of the item on your site to show relevant recommendations.
       tags:
-      - "Email Recommendations Widget APIs"
+        - Email Recommendations Widget APIs
       responses:
         '302':
           description: Redirect to the enriched image for that product
@@ -312,52 +294,6 @@ paths:
           description: If the query parameters are incorrect/invalid
         '404':
           description: Must send 404 if the widget id is not valid
-
-    parameters:
-    - $ref: '#/components/parameters/auth_key'
-    - name: widget_id
-      in: path
-      description: The ID of the widget, which can be found in the Widget Configurator in the Dashboard.
-      required: true
-      schema:
-        type: string
-        default: 1jwp539z
-    - $ref: '#/components/parameters/account_id'
-    - $ref: '#/components/parameters/domain_key'
-    - $ref: '#/components/parameters/_br_uid_2'
-    - $ref: '#/components/parameters/url'
-    - $ref: '#/components/parameters/item_ids'
-    - $ref: '#/components/parameters/ref_url'
-    - $ref: '#/components/parameters/request_id'
-    - $ref: '#/components/parameters/view_id' 
-    - $ref: '#/components/parameters/fields'
-    - $ref: '#/components/parameters/rows'
-    - $ref: '#/components/parameters/filter'
-
-  /api/v2/widgets/proxy/item/{widget_id}:
-    summary: Email Widget v2 api
-    description: >-
-      Email proxy api calls for item-based widgets such as Frequently bought together, Frequently viewed together, Similar products, Experience-Driven Recommendations
-    get:
-      summary: Item-based Recommendation Widget products (Proxy API) 
-      description: >-
-        This API allows you to get the Product Description Page for the products in item-based widgets such as Bestseller, Frequently bought together, Frequently viewed together, Similar products, Experience-Driven Recommendations.
-        They use the unique identifier of the item on your site to show relevant recommendations.
-      tags:
-        - "Email Recommendations Widget APIs"
-      responses:
-        '302':
-          description: Redirect to the PDP link
-          content:
-            text/html:
-              schema:
-                type: string
-                format: binary
-        '400':
-          description: If the query parameters are incorrect/invalid
-        '404':
-          description: Must send 404 if the widget id is not valid
-
     parameters:
       - $ref: '#/components/parameters/auth_key'
       - name: widget_id
@@ -378,17 +314,54 @@ paths:
       - $ref: '#/components/parameters/fields'
       - $ref: '#/components/parameters/rows'
       - $ref: '#/components/parameters/filter'
-
+  /api/v2/widgets/proxy/item/{widget_id}:
+    summary: Email Widget v2 api
+    description: Email proxy api calls for item-based widgets such as Frequently bought together, Frequently viewed together, Similar products, Experience-Driven Recommendations
+    get:
+      summary: Item-based Recommendation Widget products (Proxy API)
+      description: This API allows you to get the Product Description Page for the products in item-based widgets such as Bestseller, Frequently bought together, Frequently viewed together, Similar products, Experience-Driven Recommendations. They use the unique identifier of the item on your site to show relevant recommendations.
+      tags:
+        - Email Recommendations Widget APIs
+      responses:
+        '302':
+          description: Redirect to the PDP link
+          content:
+            text/html:
+              schema:
+                type: string
+                format: binary
+        '400':
+          description: If the query parameters are incorrect/invalid
+        '404':
+          description: Must send 404 if the widget id is not valid
+    parameters:
+      - $ref: '#/components/parameters/auth_key'
+      - name: widget_id
+        in: path
+        description: The ID of the widget, which can be found in the Widget Configurator in the Dashboard.
+        required: true
+        schema:
+          type: string
+          default: 1jwp539z
+      - $ref: '#/components/parameters/account_id'
+      - $ref: '#/components/parameters/domain_key'
+      - $ref: '#/components/parameters/_br_uid_2'
+      - $ref: '#/components/parameters/url'
+      - $ref: '#/components/parameters/item_ids'
+      - $ref: '#/components/parameters/ref_url'
+      - $ref: '#/components/parameters/request_id'
+      - $ref: '#/components/parameters/view_id'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/rows'
+      - $ref: '#/components/parameters/filter'
   /api/v2/widgets/image/category/{widget_id}:
     summary: Email Widget v2 api
-    description: >-
-      Email image api for category-based widget
+    description: Email image api for category-based widget
     get:
-      summary: Category-based Widget products (Image API) 
-      description: >-
-        This API allows you to fetch the EnrichedImages for products in a category-id based widget.
+      summary: Category-based Widget products (Image API)
+      description: This API allows you to fetch the EnrichedImages for products in a category-id based widget.
       tags:
-      - "Email Recommendations Widget APIs"
+        - Email Recommendations Widget APIs
       responses:
         '302':
           description: Redirect to the enriched image for that product
@@ -401,42 +374,38 @@ paths:
           description: If the query parameters are incorrect/invalid
         '404':
           description: Must send 404 if the widget id is not valid
-
     parameters:
-    - $ref: '#/components/parameters/auth_key'
-    - name: widget_id
-      in: path
-      description: The ID of the widget, which can be found in the Widget Configurator in the Dashboard.
-      required: true
-      schema:
-        type: string
-        default: r92rgmjv
-    - $ref: '#/components/parameters/account_id'
-    - $ref: '#/components/parameters/domain_key'
-    - $ref: '#/components/parameters/_br_uid_2'
-    - $ref: '#/components/parameters/url' 
-    - $ref: '#/components/parameters/cat_id'
-    - $ref: '#/components/parameters/ref_url'
-    - $ref: '#/components/parameters/request_id'
-    - $ref: '#/components/parameters/view_id' 
-    - $ref: '#/components/parameters/fields'
-    - $ref: '#/components/parameters/rows'
-    - $ref: '#/components/parameters/start'
-    - $ref: '#/components/parameters/sort'
-    - $ref: '#/components/parameters/filter'
-    - $ref: '#/components/parameters/segment'
-    - $ref: '#/components/parameters/facet'
-
+      - $ref: '#/components/parameters/auth_key'
+      - name: widget_id
+        in: path
+        description: The ID of the widget, which can be found in the Widget Configurator in the Dashboard.
+        required: true
+        schema:
+          type: string
+          default: r92rgmjv
+      - $ref: '#/components/parameters/account_id'
+      - $ref: '#/components/parameters/domain_key'
+      - $ref: '#/components/parameters/_br_uid_2'
+      - $ref: '#/components/parameters/url'
+      - $ref: '#/components/parameters/cat_id'
+      - $ref: '#/components/parameters/ref_url'
+      - $ref: '#/components/parameters/request_id'
+      - $ref: '#/components/parameters/view_id'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/rows'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/sort'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/segment'
+      - $ref: '#/components/parameters/facet'
   /api/v2/widgets/proxy/category/{widget_id}:
     summary: Email Widget v2 api
-    description: >-
-      Email proxy api for category-based widget
+    description: Email proxy api for category-based widget
     get:
-      summary: Category-based Widget products (Proxy API) 
-      description: >-
-        This API allows you to fetch the Product Description Page for products in a category-id based widget.
+      summary: Category-based Widget products (Proxy API)
+      description: This API allows you to fetch the Product Description Page for products in a category-id based widget.
       tags:
-      - "Email Recommendations Widget APIs"
+        - Email Recommendations Widget APIs
       responses:
         '302':
           description: Redirect to the PDP link
@@ -449,42 +418,38 @@ paths:
           description: If the query parameters are incorrect/invalid
         '404':
           description: Must send 404 if the widget id is not valid
-
     parameters:
-    - $ref: '#/components/parameters/auth_key'
-    - name: widget_id
-      in: path
-      description: The ID of the widget, which can be found in the Widget Configurator in the Dashboard.
-      required: true
-      schema:
-        type: string
-        default: r92rgmjv
-    - $ref: '#/components/parameters/account_id'
-    - $ref: '#/components/parameters/domain_key'
-    - $ref: '#/components/parameters/_br_uid_2'
-    - $ref: '#/components/parameters/url'
-    - $ref: '#/components/parameters/cat_id'
-    - $ref: '#/components/parameters/ref_url'
-    - $ref: '#/components/parameters/request_id'
-    - $ref: '#/components/parameters/view_id'
-    - $ref: '#/components/parameters/fields'
-    - $ref: '#/components/parameters/rows'
-    - $ref: '#/components/parameters/start'
-    - $ref: '#/components/parameters/sort'
-    - $ref: '#/components/parameters/filter'
-    - $ref: '#/components/parameters/segment'
-    - $ref: '#/components/parameters/facet'
-
+      - $ref: '#/components/parameters/auth_key'
+      - name: widget_id
+        in: path
+        description: The ID of the widget, which can be found in the Widget Configurator in the Dashboard.
+        required: true
+        schema:
+          type: string
+          default: r92rgmjv
+      - $ref: '#/components/parameters/account_id'
+      - $ref: '#/components/parameters/domain_key'
+      - $ref: '#/components/parameters/_br_uid_2'
+      - $ref: '#/components/parameters/url'
+      - $ref: '#/components/parameters/cat_id'
+      - $ref: '#/components/parameters/ref_url'
+      - $ref: '#/components/parameters/request_id'
+      - $ref: '#/components/parameters/view_id'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/rows'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/sort'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/segment'
+      - $ref: '#/components/parameters/facet'
   /api/v2/widgets/image/keyword/{widget_id}:
     summary: Email Widget v2 api
-    description: >-
-      Email image api for keyword-based widget
+    description: Email image api for keyword-based widget
     get:
-      summary: Keyword-based Widget products (Image API) 
-      description: >-
-        This API allows you to fetch the EnrichedImages for products in keyword-based widget results like Search.
+      summary: Keyword-based Widget products (Image API)
+      description: This API allows you to fetch the EnrichedImages for products in keyword-based widget results like Search.
       tags:
-      - "Email Recommendations Widget APIs"
+        - Email Recommendations Widget APIs
       responses:
         '302':
           description: Redirect to the enriched image for that product
@@ -497,42 +462,38 @@ paths:
           description: If the query parameters are incorrect/invalid
         '404':
           description: Must send 404 if the widget id is not valid
-
     parameters:
-    - $ref: '#/components/parameters/auth_key'
-    - name: widget_id
-      in: path
-      description: The ID of the widget, which can be found in the Widget Configurator in the Dashboard.
-      required: true
-      schema:
-        type: string
-        default: kjy4y2jv
-    - $ref: '#/components/parameters/account_id'
-    - $ref: '#/components/parameters/domain_key'
-    - $ref: '#/components/parameters/_br_uid_2'
-    - $ref: '#/components/parameters/url'
-    - $ref: '#/components/parameters/query'
-    - $ref: '#/components/parameters/ref_url'
-    - $ref: '#/components/parameters/request_id'
-    - $ref: '#/components/parameters/view_id' 
-    - $ref: '#/components/parameters/fields'
-    - $ref: '#/components/parameters/rows'
-    - $ref: '#/components/parameters/start'
-    - $ref: '#/components/parameters/sort'
-    - $ref: '#/components/parameters/filter'
-    - $ref: '#/components/parameters/segment'
-    - $ref: '#/components/parameters/facet'
-
+      - $ref: '#/components/parameters/auth_key'
+      - name: widget_id
+        in: path
+        description: The ID of the widget, which can be found in the Widget Configurator in the Dashboard.
+        required: true
+        schema:
+          type: string
+          default: kjy4y2jv
+      - $ref: '#/components/parameters/account_id'
+      - $ref: '#/components/parameters/domain_key'
+      - $ref: '#/components/parameters/_br_uid_2'
+      - $ref: '#/components/parameters/url'
+      - $ref: '#/components/parameters/query'
+      - $ref: '#/components/parameters/ref_url'
+      - $ref: '#/components/parameters/request_id'
+      - $ref: '#/components/parameters/view_id'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/rows'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/sort'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/segment'
+      - $ref: '#/components/parameters/facet'
   /api/v2/widgets/proxy/keyword/{widget_id}:
     summary: Email Widget v2 api
-    description: >-
-      Email proxy api for keyword-based widget
+    description: Email proxy api for keyword-based widget
     get:
-      summary: Keyword-based Widget products (Proxy API) 
-      description: >-
-        This API allows you to fetch the Product Description Page for products in keyword-based widget results like Search.
+      summary: Keyword-based Widget products (Proxy API)
+      description: This API allows you to fetch the Product Description Page for products in keyword-based widget results like Search.
       tags:
-      - "Email Recommendations Widget APIs"
+        - Email Recommendations Widget APIs
       responses:
         '302':
           description: Redirect to the PDP link
@@ -545,42 +506,38 @@ paths:
           description: If the query parameters are incorrect/invalid
         '404':
           description: Must send 404 if the widget id is not valid
-
     parameters:
-    - $ref: '#/components/parameters/auth_key'
-    - name: widget_id
-      in: path
-      description: The ID of the widget, which can be found in the Widget Configurator in the Dashboard.
-      required: true
-      schema:
-        type: string
-        default: kjy4y2jv
-    - $ref: '#/components/parameters/account_id'
-    - $ref: '#/components/parameters/domain_key'
-    - $ref: '#/components/parameters/_br_uid_2'
-    - $ref: '#/components/parameters/url'
-    - $ref: '#/components/parameters/query'
-    - $ref: '#/components/parameters/ref_url'
-    - $ref: '#/components/parameters/request_id'
-    - $ref: '#/components/parameters/view_id'
-    - $ref: '#/components/parameters/fields'
-    - $ref: '#/components/parameters/rows'
-    - $ref: '#/components/parameters/start'
-    - $ref: '#/components/parameters/sort'
-    - $ref: '#/components/parameters/filter'
-    - $ref: '#/components/parameters/segment'
-    - $ref: '#/components/parameters/facet'
-
+      - $ref: '#/components/parameters/auth_key'
+      - name: widget_id
+        in: path
+        description: The ID of the widget, which can be found in the Widget Configurator in the Dashboard.
+        required: true
+        schema:
+          type: string
+          default: kjy4y2jv
+      - $ref: '#/components/parameters/account_id'
+      - $ref: '#/components/parameters/domain_key'
+      - $ref: '#/components/parameters/_br_uid_2'
+      - $ref: '#/components/parameters/url'
+      - $ref: '#/components/parameters/query'
+      - $ref: '#/components/parameters/ref_url'
+      - $ref: '#/components/parameters/request_id'
+      - $ref: '#/components/parameters/view_id'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/rows'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/sort'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/segment'
+      - $ref: '#/components/parameters/facet'
   /api/v2/widgets/image/personalized/{widget_id}:
     summary: Email Widget v2 api
-    description: >-
-      Email image api for personalization widgets such as Past Purchases
+    description: Email image api for personalization widgets such as Past Purchases
     get:
       summary: Personalization-based Widget products (Image API)
-      description: >-
-          This API allows you to fetch the EnrichedImage for products in user_id based personalization widgets such as Past Purchases
+      description: This API allows you to fetch the EnrichedImage for products in user_id based personalization widgets such as Past Purchases
       tags:
-      - "Email Recommendations Widget APIs"
+        - Email Recommendations Widget APIs
       responses:
         '302':
           description: Redirect to the enriched image for that product
@@ -593,43 +550,39 @@ paths:
           description: If the query parameters are incorrect/invalid
         '404':
           description: Must send 404 if the widget id is not valid
-
     parameters:
-    - $ref: '#/components/parameters/auth_key'
-    - name: widget_id
-      in: path
-      description: The ID of the widget, which can be found in the Widget Configurator in the Dashboard.
-      required: true
-      schema:
-        type: string
-        default: 4lee5ol2
-    - $ref: '#/components/parameters/account_id'
-    - $ref: '#/components/parameters/domain_key'
-    - $ref: '#/components/parameters/_br_uid_2'
-    - $ref: '#/components/parameters/url' 
-    - $ref: '#/components/parameters/query'
-    - $ref: '#/components/parameters/user_id'
-    - $ref: '#/components/parameters/ref_url'
-    - $ref: '#/components/parameters/request_id'
-    - $ref: '#/components/parameters/view_id' 
-    - $ref: '#/components/parameters/fields'
-    - $ref: '#/components/parameters/rows'
-    - $ref: '#/components/parameters/start'
-    - $ref: '#/components/parameters/sort'
-    - $ref: '#/components/parameters/filter'
-    - $ref: '#/components/parameters/segment'
-    - $ref: '#/components/parameters/facet'
-
+      - $ref: '#/components/parameters/auth_key'
+      - name: widget_id
+        in: path
+        description: The ID of the widget, which can be found in the Widget Configurator in the Dashboard.
+        required: true
+        schema:
+          type: string
+          default: 4lee5ol2
+      - $ref: '#/components/parameters/account_id'
+      - $ref: '#/components/parameters/domain_key'
+      - $ref: '#/components/parameters/_br_uid_2'
+      - $ref: '#/components/parameters/url'
+      - $ref: '#/components/parameters/query'
+      - $ref: '#/components/parameters/user_id'
+      - $ref: '#/components/parameters/ref_url'
+      - $ref: '#/components/parameters/request_id'
+      - $ref: '#/components/parameters/view_id'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/rows'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/sort'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/segment'
+      - $ref: '#/components/parameters/facet'
   /api/v2/widgets/proxy/personalized/{widget_id}:
     summary: Email Widget v2 api
-    description: >-
-      Email proxy api for personalization widgets such as Past Purchases
+    description: Email proxy api for personalization widgets such as Past Purchases
     get:
       summary: Personalization-based Widget products (Proxy API)
-      description: >-
-          This API allows you to fetch the Product Description Pages for products in user_id based personalization widgets such as Past Purchases
+      description: This API allows you to fetch the Product Description Pages for products in user_id based personalization widgets such as Past Purchases
       tags:
-      - "Email Recommendations Widget APIs"
+        - Email Recommendations Widget APIs
       responses:
         '302':
           description: Redirect to the PDP link
@@ -642,29 +595,32 @@ paths:
           description: If the query parameters are incorrect/invalid
         '404':
           description: Must send 404 if the widget id is not valid
-
     parameters:
-    - $ref: '#/components/parameters/auth_key'
-    - name: widget_id
-      in: path
-      description: The ID of the widget, which can be found in the Widget Configurator in the Dashboard.
-      required: true
-      schema:
-        type: string
-        default: 4lee5ol2
-    - $ref: '#/components/parameters/account_id'
-    - $ref: '#/components/parameters/domain_key'
-    - $ref: '#/components/parameters/_br_uid_2'
-    - $ref: '#/components/parameters/url'
-    - $ref: '#/components/parameters/query'
-    - $ref: '#/components/parameters/user_id'
-    - $ref: '#/components/parameters/ref_url'
-    - $ref: '#/components/parameters/request_id'
-    - $ref: '#/components/parameters/view_id'
-    - $ref: '#/components/parameters/fields'
-    - $ref: '#/components/parameters/rows'
-    - $ref: '#/components/parameters/start'
-    - $ref: '#/components/parameters/sort'
-    - $ref: '#/components/parameters/filter'
-    - $ref: '#/components/parameters/segment'
-    - $ref: '#/components/parameters/facet'
+      - $ref: '#/components/parameters/auth_key'
+      - name: widget_id
+        in: path
+        description: The ID of the widget, which can be found in the Widget Configurator in the Dashboard.
+        required: true
+        schema:
+          type: string
+          default: 4lee5ol2
+      - $ref: '#/components/parameters/account_id'
+      - $ref: '#/components/parameters/domain_key'
+      - $ref: '#/components/parameters/_br_uid_2'
+      - $ref: '#/components/parameters/url'
+      - $ref: '#/components/parameters/query'
+      - $ref: '#/components/parameters/user_id'
+      - $ref: '#/components/parameters/ref_url'
+      - $ref: '#/components/parameters/request_id'
+      - $ref: '#/components/parameters/view_id'
+      - $ref: '#/components/parameters/fields'
+      - $ref: '#/components/parameters/rows'
+      - $ref: '#/components/parameters/start'
+      - $ref: '#/components/parameters/sort'
+      - $ref: '#/components/parameters/filter'
+      - $ref: '#/components/parameters/segment'
+      - $ref: '#/components/parameters/facet'
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true
