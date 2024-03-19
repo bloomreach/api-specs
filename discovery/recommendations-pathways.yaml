@@ -3,11 +3,11 @@ info:
   title: Recommendations and Pathways APIs
   version: '1.0'
 servers:
-- url: https://pathways.dxpapi.com/api/v2/widgets
+  - url: https://pathways.dxpapi.com/api/v2/widgets
 components:
-  securitySchemes: {}
+  securitySchemes: { }
 security:
-- {}
+  - { }
 paths:
   "/item/{widget_id}":
     get:
@@ -15,77 +15,78 @@ paths:
       description: ''
       operationId: item-based-recommendation-widget-api
       parameters:
-      - name: widget_id
-        in: path
-        description: The ID of the widget, which can be found in the [Widget Configurator](doc:widget-configurator)
-          in the Dashboard. <br><br> The example value shown here, <i>kl6pne92</i>,
-          is included for your convenience to send a request with <b>Try It</b>.
-        schema:
-          type: string
-          default: kl6pne92
-        required: true
-      - name: account_id
-        in: query
-        description: Your site's numerical Bloomreach account ID. Your Bloomreach
-          representative gives your site's account ID to you before or during your
-          integration kickoff meeting. <br><br> The example value shown here, <i>6702</i>,
-          is included for your convenience to send a request with <b>Try It</b>.
-        required: true
-        schema:
-          type: integer
-          format: int32
-          default: 6702
-      - name: _br_uid_2
-        in: query
-        description: A first-party cookie created by the Bloomreach tracking pixel
-          library (BrTrk). This cookie creates a unique, anonymous identifier for
-          every browser or device. <br><br> Use the default value provided, which
-          is already encoded.
-        required: true
-        schema:
-          type: string
-          default: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
-      - name: domain_key
-        in: query
-        description: Your site domain's ID, which is provided by Bloomreach. This
-          ID is for the domain that you want to receive your Bloomreach API requests.  This
-          parameter identifies the specific site version when the one account ID hosts
-          multiple site versions with unique characteristics, such as language versions.
-          <br><br> The example value shown here, <i>documentation_site</i>, is included
-          for your convenience to send a request with <b>Try It</b>.
-        required: true
-        schema:
-          type: string
-          default: documentation_site
-      - name: item_ids
-        in: query
-        description: Specifies access to a particular set of items. For product catalog,
-          this would be the PID(s). <br><br> The example value shown here, <i>4427949</i>,
-          is included for your convenience to send a request with <b>Try It</b>.
-        required: true
-        schema:
-          type: string
-          default: '4427949'
-      - name: request_id
-        in: query
-        description: An ID to track site visitor clicks. We recommend that you generate
-          unique, random values of 13 digits to enable click-tracking.  The request_id
-          is also important for debugging.
-        required: true
-        schema:
-          type: string
-      - name: url
-        in: query
-        description: The absolute URL of the page where the request is initiated.
-          Do not use a relative URL. <br><br> The example value shown here, <i>https://www.documentation-site.com</i>,
-          is included for your convenience to send a request with <b>Try It</b>.
-        required: true
-        schema:
-          type: string
-          default: https://www.documentation-site.com
-      - name: context_pids
-        in: query
-        description: 'context_pids takes a single product ID for producing Context-based
+        - name: widget_id
+          in: path
+          description: The ID of the widget, which can be found in the [Widget Configurator](doc:widget-configurator)
+            in the Dashboard. <br><br> The example value shown here, <i>kl6pne92</i>,
+            is included for your convenience to send a request with <b>Try It</b>.
+          schema:
+            type: string
+          required: true
+          example: kl6pne92
+        - name: account_id
+          in: query
+          description: Your site's numerical Bloomreach account ID. Your Bloomreach
+            representative gives your site's account ID to you before or during your
+            integration kickoff meeting. <br><br> The example value shown here, <i>6702</i>,
+            is included for your convenience to send a request with <b>Try It</b>.
+          required: true
+          example: 6702
+          schema:
+            type: integer
+            format: int32
+        - name: _br_uid_2
+          in: query
+          description: A first-party cookie created by the Bloomreach tracking pixel
+            library (BrTrk). This cookie creates a unique, anonymous identifier for
+            every browser or device. <br><br> Use the example value provided, which
+            is already encoded.
+          required: true
+          example: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
+          schema:
+            type: string
+        - name: domain_key
+          in: query
+          description: Your site domain's ID, which is provided by Bloomreach. This
+            ID is for the domain that you want to receive your Bloomreach API requests.  This
+            parameter identifies the specific site version when the one account ID hosts
+            multiple site versions with unique characteristics, such as language versions.
+            <br><br> The example value shown here, <i>documentation_site</i>, is included
+            for your convenience to send a request with <b>Try It</b>.
+          required: true
+          example: documentation_site
+          schema:
+            type: string
+        - name: item_ids
+          in: query
+          description: Specifies access to a particular set of items. For product catalog,
+            this would be the PID(s). <br><br> The example value shown here, <i>4427949</i>,
+            is included for your convenience to send a request with <b>Try It</b>.
+          required: true
+          example: '4427949'
+          schema:
+            type: string
+        - name: request_id
+          in: query
+          description: An ID to track site visitor clicks. We recommend that you generate
+            unique, random values of 13 digits to enable click-tracking.  The request_id
+            is also important for debugging.
+          required: true
+          schema:
+            type: string
+        - name: url
+          in: query
+          description: The absolute URL of the page where the request is initiated.
+            Do not use a relative URL. <br><br> The example value shown here, <i>https://www.documentation-site.com</i>,
+            is included for your convenience to send a request with <b>Try It</b>.
+          required: true
+          example: '4500928'
+          example: https://www.documentation-site.com
+          schema:
+            type: string
+        - name: context_pids
+          in: query
+          description: 'context_pids takes a single product ID for producing Context-based
           merchandising results for the widget.<br>Contextual Merchandising uses Context
           PID as a primary input for generating the recall set of the widget results.<br>In
           the event that not enough results are produced based on context_pids, the
@@ -94,19 +95,18 @@ paths:
           will use Item ID(s) to produce Contextual Merchandising results for the
           widget.<br><br>You can find more information on the Contextual Merchandising
           Feature in [its guide](doc:contextual-merchandising).'
-        schema:
-          type: string
-          default: '4500928'
-      - name: fields
-        in: query
-        description: A comma-separated list of fields to be sent in the request. <br><br>
-          Alternatively, you may configure the fields in the Widget Configurator in
-          the Dashboard instead. This parameter is required if not sent via the Dashboard.
-        schema:
-          type: string
-      - name: filter
-        in: query
-        description: 'The filter parameter applies a faceted filter to the returned
+          schema:
+            type: string
+        - name: fields
+          in: query
+          description: A comma-separated list of fields to be sent in the request. <br><br>
+            Alternatively, you may configure the fields in the Widget Configurator in
+            the Dashboard instead. This parameter is required if not sent via the Dashboard.
+          schema:
+            type: string
+        - name: filter
+          in: query
+          description: 'The filter parameter applies a faceted filter to the returned
           products, searching for products that fit your parameter values. Any facet
           that you want to filter must be in your feed. <br><br> Attributes must be
           enabled and mapped by Bloomreach. Let your Bloomreach representative know
@@ -116,46 +116,46 @@ paths:
           ranges is not supported. <br><br> To provide multiple filters, send multiple
           filter parameters. For example, **&filter=(price:["*" TO "100"])&filter=(color_groups:
           ("blue"))**'
-        schema:
-          type: string
-      - name: ref_url
-        in: query
-        description: The URL of the page or HTTP referrer where the request is started.
-          <br><br> Required if you want to use [Targeting](doc:targeting).
-        schema:
-          type: string
-      - name: rows
-        in: query
-        description: The number of matching items to return per results page in the
-          API response. The maximum value is 200. The result size is used from the
-          Dashboard if it is not sent in the API. <br><br> To enhance performance,
-          limit this value to the number of items that you think is reasonable for
-          a single page of search results.
-        schema:
-          type: integer
-          format: int32
-      - name: user_id
-        in: query
-        description: The universal customer ID of the user. You only need to pass
-          this field if your particular integration tracks customers this way. The
-          parameter captures user IDs from the customer side and reuses the information
-          when powering apps or enhancing cross-device linking. In this way, Bloomreach
-          recognizes users in a way that's aligned with your system. <br><br> Use
-          an anonymous string. Don't use email or other personally identifiable information.
-        schema:
-          type: string
-      - name: view_id
-        in: query
-        description: A unique identifier for a specific view of your product catalog.
-          If you have multiple versions of your site, each with their own product
-          catalog characteristics like product titles and prices, then add view_id
-          to your call. Bloomreach uses your view_id parameter value to display the
-          right product information for your customers based on their individual site
-          views. <br><br> You can enter any string value to identify the specific
-          site catalog view. This string must be consistent in your pixel, API, and
-          product catalog.
-        schema:
-          type: string
+          schema:
+            type: string
+        - name: ref_url
+          in: query
+          description: The URL of the page or HTTP referrer where the request is started.
+            <br><br> Required if you want to use [Targeting](doc:targeting).
+          schema:
+            type: string
+        - name: rows
+          in: query
+          description: The number of matching items to return per results page in the
+            API response. The maximum value is 200. The result size is used from the
+            Dashboard if it is not sent in the API. <br><br> To enhance performance,
+            limit this value to the number of items that you think is reasonable for
+            a single page of search results.
+          schema:
+            type: integer
+            format: int32
+        - name: user_id
+          in: query
+          description: The universal customer ID of the user. You only need to pass
+            this field if your particular integration tracks customers this way. The
+            parameter captures user IDs from the customer side and reuses the information
+            when powering apps or enhancing cross-device linking. In this way, Bloomreach
+            recognizes users in a way that's aligned with your system. <br><br> Use
+            an anonymous string. Don't use email or other personally identifiable information.
+          schema:
+            type: string
+        - name: view_id
+          in: query
+          description: A unique identifier for a specific view of your product catalog.
+            If you have multiple versions of your site, each with their own product
+            catalog characteristics like product titles and prices, then add view_id
+            to your call. Bloomreach uses your view_id parameter value to display the
+            right product information for your customers based on their individual site
+            views. <br><br> You can enter any string value to identify the specific
+            site catalog view. This string must be consistent in your pixel, API, and
+            product catalog.
+          schema:
+            type: string
       deprecated: false
   "/category/{widget_id}":
     get:
@@ -163,81 +163,81 @@ paths:
       description: ''
       operationId: category-based-widget-api
       parameters:
-      - name: account_id
-        in: query
-        description: Your site's numerical Bloomreach account ID. Your Bloomreach
-          representative gives your site's account ID to you before or during your
-          integration kickoff meeting. <br><br> The example value shown here, <i>6702</i>,
-          is included for your convenience to send a request with <b>Try It</b>.
-        required: true
-        schema:
-          type: integer
-          format: int32
-          default: 6702
-      - name: _br_uid_2
-        in: query
-        description: A first-party cookie created by the Bloomreach tracking pixel
-          library (BrTrk). This cookie creates a unique, anonymous identifier for
-          every browser or device. <br><br> Use the default value provided, which
-          is already encoded.
-        required: true
-        schema:
-          type: string
-          default: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
-      - name: cat_id
-        in: query
-        description: Your site's category ID. <br><br> The example value shown here,
-          <i>pnb160000000000</i>, is included for your convenience to send a request
-          with <b>Try It</b>.
-        required: true
-        schema:
-          type: string
-          default: pnb160000000000
-      - name: domain_key
-        in: query
-        description: Your site domain's ID, which is provided by Bloomreach. This
-          ID is for the domain that you want to receive your Bloomreach API requests.  This
-          parameter identifies the specific site version when the one account ID hosts
-          multiple site versions with unique characteristics, such as language versions.
-          <br><br> The example value shown here, <i>documentation_site</i>, is included
-          for your convenience to send a request with <b>Try It</b>.
-        required: true
-        schema:
-          type: string
-          default: documentation_site
-      - name: request_id
-        in: query
-        description: An ID to track site visitor clicks. We recommend that you generate
-          unique, random values of 13 digits to enable click-tracking.  The request_id
-          is also important for debugging.
-        required: true
-        schema:
-          type: string
-      - name: url
-        in: query
-        description: The absolute URL of the page where the request is initiated.
-          Do not use a relative URL. <br><br> The example value shown here, <i>https://www.documentation-site.com</i>,
-          is included for your convenience to send a request with <b>Try It</b>.
-        required: true
-        schema:
-          type: string
-          default: https://www.documentation-site.com
-      - name: facet
-        in: query
-        description: Facets are disabled by default. To enable facets, set **facet=true**.
-        schema:
-          type: boolean
-          default: false
-      - name: fields
-        in: query
-        description: A comma-separated list of fields to be sent in the request. <br><br>
-          Alternatively, you may configure the fields in the Widget Configurator in
-          the Dashboard instead. This parameter is required if not sent via the Dashboard.
-        schema:
-          type: string
-      - name: filter
-        in: query
-        description: 'The filter parameter applies a faceted filter to the returned
+        - name: account_id
+          in: query
+          description: Your site's numerical Bloomreach account ID. Your Bloomreach
+            representative gives your site's account ID to you before or during your
+            integration kickoff meeting. <br><br> The example value shown here, <i>6702</i>,
+            is included for your convenience to send a request with <b>Try It</b>.
+          required: true
+          example: 6702
+          schema:
+            type: integer
+            format: int32
+        - name: _br_uid_2
+          in: query
+          description: A first-party cookie created by the Bloomreach tracking pixel
+            library (BrTrk). This cookie creates a unique, anonymous identifier for
+            every browser or device. <br><br> Use the example value provided, which
+            is already encoded.
+          required: true
+          example: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
+          schema:
+            type: string
+        - name: cat_id
+          in: query
+          description: Your site's category ID. <br><br> The example value shown here,
+            <i>pnb160000000000</i>, is included for your convenience to send a request
+            with <b>Try It</b>.
+          required: true
+          example: pnb160000000000
+          schema:
+            type: string
+        - name: domain_key
+          in: query
+          description: Your site domain's ID, which is provided by Bloomreach. This
+            ID is for the domain that you want to receive your Bloomreach API requests.  This
+            parameter identifies the specific site version when the one account ID hosts
+            multiple site versions with unique characteristics, such as language versions.
+            <br><br> The example value shown here, <i>documentation_site</i>, is included
+            for your convenience to send a request with <b>Try It</b>.
+          required: true
+          example: documentation_site
+          schema:
+            type: string
+        - name: request_id
+          in: query
+          description: An ID to track site visitor clicks. We recommend that you generate
+            unique, random values of 13 digits to enable click-tracking.  The request_id
+            is also important for debugging.
+          required: true
+          schema:
+            type: string
+        - name: url
+          in: query
+          description: The absolute URL of the page where the request is initiated.
+            Do not use a relative URL. <br><br> The example value shown here, <i>https://www.documentation-site.com</i>,
+            is included for your convenience to send a request with <b>Try It</b>.
+          required: true
+          example: https://www.documentation-site.com
+          schema:
+            type: string
+        - name: facet
+          in: query
+          description: Facets are disabled by default. To enable facets, set **facet=true**.
+          schema:
+            type: boolean
+            default: false
+        - name: fields
+          in: query
+          description: A comma-separated list of fields to be sent in the request. <br><br>
+            Alternatively, you may configure the fields in the Widget Configurator in
+            the Dashboard instead. This parameter is required if not sent via the Dashboard.
+          schema:
+            type: string
+        - name: filter
+          in: query
+          description: 'The filter parameter applies a faceted filter to the returned
           products, searching for products that fit your parameter values. Any facet
           that you want to filter must be in your feed. <br><br> Attributes must be
           enabled and mapped by Bloomreach. Let your Bloomreach representative know
@@ -247,11 +247,11 @@ paths:
           ranges is not supported. <br><br> To provide multiple filters, send multiple
           filter parameters. For example, **&filter=(price:["*" TO "100"])&filter=(color_groups:
           ("blue"))**'
-        schema:
-          type: string
-      - name: filter_facet
-        in: query
-        description: 'With the filter parameter, after a user selects a facet value
+          schema:
+            type: string
+        - name: filter_facet
+          in: query
+          description: 'With the filter parameter, after a user selects a facet value
           for filtering, the other facet values in that field are not returned by
           the API and are no longer visible. The filter_facet parameter allows other
           facet values to be returned after a facet value has been selected. <br><br>  filter_facet
@@ -261,62 +261,62 @@ paths:
           value in that field. Example values: <br><br> Single filter with multiple
           values <br>**&filter_facet=color:"red" OR "purple"** <br><br>Multiple filters
           on different attributes <br>**&filter_facet=color:"red"&filter_facet=brand:"Bloomreach"**'
-        schema:
-          type: string
-      - name: ref_url
-        in: query
-        description: The URL of the page or HTTP referrer where the request is started.
-        schema:
-          type: string
-      - name: rows
-        in: query
-        description: The number of matching items to return per results page in the
-          API response. The maximum value is 200. The result size is used from the
-          Dashboard if it is not sent in the API. <br><br> To enhance performance,
-          limit this value to the number of items that you think is reasonable for
-          a single page of search results.
-        schema:
-          type: integer
-          format: int32
-      - name: start
-        in: query
-        description: The number of the first item on a page of results. For example,
-          the first item on the first page is 0, making the start value also 0. The
-          maximum value is 10000.
-        schema:
-          type: integer
-          format: int32
-      - name: user_id
-        in: query
-        description: The universal customer ID of the user. You only need to pass
-          this field if your particular integration tracks customers this way. The
-          parameter captures user IDs from the customer side and reuses the information
-          when powering apps or enhancing cross-device linking. In this way, Bloomreach
-          recognizes users in a way that's aligned with your system. <br><br> Use
-          an anonymous string. Don't use email or other personally identifiable information.
-        schema:
-          type: string
-      - name: view_id
-        in: query
-        description: A unique identifier for a specific view of your product catalog.
-          If you have multiple versions of your site, each with their own product
-          catalog characteristics like product titles and prices, then add view_id
-          to your call. Bloomreach uses your view_id parameter value to display the
-          right product information for your customers based on their individual site
-          views. <br><br> You can enter any string value to identify the specific
-          site catalog view. This string must be consistent in your pixel, API, and
-          product catalog.
-        schema:
-          type: string
-      - name: widget_id
-        in: path
-        description: The ID of the widget, which can be found in the [Widget Configurator](doc:widget-configurator)
-          in the Dashboard. <br><br> The example value shown here, <i>dl4qy396</i>,
-          is included for your convenience to send a request with <b>Try It</b>.
-        schema:
-          type: string
-          default: dl4qy396
-        required: true
+          schema:
+            type: string
+        - name: ref_url
+          in: query
+          description: The URL of the page or HTTP referrer where the request is started.
+          schema:
+            type: string
+        - name: rows
+          in: query
+          description: The number of matching items to return per results page in the
+            API response. The maximum value is 200. The result size is used from the
+            Dashboard if it is not sent in the API. <br><br> To enhance performance,
+            limit this value to the number of items that you think is reasonable for
+            a single page of search results.
+          schema:
+            type: integer
+            format: int32
+        - name: start
+          in: query
+          description: The number of the first item on a page of results. For example,
+            the first item on the first page is 0, making the start value also 0. The
+            maximum value is 10000.
+          schema:
+            type: integer
+            format: int32
+        - name: user_id
+          in: query
+          description: The universal customer ID of the user. You only need to pass
+            this field if your particular integration tracks customers this way. The
+            parameter captures user IDs from the customer side and reuses the information
+            when powering apps or enhancing cross-device linking. In this way, Bloomreach
+            recognizes users in a way that's aligned with your system. <br><br> Use
+            an anonymous string. Don't use email or other personally identifiable information.
+          schema:
+            type: string
+        - name: view_id
+          in: query
+          description: A unique identifier for a specific view of your product catalog.
+            If you have multiple versions of your site, each with their own product
+            catalog characteristics like product titles and prices, then add view_id
+            to your call. Bloomreach uses your view_id parameter value to display the
+            right product information for your customers based on their individual site
+            views. <br><br> You can enter any string value to identify the specific
+            site catalog view. This string must be consistent in your pixel, API, and
+            product catalog.
+          schema:
+            type: string
+        - name: widget_id
+          in: path
+          description: The ID of the widget, which can be found in the [Widget Configurator](doc:widget-configurator)
+            in the Dashboard. <br><br> The example value shown here, <i>dl4qy396</i>,
+            is included for your convenience to send a request with <b>Try It</b>.
+          schema:
+            type: string
+          required: true
+          example: dl4qy396
       deprecated: false
   "/keyword/{widget_id}":
     get:
@@ -324,83 +324,83 @@ paths:
       description: ''
       operationId: keyword-based-widget-api
       parameters:
-      - name: account_id
-        in: query
-        description: Your site's numerical Bloomreach account ID. Your Bloomreach
-          representative gives your site's account ID to you before or during your
-          integration kickoff meeting. <br><br> The example value shown here, <i>6702</i>,
-          is included for your convenience to send a request with <b>Try It</b>.
-        required: true
-        schema:
-          type: integer
-          format: int32
-          default: 6702
-      - name: _br_uid_2
-        in: query
-        description: A first-party cookie created by the Bloomreach tracking pixel
-          library (BrTrk). This cookie creates a unique, anonymous identifier for
-          every browser or device. <br><br> Use the default value provided, which
-          is already encoded.
-        required: true
-        schema:
-          type: string
-          default: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
-      - name: domain_key
-        in: query
-        description: Your site domain's ID, which is provided by Bloomreach. This
-          ID is for the domain that you want to receive your Bloomreach API requests.  This
-          parameter identifies the specific site version when the one account ID hosts
-          multiple site versions with unique characteristics, such as language versions.
-          <br><br> The example value shown here, <i>documentation_site</i>, is included
-          for your convenience to send a request with <b>Try It</b>.
-        required: true
-        schema:
-          type: string
-          default: documentation_site
-      - name: query
-        in: query
-        description: Your site visitor's search query. Search queries are composed
-          of one or more terms. <br><br> You can percent encode spaces between terms
-          as %20, or you can leave the spaces unencoded. <br><br> The example value
-          shown here, <i>cable</i>, is included for your convenience to send a request
-          with <b>Try It</b>.
-        required: true
-        schema:
-          type: string
-          default: cable
-      - name: request_id
-        in: query
-        description: An ID to track site visitor clicks. We recommend that you generate
-          unique, random values of 13 digits to enable click-tracking.  The request_id
-          is also important for debugging.
-        required: true
-        schema:
-          type: string
-      - name: url
-        in: query
-        description: The absolute URL of the page where the request is initiated.
-          Do not use a relative URL. <br><br> The example value shown here, <i>https://www.documentation-site.com</i>,
-          is included for your convenience to send a request with <b>Try It</b>.
-        required: true
-        schema:
-          type: string
-          default: https://www.documentation-site.com
-      - name: fields
-        in: query
-        description: A comma-separated list of fields to be sent in the request. <br><br>
-          Alternatively, you may configure the fields in the Widget Configurator in
-          the Dashboard instead. This parameter is required if not sent via the Dashboard.
-        schema:
-          type: string
-      - name: facet
-        in: query
-        description: Facets are disabled by default. To enable facets, set **facet=true**.
-        schema:
-          type: boolean
-          default: false
-      - name: filter
-        in: query
-        description: 'The filter parameter applies a faceted filter to the returned
+        - name: account_id
+          in: query
+          description: Your site's numerical Bloomreach account ID. Your Bloomreach
+            representative gives your site's account ID to you before or during your
+            integration kickoff meeting. <br><br> The example value shown here, <i>6702</i>,
+            is included for your convenience to send a request with <b>Try It</b>.
+          required: true
+          example: 6702
+          schema:
+            type: integer
+            format: int32
+        - name: _br_uid_2
+          in: query
+          description: A first-party cookie created by the Bloomreach tracking pixel
+            library (BrTrk). This cookie creates a unique, anonymous identifier for
+            every browser or device. <br><br> Use the example value provided, which
+            is already encoded.
+          required: true
+          example: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
+          schema:
+            type: string
+        - name: domain_key
+          in: query
+          description: Your site domain's ID, which is provided by Bloomreach. This
+            ID is for the domain that you want to receive your Bloomreach API requests.  This
+            parameter identifies the specific site version when the one account ID hosts
+            multiple site versions with unique characteristics, such as language versions.
+            <br><br> The example value shown here, <i>documentation_site</i>, is included
+            for your convenience to send a request with <b>Try It</b>.
+          required: true
+          example: documentation_site
+          schema:
+            type: string
+        - name: query
+          in: query
+          description: Your site visitor's search query. Search queries are composed
+            of one or more terms. <br><br> You can percent encode spaces between terms
+            as %20, or you can leave the spaces unencoded. <br><br> The example value
+            shown here, <i>cable</i>, is included for your convenience to send a request
+            with <b>Try It</b>.
+          required: true
+          example: cable
+          schema:
+            type: string
+        - name: request_id
+          in: query
+          description: An ID to track site visitor clicks. We recommend that you generate
+            unique, random values of 13 digits to enable click-tracking.  The request_id
+            is also important for debugging.
+          required: true
+          schema:
+            type: string
+        - name: url
+          in: query
+          description: The absolute URL of the page where the request is initiated.
+            Do not use a relative URL. <br><br> The example value shown here, <i>https://www.documentation-site.com</i>,
+            is included for your convenience to send a request with <b>Try It</b>.
+          required: true
+          example: https://www.documentation-site.com
+          schema:
+            type: string
+        - name: fields
+          in: query
+          description: A comma-separated list of fields to be sent in the request. <br><br>
+            Alternatively, you may configure the fields in the Widget Configurator in
+            the Dashboard instead. This parameter is required if not sent via the Dashboard.
+          schema:
+            type: string
+        - name: facet
+          in: query
+          description: Facets are disabled by default. To enable facets, set **facet=true**.
+          schema:
+            type: boolean
+            default: false
+        - name: filter
+          in: query
+          description: 'The filter parameter applies a faceted filter to the returned
           products, searching for products that fit your parameter values. Any facet
           that you want to filter must be in your feed. <br><br> Attributes must be
           enabled and mapped by Bloomreach. Let your Bloomreach representative know
@@ -410,11 +410,11 @@ paths:
           ranges is not supported. <br><br> To provide multiple filters, send multiple
           filter parameters. For example, **&filter=(price:["*" TO "100"])&filter=(color_groups:
           ("blue"))**'
-        schema:
-          type: string
-      - name: filter_facet
-        in: query
-        description: 'With the filter parameter, after a user selects a facet value
+          schema:
+            type: string
+        - name: filter_facet
+          in: query
+          description: 'With the filter parameter, after a user selects a facet value
           for filtering, the other facet values in that field are not returned by
           the API and are no longer visible. The filter_facet parameter allows other
           facet values to be returned after a facet value has been selected.  <br><br>
@@ -424,62 +424,62 @@ paths:
           selects a facet value in that field. Example values: <br><br> Single filter
           with multiple values <br>**&filter_facet=color:"red" OR "purple"** <br><br>
           Multiple filters on different attributes <br>**&filter_facet=color:"red"&filter_facet=brand:"Bloomreach"**'
-        schema:
-          type: string
-      - name: ref_url
-        in: query
-        description: The URL of the page or HTTP referrer where the request is started.
-        schema:
-          type: string
-      - name: rows
-        in: query
-        description: The number of matching items to return per results page in the
-          API response. The maximum value is 200. The result size is used from the
-          Dashboard if it is not sent in the API. <br><br> To enhance performance,
-          limit this value to the number of items that you think is reasonable for
-          a single page of search results.
-        schema:
-          type: integer
-          format: int32
-      - name: start
-        in: query
-        description: The number of the first item on a page of results. For example,
-          the first item on the first page is 0, making the start value also 0. The
-          maximum value is 10000.
-        schema:
-          type: integer
-          format: int32
-      - name: user_id
-        in: query
-        description: The universal customer ID of the user. You only need to pass
-          this field if your particular integration tracks customers this way. The
-          parameter captures user IDs from the customer side and reuses the information
-          when powering apps or enhancing cross-device linking. In this way, Bloomreach
-          recognizes users in a way that's aligned with your system. <br><br> Use
-          an anonymous string. Don't use email or other personally identifiable information.
-        schema:
-          type: string
-      - name: view_id
-        in: query
-        description: A unique identifier for a specific view of your product catalog.
-          If you have multiple versions of your site, each with their own product
-          catalog characteristics like product titles and prices, then add view_id
-          to your call. Bloomreach uses your view_id parameter value to display the
-          right product information for your customers based on their individual site
-          views. <br><br> You can enter any string value to identify the specific
-          site catalog view. This string must be consistent in your pixel, API, and
-          product catalog.
-        schema:
-          type: string
-      - name: widget_id
-        in: path
-        description: The ID of the widget, which can be found in the [Widget Configurator](doc:widget-configurator)
-          in the Dashboard. <br><br> The example value shown here, <i>1jwq4qjz</i>,
-          is included for your convenience to send a request with <b>Try It</b>.
-        schema:
-          type: string
-          default: 1jwq4qjz
-        required: true
+          schema:
+            type: string
+        - name: ref_url
+          in: query
+          description: The URL of the page or HTTP referrer where the request is started.
+          schema:
+            type: string
+        - name: rows
+          in: query
+          description: The number of matching items to return per results page in the
+            API response. The maximum value is 200. The result size is used from the
+            Dashboard if it is not sent in the API. <br><br> To enhance performance,
+            limit this value to the number of items that you think is reasonable for
+            a single page of search results.
+          schema:
+            type: integer
+            format: int32
+        - name: start
+          in: query
+          description: The number of the first item on a page of results. For example,
+            the first item on the first page is 0, making the start value also 0. The
+            maximum value is 10000.
+          schema:
+            type: integer
+            format: int32
+        - name: user_id
+          in: query
+          description: The universal customer ID of the user. You only need to pass
+            this field if your particular integration tracks customers this way. The
+            parameter captures user IDs from the customer side and reuses the information
+            when powering apps or enhancing cross-device linking. In this way, Bloomreach
+            recognizes users in a way that's aligned with your system. <br><br> Use
+            an anonymous string. Don't use email or other personally identifiable information.
+          schema:
+            type: string
+        - name: view_id
+          in: query
+          description: A unique identifier for a specific view of your product catalog.
+            If you have multiple versions of your site, each with their own product
+            catalog characteristics like product titles and prices, then add view_id
+            to your call. Bloomreach uses your view_id parameter value to display the
+            right product information for your customers based on their individual site
+            views. <br><br> You can enter any string value to identify the specific
+            site catalog view. This string must be consistent in your pixel, API, and
+            product catalog.
+          schema:
+            type: string
+        - name: widget_id
+          in: path
+          description: The ID of the widget, which can be found in the [Widget Configurator](doc:widget-configurator)
+            in the Dashboard. <br><br> The example value shown here, <i>1jwq4qjz</i>,
+            is included for your convenience to send a request with <b>Try It</b>.
+          schema:
+            type: string
+          required: true
+          example: 1jwq4qjz
       deprecated: false
   "/personalized/{widget_id}":
     get:
@@ -487,91 +487,91 @@ paths:
       description: ''
       operationId: personalization-based-widget-api
       parameters:
-      - name: account_id
-        in: query
-        description: Your site's numerical Bloomreach account ID. Your Bloomreach
-          representative gives your site's account ID to you before or during your
-          integration kickoff meeting. <br><br> The example value shown here, <i>6702</i>,
-          is included for your convenience to send a request with <b>Try It</b>.
-        required: true
-        schema:
-          type: integer
-          format: int32
-          default: 6702
-      - name: _br_uid_2
-        in: query
-        description: A first-party cookie created by the Bloomreach tracking pixel
-          library (BrTrk). This cookie creates a unique, anonymous identifier for
-          every browser or device. <br><br> Use the default value provided, which
-          is already encoded.
-        required: true
-        schema:
-          type: string
-          default: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
-      - name: domain_key
-        in: query
-        description: Your site domain's ID, which is provided by Bloomreach. This
-          ID is for the domain that you want to receive your Bloomreach API requests.  This
-          parameter identifies the specific site version when the one account ID hosts
-          multiple site versions with unique characteristics, such as language versions.
-          <br><br> The example value shown here, <i>documentation_site</i>, is included
-          for your convenience to send a request with <b>Try It</b>.
-        required: true
-        schema:
-          type: string
-          default: documentation_site
-      - name: query
-        in: query
-        description: Your site visitor's search query. Search queries are composed
-          of one or more terms. <br><br> You can percent encode spaces between terms
-          as %20, or you can leave the spaces unencoded. <br><br> The example value
-          shown here, <i>cable</i>, is included for your convenience to send a request
-          with <b>Try It</b>.
-        required: true
-        schema:
-          type: string
-          default: cable
-      - name: request_id
-        in: query
-        description: An ID to track site visitor clicks. We recommend that you generate
-          unique, random values of 13 digits to enable click-tracking.  The request_id
-          is also important for debugging.
-        required: true
-        schema:
-          type: string
-      - name: url
-        in: query
-        description: The absolute URL of the page where the request is initiated.
-          Do not use a relative URL. <br><br> The example value shown here, <i>https://www.documentation-site.com</i>,
-          is included for your convenience to send a request with <b>Try It</b>.
-        required: true
-        schema:
-          type: string
-          default: https://www.documentation-site.com
-      - name: user_id
-        in: query
-        description: The universal customer ID of the user. Required for Personalization-based
-          Recommendation widgets. The parameter captures user IDs from the customer
-          side and reuses the information when powering apps or enhancing cross-device
-          linking. In this way, Bloomreach recognizes users in a way that's aligned
-          with your system. <br><br> Use an anonymous string. Don't use email or other
-          personally identifiable information. <br><br> The example value shown here,
-          <i>6702</i>, is included for your convenience to send a request with <b>Try
-          It</b>.
-        required: true
-        schema:
-          type: string
-          default: abc123
-      - name: fields
-        in: query
-        description: A comma-separated list of fields to be sent in the request. <br><br>
-          Alternatively, you may configure the fields in the Widget Configurator in
-          the Dashboard instead. This parameter is required if not sent via the Dashboard.
-        schema:
-          type: string
-      - name: filter
-        in: query
-        description: 'The filter parameter applies a faceted filter to the returned
+        - name: account_id
+          in: query
+          description: Your site's numerical Bloomreach account ID. Your Bloomreach
+            representative gives your site's account ID to you before or during your
+            integration kickoff meeting. <br><br> The example value shown here, <i>6702</i>,
+            is included for your convenience to send a request with <b>Try It</b>.
+          required: true
+          example: 6702
+          schema:
+            type: integer
+            format: int32
+        - name: _br_uid_2
+          in: query
+          description: A first-party cookie created by the Bloomreach tracking pixel
+            library (BrTrk). This cookie creates a unique, anonymous identifier for
+            every browser or device. <br><br> Use the example value provided, which
+            is already encoded.
+          required: true
+          example: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
+          schema:
+            type: string
+        - name: domain_key
+          in: query
+          description: Your site domain's ID, which is provided by Bloomreach. This
+            ID is for the domain that you want to receive your Bloomreach API requests.  This
+            parameter identifies the specific site version when the one account ID hosts
+            multiple site versions with unique characteristics, such as language versions.
+            <br><br> The example value shown here, <i>documentation_site</i>, is included
+            for your convenience to send a request with <b>Try It</b>.
+          required: true
+          example: documentation_site
+          schema:
+            type: string
+        - name: query
+          in: query
+          description: Your site visitor's search query. Search queries are composed
+            of one or more terms. <br><br> You can percent encode spaces between terms
+            as %20, or you can leave the spaces unencoded. <br><br> The example value
+            shown here, <i>cable</i>, is included for your convenience to send a request
+            with <b>Try It</b>.
+          required: true
+          example: cable
+          schema:
+            type: string
+        - name: request_id
+          in: query
+          description: An ID to track site visitor clicks. We recommend that you generate
+            unique, random values of 13 digits to enable click-tracking.  The request_id
+            is also important for debugging.
+          required: true
+          schema:
+            type: string
+        - name: url
+          in: query
+          description: The absolute URL of the page where the request is initiated.
+            Do not use a relative URL. <br><br> The example value shown here, <i>https://www.documentation-site.com</i>,
+            is included for your convenience to send a request with <b>Try It</b>.
+          required: true
+          example: https://www.documentation-site.com
+          schema:
+            type: string
+        - name: user_id
+          in: query
+          description: The universal customer ID of the user. Required for Personalization-based
+            Recommendation widgets. The parameter captures user IDs from the customer
+            side and reuses the information when powering apps or enhancing cross-device
+            linking. In this way, Bloomreach recognizes users in a way that's aligned
+            with your system. <br><br> Use an anonymous string. Don't use email or other
+            personally identifiable information. <br><br> The example value shown here,
+            <i>6702</i>, is included for your convenience to send a request with <b>Try
+            It</b>.
+          required: true
+          example: abc123
+          schema:
+            type: string
+        - name: fields
+          in: query
+          description: A comma-separated list of fields to be sent in the request. <br><br>
+            Alternatively, you may configure the fields in the Widget Configurator in
+            the Dashboard instead. This parameter is required if not sent via the Dashboard.
+          schema:
+            type: string
+        - name: filter
+          in: query
+          description: 'The filter parameter applies a faceted filter to the returned
           products, searching for products that fit your parameter values. Any facet
           that you want to filter must be in your feed. <br><br> Attributes must be
           enabled and mapped by Bloomreach. Let your Bloomreach representative know
@@ -581,44 +581,44 @@ paths:
           ranges is not supported. <br><br> To provide multiple filters, send multiple
           filter parameters. For example, **&filter=(price:["*" TO "100"])&filter=(color_groups:
           ("blue"))**'
-        schema:
-          type: string
-      - name: ref_url
-        in: query
-        description: The URL of the page or HTTP referrer where the request is started.
-        schema:
-          type: string
-      - name: rows
-        in: query
-        description: The number of matching items to return per results page in the
-          API response. The maximum value is 200. The result size is used from the
-          Dashboard if it is not sent in the API. <br><br> To enhance performance,
-          limit this value to the number of items that you think is reasonable for
-          a single page of search results.
-        schema:
-          type: integer
-          format: int32
-      - name: view_id
-        in: query
-        description: A unique identifier for a specific view of your product catalog.
-          If you have multiple versions of your site, each with their own product
-          catalog characteristics like product titles and prices, then add view_id
-          to your call. Bloomreach uses your view_id parameter value to display the
-          right product information for your customers based on their individual site
-          views. <br><br> You can enter any string value to identify the specific
-          site catalog view. This string must be consistent in your pixel, API, and
-          product catalog.
-        schema:
-          type: string
-      - name: widget_id
-        in: path
-        description: The ID of the widget, which can be found in the [Widget Configurator](doc:widget-configurator)
-          in the Dashboard. <br><br> The example value shown here, <i>q9xyqxj0</i>,
-          is included for your convenience to send a request with <b>Try It</b>.
-        schema:
-          type: string
-          default: q9xyqxj0
-        required: true
+          schema:
+            type: string
+        - name: ref_url
+          in: query
+          description: The URL of the page or HTTP referrer where the request is started.
+          schema:
+            type: string
+        - name: rows
+          in: query
+          description: The number of matching items to return per results page in the
+            API response. The maximum value is 200. The result size is used from the
+            Dashboard if it is not sent in the API. <br><br> To enhance performance,
+            limit this value to the number of items that you think is reasonable for
+            a single page of search results.
+          schema:
+            type: integer
+            format: int32
+        - name: view_id
+          in: query
+          description: A unique identifier for a specific view of your product catalog.
+            If you have multiple versions of your site, each with their own product
+            catalog characteristics like product titles and prices, then add view_id
+            to your call. Bloomreach uses your view_id parameter value to display the
+            right product information for your customers based on their individual site
+            views. <br><br> You can enter any string value to identify the specific
+            site catalog view. This string must be consistent in your pixel, API, and
+            product catalog.
+          schema:
+            type: string
+        - name: widget_id
+          in: path
+          description: The ID of the widget, which can be found in the [Widget Configurator](doc:widget-configurator)
+            in the Dashboard. <br><br> The example value shown here, <i>q9xyqxj0</i>,
+            is included for your convenience to send a request with <b>Try It</b>.
+          schema:
+            type: string
+          required: true
+          example: q9xyqxj0
       deprecated: false
   "/global/{widget_id}":
     get:
@@ -626,66 +626,66 @@ paths:
       description: ''
       operationId: global-recommendation-widget-api
       parameters:
-      - name: account_id
-        in: query
-        description: Your site's numerical Bloomreach account ID. Your Bloomreach
-          representative gives your site's account ID to you before or during your
-          integration kickoff meeting. <br><br> The example value shown here, <i>6702</i>,
-          is included for your convenience to send a request with <b>Try It</b>.
-        required: true
-        schema:
-          type: integer
-          format: int32
-          default: 6702
-      - name: _br_uid_2
-        in: query
-        description: A first-party cookie created by the Bloomreach tracking pixel
-          library (BrTrk). This cookie creates a unique, anonymous identifier for
-          every browser or device. <br><br> Use the default value provided, which
-          is already encoded.
-        required: true
-        schema:
-          type: string
-          default: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
-      - name: domain_key
-        in: query
-        description: Your site domain's ID, which is provided by Bloomreach. This
-          ID is for the domain that you want to receive your Bloomreach API requests.  This
-          parameter identifies the specific site version when the one account ID hosts
-          multiple site versions with unique characteristics, such as language versions.
-          <br><br> The example value shown here, <i>documentation_site</i>, is included
-          for your convenience to send a request with <b>Try It</b>.
-        required: true
-        schema:
-          type: string
-          default: documentation_site
-      - name: request_id
-        in: query
-        description: An ID to track site visitor clicks. We recommend that you generate
-          unique, random values of 13 digits to enable click-tracking.  The request_id
-          is also important for debugging.
-        required: true
-        schema:
-          type: string
-      - name: url
-        in: query
-        description: The absolute URL of the page where the request is initiated.
-          Do not use a relative URL. <br><br> The example value shown here, <i>https://www.documentation-site.com</i>,
-          is included for your convenience to send a request with <b>Try It</b>.
-        required: true
-        schema:
-          type: string
-          default: https://www.documentation-site.com
-      - name: fields
-        in: query
-        description: A comma-separated list of fields to be sent in the request. <br><br>
-          Alternatively, you may configure the fields in the Widget Configurator in
-          the Dashboard instead. This parameter is required if not sent via the Dashboard.
-        schema:
-          type: string
-      - name: filter
-        in: query
-        description: 'The filter parameter applies a faceted filter to the returned
+        - name: account_id
+          in: query
+          description: Your site's numerical Bloomreach account ID. Your Bloomreach
+            representative gives your site's account ID to you before or during your
+            integration kickoff meeting. <br><br> The example value shown here, <i>6702</i>,
+            is included for your convenience to send a request with <b>Try It</b>.
+          required: true
+          example: 6702
+          schema:
+            type: integer
+            format: int32
+        - name: _br_uid_2
+          in: query
+          description: A first-party cookie created by the Bloomreach tracking pixel
+            library (BrTrk). This cookie creates a unique, anonymous identifier for
+            every browser or device. <br><br> Use the example value provided, which
+            is already encoded.
+          required: true
+          example: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
+          schema:
+            type: string
+        - name: domain_key
+          in: query
+          description: Your site domain's ID, which is provided by Bloomreach. This
+            ID is for the domain that you want to receive your Bloomreach API requests.  This
+            parameter identifies the specific site version when the one account ID hosts
+            multiple site versions with unique characteristics, such as language versions.
+            <br><br> The example value shown here, <i>documentation_site</i>, is included
+            for your convenience to send a request with <b>Try It</b>.
+          required: true
+          example: documentation_site
+          schema:
+            type: string
+        - name: request_id
+          in: query
+          description: An ID to track site visitor clicks. We recommend that you generate
+            unique, random values of 13 digits to enable click-tracking.  The request_id
+            is also important for debugging.
+          required: true
+          schema:
+            type: string
+        - name: url
+          in: query
+          description: The absolute URL of the page where the request is initiated.
+            Do not use a relative URL. <br><br> The example value shown here, <i>https://www.documentation-site.com</i>,
+            is included for your convenience to send a request with <b>Try It</b>.
+          required: true
+          example: https://www.documentation-site.com
+          schema:
+            type: string
+        - name: fields
+          in: query
+          description: A comma-separated list of fields to be sent in the request. <br><br>
+            Alternatively, you may configure the fields in the Widget Configurator in
+            the Dashboard instead. This parameter is required if not sent via the Dashboard.
+          schema:
+            type: string
+        - name: filter
+          in: query
+          description: 'The filter parameter applies a faceted filter to the returned
           products, searching for products that fit your parameter values. Any facet
           that you want to filter must be in your feed. <br><br> Attributes must be
           enabled and mapped by Bloomreach. Let your Bloomreach representative know
@@ -695,44 +695,44 @@ paths:
           ranges is not supported. <br><br> To provide multiple filters, send multiple
           filter parameters. For example, **&filter=(price:["*" TO "100"])&filter=(color_groups:
           ("blue"))**'
-        schema:
-          type: string
-      - name: ref_url
-        in: query
-        description: The URL of the page or HTTP referrer where the request is started.
-        schema:
-          type: string
-      - name: rows
-        in: query
-        description: The number of matching items to return per results page in the
-          API response. The maximum value is 200. The result size is used from the
-          Dashboard if it is not sent in the API. <br><br> To enhance performance,
-          limit this value to the number of items that you think is reasonable for
-          a single page of search results.
-        schema:
-          type: integer
-          format: int32
-      - name: view_id
-        in: query
-        description: A unique identifier for a specific view of your product catalog.
-          If you have multiple versions of your site, each with their own product
-          catalog characteristics like product titles and prices, then add view_id
-          to your call. Bloomreach uses your view_id parameter value to display the
-          right product information for your customers based on their individual site
-          views. <br><br> You can enter any string value to identify the specific
-          site catalog view. This string must be consistent in your pixel, API, and
-          product catalog.
-        schema:
-          type: string
-      - name: widget_id
-        in: path
-        description: The ID of the widget, which can be found in the [Widget Configurator](doc:widget-configurator)
-          in the Dashboard. <br><br> The example value shown here, <i>r9287r9v</i>,
-          is included for your convenience to send a request with <b>Try It</b>.
-        schema:
-          type: string
-          default: r9287r9v
-        required: true
+          schema:
+            type: string
+        - name: ref_url
+          in: query
+          description: The URL of the page or HTTP referrer where the request is started.
+          schema:
+            type: string
+        - name: rows
+          in: query
+          description: The number of matching items to return per results page in the
+            API response. The maximum value is 200. The result size is used from the
+            Dashboard if it is not sent in the API. <br><br> To enhance performance,
+            limit this value to the number of items that you think is reasonable for
+            a single page of search results.
+          schema:
+            type: integer
+            format: int32
+        - name: view_id
+          in: query
+          description: A unique identifier for a specific view of your product catalog.
+            If you have multiple versions of your site, each with their own product
+            catalog characteristics like product titles and prices, then add view_id
+            to your call. Bloomreach uses your view_id parameter value to display the
+            right product information for your customers based on their individual site
+            views. <br><br> You can enter any string value to identify the specific
+            site catalog view. This string must be consistent in your pixel, API, and
+            product catalog.
+          schema:
+            type: string
+        - name: widget_id
+          in: path
+          description: The ID of the widget, which can be found in the [Widget Configurator](doc:widget-configurator)
+            in the Dashboard. <br><br> The example value shown here, <i>r9287r9v</i>,
+            is included for your convenience to send a request with <b>Try It</b>.
+          schema:
+            type: string
+          required: true
+          example: r9287r9v
       deprecated: false
   "/personalized/{recently_viewed_widget_id}":
     get:
@@ -740,129 +740,129 @@ paths:
       description: ''
       operationId: recently-viewed-widget-api
       parameters:
-      - name: recently_viewed_widget_id
-        in: path
-        description: The ID of the Recently Viewed widget, which can be found in the
-          [Widget Configurator](doc:widget-configurator) in the Dashboard. <br><br>
-          The example value shown here, <i>q9xyqxj0</i>, is included for your convenience
-          to send a request with <b>Try It</b>.
-        schema:
-          type: string
-          default: q9xyqxj0
-        required: true
-      - name: account_id
-        in: query
-        description: Your site's numerical Bloomreach account ID. Your Bloomreach
-          representative gives your site's account ID to you before or during your
-          integration kickoff meeting. <br><br> The example value shown here, <i>6702</i>,
-          is included for your convenience to send a request with <b>Try It</b>.
-        required: true
-        schema:
-          type: string
-          default: '6702'
-      - name: _br_uid_2
-        in: query
-        description: A first-party cookie created by the Bloomreach tracking pixel
-          library (BrTrk). This cookie creates a unique, anonymous identifier for
-          every browser or device. <br><br> Use the default value provided, which
-          is already encoded.
-        required: true
-        schema:
-          type: string
-          default: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
-      - name: domain_key
-        in: query
-        description: Your site domain's ID, which is provided by Bloomreach. This
-          ID is for the domain that you want to receive your Bloomreach API requests.  This
-          parameter identifies the specific site version when the one account ID hosts
-          multiple site versions with unique characteristics, such as language versions.
-          <br><br> The example value shown here, <i>documentation_site</i>, is included
-          for your convenience to send a request with <b>Try It</b>.
-        required: true
-        schema:
-          type: string
-          default: documentation_site
-      - name: url
-        in: query
-        description: The absolute URL of the page where the request is initiated.
-          Do not use a relative URL. <br><br> The example value shown here, <i>https://www.documentation-site.com</i>,
-          is included for your convenience to send a request with <b>Try It</b>.
-        required: true
-        schema:
-          type: string
-          default: https://www.documentation-site.com
-      - name: auth_key
-        in: query
-        description: The Bloomreach-provided authentication key for the Bloomreach
-          account that's sending the request. <br><br> Autosuggest API calls are client-side,
-          so you can leave **auth_key** empty.
-        schema:
-          type: string
-      - name: user_id
-        in: query
-        description: The universal customer ID of the user. Required for Personalization-based
-          Recommendation widgets. The parameter captures user IDs from the customer
-          side and reuses the information when powering apps or enhancing cross-device
-          linking. In this way, Bloomreach recognizes users in a way that's aligned
-          with your system. <br><br> Use an anonymous string. Don't use email or other
-          personally identifiable information. <br><br> The example value shown here,
-          <i>6702</i>, is included for your convenience to send a request with <b>Try
-          It</b>.
-        schema:
-          type: string
-          default: abc123
-      - name: ref_url
-        in: query
-        description: The URL of the page or HTTP referrer where the request is started.
-        schema:
-          type: string
-      - name: request_id
-        in: query
-        description: An ID to track site visitor clicks. We recommend that you generate
-          unique, random values of 13 digits to enable click-tracking.  The request_id
-          is also important for debugging.
-        schema:
-          type: string
-      - name: view_id
-        in: query
-        description: A unique identifier for a specific view of your product catalog.
-          If you have multiple versions of your site, each with their own product
-          catalog characteristics like product titles and prices, then add view_id
-          to your call. Bloomreach uses your view_id parameter value to display the
-          right product information for your customers based on their individual site
-          views. <br><br> You can enter any string value to identify the specific
-          site catalog view. This string must be consistent in your pixel, API, and
-          product catalog.
-        schema:
-          type: string
-      - name: fields
-        in: query
-        description: A comma-separated list of fields to be sent in the request. <br><br>
-          Alternatively, you may configure the fields in the Widget Configurator in
-          the Dashboard instead. This parameter is required if not sent via the Dashboard.
-        schema:
-          type: string
-      - name: rows
-        in: query
-        description: The number of matching items to return per results page in the
-          API response. The maximum value is 200. The result size is used from the
-          Dashboard if it is not sent in the API. <br><br> To enhance performance,
-          limit this value to the number of items that you think is reasonable for
-          a single page of search results.
-        schema:
-          type: integer
-          format: int32
-      - name: start
-        in: query
-        description: The number of the first item on a page of results. For example,
-          the first item on the first page is 0, making the start value also 0. The
-          maximum value is 10000.
-        schema:
-          type: integer
-          format: int32
-      - name: filter
-        in: query
-        description: 'The filter parameter applies a faceted filter to the returned
+        - name: recently_viewed_widget_id
+          in: path
+          description: The ID of the Recently Viewed widget, which can be found in the
+            [Widget Configurator](doc:widget-configurator) in the Dashboard. <br><br>
+            The example value shown here, <i>q9xyqxj0</i>, is included for your convenience
+            to send a request with <b>Try It</b>.
+          schema:
+            type: string
+          required: true
+          example: q9xyqxj0
+        - name: account_id
+          in: query
+          description: Your site's numerical Bloomreach account ID. Your Bloomreach
+            representative gives your site's account ID to you before or during your
+            integration kickoff meeting. <br><br> The example value shown here, <i>6702</i>,
+            is included for your convenience to send a request with <b>Try It</b>.
+          required: true
+          example: 6702
+          schema:
+            type: string
+        - name: _br_uid_2
+          in: query
+          description: A first-party cookie created by the Bloomreach tracking pixel
+            library (BrTrk). This cookie creates a unique, anonymous identifier for
+            every browser or device. <br><br> Use the example value provided, which
+            is already encoded.
+          required: true
+          example: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
+          schema:
+            type: string
+        - name: domain_key
+          in: query
+          description: Your site domain's ID, which is provided by Bloomreach. This
+            ID is for the domain that you want to receive your Bloomreach API requests.  This
+            parameter identifies the specific site version when the one account ID hosts
+            multiple site versions with unique characteristics, such as language versions.
+            <br><br> The example value shown here, <i>documentation_site</i>, is included
+            for your convenience to send a request with <b>Try It</b>.
+          required: true
+          example: documentation_site
+          schema:
+            type: string
+        - name: url
+          in: query
+          description: The absolute URL of the page where the request is initiated.
+            Do not use a relative URL. <br><br> The example value shown here, <i>https://www.documentation-site.com</i>,
+            is included for your convenience to send a request with <b>Try It</b>.
+          required: true
+          example: https://www.documentation-site.com
+          schema:
+            type: string
+        - name: auth_key
+          in: query
+          description: The Bloomreach-provided authentication key for the Bloomreach
+            account that's sending the request. <br><br> Autosuggest API calls are client-side,
+            so you can leave **auth_key** empty.
+          schema:
+            type: string
+        - name: user_id
+          in: query
+          description: The universal customer ID of the user. Required for Personalization-based
+          example: abc123
+            Recommendation widgets. The parameter captures user IDs from the customer
+            side and reuses the information when powering apps or enhancing cross-device
+            linking. In this way, Bloomreach recognizes users in a way that's aligned
+            with your system. <br><br> Use an anonymous string. Don't use email or other
+            personally identifiable information. <br><br> The example value shown here,
+            <i>6702</i>, is included for your convenience to send a request with <b>Try
+            It</b>.
+          schema:
+            type: string
+        - name: ref_url
+          in: query
+          description: The URL of the page or HTTP referrer where the request is started.
+          schema:
+            type: string
+        - name: request_id
+          in: query
+          description: An ID to track site visitor clicks. We recommend that you generate
+            unique, random values of 13 digits to enable click-tracking.  The request_id
+            is also important for debugging.
+          schema:
+            type: string
+        - name: view_id
+          in: query
+          description: A unique identifier for a specific view of your product catalog.
+            If you have multiple versions of your site, each with their own product
+            catalog characteristics like product titles and prices, then add view_id
+            to your call. Bloomreach uses your view_id parameter value to display the
+            right product information for your customers based on their individual site
+            views. <br><br> You can enter any string value to identify the specific
+            site catalog view. This string must be consistent in your pixel, API, and
+            product catalog.
+          schema:
+            type: string
+        - name: fields
+          in: query
+          description: A comma-separated list of fields to be sent in the request. <br><br>
+            Alternatively, you may configure the fields in the Widget Configurator in
+            the Dashboard instead. This parameter is required if not sent via the Dashboard.
+          schema:
+            type: string
+        - name: rows
+          in: query
+          description: The number of matching items to return per results page in the
+            API response. The maximum value is 200. The result size is used from the
+            Dashboard if it is not sent in the API. <br><br> To enhance performance,
+            limit this value to the number of items that you think is reasonable for
+            a single page of search results.
+          schema:
+            type: integer
+            format: int32
+        - name: start
+          in: query
+          description: The number of the first item on a page of results. For example,
+            the first item on the first page is 0, making the start value also 0. The
+            maximum value is 10000.
+          schema:
+            type: integer
+            format: int32
+        - name: filter
+          in: query
+          description: 'The filter parameter applies a faceted filter to the returned
           products, searching for products that fit your parameter values. Any facet
           that you want to filter must be in your feed. <br><br> Attributes must be
           enabled and mapped by Bloomreach. Let your Bloomreach representative know
@@ -872,8 +872,8 @@ paths:
           ranges is not supported. <br><br> To provide multiple filters, send multiple
           filter parameters. For example, **&filter=(price:["*" TO "100"])&filter=(color_groups:
           ("blue"))**'
-        schema:
-          type: string
+          schema:
+            type: string
       responses:
         '200':
           description: '200'
@@ -1137,7 +1137,7 @@ paths:
                               items:
                                 type: string
                                 example: empty_arry
-                      query: {}
+                      query: { }
                   metadata:
                     type: object
                     properties:
@@ -1221,9 +1221,8 @@ paths:
       operationId: visual-search-response-api
       deprecated: false
 x-readme:
-  headers: []
+  headers: [ ]
   explorer-enabled: true
   proxy-enabled: true
   samples-enabled: true
 x-readme-fauxas: true
-
