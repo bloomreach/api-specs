@@ -89,12 +89,12 @@ paths:
             convenience to send a request with <b>Try It</b>.
           required: true
           examples: 
-          product: 
-          value: cable
-          summary: Search terms
-          category: 
-          value: PNB160303000000
-          summary: Category ID 
+            product: 
+              value: cable
+              summary: Search terms
+            category: 
+              value: PNB160303000000
+              summary: Category ID 
           schema:
             type: string
         - name: ref_url

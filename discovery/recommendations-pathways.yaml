@@ -80,7 +80,6 @@ paths:
             Do not use a relative URL. <br><br> The example value shown here, <i>https://www.documentation-site.com</i>,
             is included for your convenience to send a request with <b>Try It</b>.
           required: true
-          example: '4500928'
           example: https://www.documentation-site.com
           schema:
             type: string
@@ -1214,12 +1213,26 @@ paths:
       description: ''
       operationId: upload-api
       deprecated: false
+      parameters: 
+        - name: widget_id
+          in: path
+          required: true
+          description: The ID of the widget.
+          schema:
+            type: string
   "/visual/search/{widget_id}":
     get:
       summary: Visual Search API
       description: ''
       operationId: visual-search-response-api
       deprecated: false
+      parameters: 
+        - name: widget_id
+          in: path
+          required: true
+          description: The ID of the widget.
+          schema:
+            type: string
 x-readme:
   headers: [ ]
   explorer-enabled: true
