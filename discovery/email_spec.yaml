@@ -6,12 +6,6 @@ info:
   contact:
     name: Metal
     email: recs-pathways@bloomreach.com
-tags:
-  - name: Email Recommendations Widget APIs
-    description: External Swagger API Specificiation for Bloomreach Email Widgets
-    externalDocs:
-      description: Bloomreach Dev Docs
-      url: https://help.bloomreach.com/
 servers:
   - url: https://pathways-email.dxpapi.com
     description: Production
@@ -200,8 +194,6 @@ paths:
     get:
       summary: Global Recommendation Widget products (Image API)
       description: This API allows you to get the EnrichedImage for the products in global widgets like Trending products. Typically used on Context less pages like your Homepage.
-      tags:
-        - Email Recommendations Widget APIs
       responses:
         '302':
           description: Redirect to the enriched image for that product
@@ -240,8 +232,6 @@ paths:
     get:
       summary: Global Recommendation Widget products (Proxy API)
       description: This API allows you to get the Product Description Page for the products in global widgets like Trending products. Typically used on Context less pages like your Hompage.
-      tags:
-        - Email Recommendations Widget APIs
       responses:
         '302':
           description: Redirect to the PDP link
@@ -280,8 +270,6 @@ paths:
     get:
       summary: Item-based Recommendation Widget products (Image API)
       description: This API allows you to get the EnrichedImage for the products in item-based widgets such as Bestseller, Frequently bought together, Frequently viewed together, Similar products, Experience-Driven Recommendations. They use the unique identifier of the item on your site to show relevant recommendations.
-      tags:
-        - Email Recommendations Widget APIs
       responses:
         '302':
           description: Redirect to the enriched image for that product
@@ -320,8 +308,6 @@ paths:
     get:
       summary: Item-based Recommendation Widget products (Proxy API)
       description: This API allows you to get the Product Description Page for the products in item-based widgets such as Bestseller, Frequently bought together, Frequently viewed together, Similar products, Experience-Driven Recommendations. They use the unique identifier of the item on your site to show relevant recommendations.
-      tags:
-        - Email Recommendations Widget APIs
       responses:
         '302':
           description: Redirect to the PDP link
@@ -360,8 +346,6 @@ paths:
     get:
       summary: Category-based Widget products (Image API)
       description: This API allows you to fetch the EnrichedImages for products in a category-id based widget.
-      tags:
-        - Email Recommendations Widget APIs
       responses:
         '302':
           description: Redirect to the enriched image for that product
@@ -404,8 +388,6 @@ paths:
     get:
       summary: Category-based Widget products (Proxy API)
       description: This API allows you to fetch the Product Description Page for products in a category-id based widget.
-      tags:
-        - Email Recommendations Widget APIs
       responses:
         '302':
           description: Redirect to the PDP link
@@ -448,8 +430,6 @@ paths:
     get:
       summary: Keyword-based Widget products (Image API)
       description: This API allows you to fetch the EnrichedImages for products in keyword-based widget results like Search.
-      tags:
-        - Email Recommendations Widget APIs
       responses:
         '302':
           description: Redirect to the enriched image for that product
@@ -492,8 +472,6 @@ paths:
     get:
       summary: Keyword-based Widget products (Proxy API)
       description: This API allows you to fetch the Product Description Page for products in keyword-based widget results like Search.
-      tags:
-        - Email Recommendations Widget APIs
       responses:
         '302':
           description: Redirect to the PDP link
@@ -536,8 +514,6 @@ paths:
     get:
       summary: Personalization-based Widget products (Image API)
       description: This API allows you to fetch the EnrichedImage for products in user_id based personalization widgets such as Past Purchases
-      tags:
-        - Email Recommendations Widget APIs
       responses:
         '302':
           description: Redirect to the enriched image for that product
@@ -581,8 +557,6 @@ paths:
     get:
       summary: Personalization-based Widget products (Proxy API)
       description: This API allows you to fetch the Product Description Pages for products in user_id based personalization widgets such as Past Purchases
-      tags:
-        - Email Recommendations Widget APIs
       responses:
         '302':
           description: Redirect to the PDP link

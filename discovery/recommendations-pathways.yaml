@@ -8,6 +8,11 @@ components:
   securitySchemes: { }
 security:
   - { }
+tags:
+  - name: 'Personalization-based Widgets'
+    description: 'Personalization-based Widget API'
+  - name: 'Visual Search'
+    description: 'Visual Search APIs'
 paths:
   "/item/{widget_id}":
     get:
@@ -482,6 +487,8 @@ paths:
       deprecated: false
   "/personalized/{widget_id}":
     get:
+      tags:
+        - 'Personalization-based Widgets'
       summary: Personalization-based Widget API
       description: ''
       operationId: personalization-based-widget-api
@@ -735,6 +742,8 @@ paths:
       deprecated: false
   "/personalized/{recently_viewed_widget_id}":
     get:
+      tags:
+        - 'Personalization-based Widgets'
       summary: Recently Viewed Widget API
       description: ''
       operationId: recently-viewed-widget-api
@@ -1209,6 +1218,8 @@ paths:
       deprecated: false
   "/visual/upload/{widget_id}":
     post:
+      tags:
+        - 'Visual Search'
       summary: Upload API
       description: ''
       operationId: upload-api
@@ -1222,6 +1233,8 @@ paths:
             type: string
   "/visual/search/{widget_id}":
     get:
+      tags:
+        - 'Visual Search'
       summary: Visual Search API
       description: ''
       operationId: visual-search-response-api

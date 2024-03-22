@@ -16,7 +16,6 @@ paths:
         The Content Search API sends a keyword query to retrieve non-product content on your site. You can apply
         additional facets to return content that either includes or excludes specified attributes about content type
         like videos and blog posts.
-      tags: [contentSearch]
       operationId: content-search-api
       parameters:
         - name: account_id

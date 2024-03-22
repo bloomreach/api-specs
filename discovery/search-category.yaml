@@ -15,7 +15,6 @@ paths:
       description:
         Returns product data and attriutes based on inputted query structure. Queries can also include filters and
         facets.
-      tags: [productSearch]
       operationId: product-search-category-api
       parameters:
         - name: account_id

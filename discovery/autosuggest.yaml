@@ -13,7 +13,6 @@ paths:
     get:
       summary: Autosuggest API
       description: Returns product suggestions based on inputted value
-      tags: [autosuggest]
       operationId: autosuggest-api
       parameters:
         - name: account_id
