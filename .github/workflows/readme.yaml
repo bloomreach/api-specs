@@ -1,15 +1,48 @@
-# For info on getting the latest rdme version and obtaining your API_DEFINITION_ID,
-# see our docs: https://docs.readme.com/docs/rdme#example-syncing-an-openapi-definition
 name: Sync OAS to ReadMe
 on:
   push:
     branches:
-      - main
+      - oas-readme-postman
 jobs:
-  build:
+  rdme-openapi:
     runs-on: ubuntu-latest
+    environment: Sandbox
     steps:
-      - uses: actions/checkout@v3
-      - uses: readmeio/rdme@7.3.0
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Upload Autosuggest API to Readme
+        uses: readmeio/rdme@v8
         with:
-          rdme: openapi discovery/email_spec.yaml --key=${{ secrets.API_KEY_SANDBOX }} --id=${{ secrets.EMAIL_RECS_ID }}
+          rdme:
+            openapi discovery/autosuggest.yaml --key=${{ secrets.API_KEY_SANDBOX }} --id=${{ vars.AUTOSUGGEST_ID }}
+
+      - name: Upload Bestseller API to Readme
+        uses: readmeio/rdme@v8
+        with:
+          rdme:
+            openapi discovery/bestseller.yaml --key=${{ secrets.API_KEY_SANDBOX }} --id=${{ vars.BESTSELLER_ID }}
+
+      - name: Upload Content Search API to Readme
+        uses: readmeio/rdme@v8
+        with:
+          rdme:
+            openapi discovery/content-search.yaml --key=${{ secrets.API_KEY_SANDBOX }} --id=${{ vars.CONTENT_SEARCH_ID }}
+
+      - name: Upload Recommendations & Pathways API to Readme
+        uses: readmeio/rdme@v8
+        with:
+          rdme:
+            openapi discovery/recommendations-pathways.yaml --key=${{ secrets.API_KEY_SANDBOX }} --id=${{ vars.RECS_PATHWAYS_ID }}
+
+      - name: Upload Search & Category API to Readme
+        uses: readmeio/rdme@v8
+        with:
+          rdme:
+            openapi discovery/search-category.yaml --key=${{ secrets.API_KEY_SANDBOX }} --id=${{ vars.SEARCH_CATEGORY_ID }}
+
+      - name: Upload Email Widget API to Readme
+        uses: readmeio/rdme@v8
+        with:
+          rdme:
+            openapi discovery/email_spec.yaml --key=${{ secrets.API_KEY_SANDBOX }} --id=${{ vars.EMAIL_RECS_ID }}
