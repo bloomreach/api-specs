@@ -1,0 +1,60 @@
+name: Sync Postman Collection
+on:
+  push:
+    branches:
+      - oas-readme-postman
+jobs:
+  postman-sync:
+    runs-on: ubuntu-latest
+    environment: Sandbox
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Upload Autosuggest API to Postman Collection
+        uses: jumaevkova04/openapi2postman@main
+        with:
+          api-key: ${{ secrets.POSTMAN_API_KEY }}
+          workspace-id: ${{ vars.POSTMAN_WORKSPACE_ID }}
+          collection-id: ${{ vars.POSTMAN_AUTOSUGGEST_COLLECTION_ID }}
+          file: discovery/autosuggest.yaml
+
+      - name: Upload Bestseller API to Postman Collection
+        uses: jumaevkova04/openapi2postman@main
+        with:
+          api-key: ${{ secrets.POSTMAN_API_KEY }}
+          workspace-id: ${{ vars.POSTMAN_WORKSPACE_ID }}
+          collection-id: ${{ vars.POSTMAN_BESTSELLER_COLLECTION_ID }}
+          file: discovery/bestseller.yaml
+
+      - name: Upload Content Search API to Postman Collection
+        uses: jumaevkova04/openapi2postman@main
+        with:
+          api-key: ${{ secrets.POSTMAN_API_KEY }}
+          workspace-id: ${{ vars.POSTMAN_WORKSPACE_ID }}
+          collection-id: ${{ vars.POSTMAN_CONTENT_SEARCH_COLLECTION_ID }}
+          file: discovery/content-search.yaml
+
+      - name: Upload Recommendations & Pathways API to Postman Collection
+        uses: jumaevkova04/openapi2postman@main
+        with:
+          api-key: ${{ secrets.POSTMAN_API_KEY }}
+          workspace-id: ${{ vars.POSTMAN_WORKSPACE_ID }}
+          collection-id: ${{ vars.POSTMAN_RECS_PATHS_COLLECTION_ID }}
+          file: discovery/recommendations-pathways.yaml
+
+      - name: Upload Search & Category API to Postman Collection
+        uses: jumaevkova04/openapi2postman@main
+        with:
+          api-key: ${{ secrets.POSTMAN_API_KEY }}
+          workspace-id: ${{ vars.POSTMAN_WORKSPACE_ID }}
+          collection-id: ${{ vars.POSTMAN_SEARCH_CATEGORY_COLLECTION_ID }}
+          file: discovery/search-category.yaml
+
+      - name: Upload Email Widget API to Postman Collection
+        uses: jumaevkova04/openapi2postman@main
+        with:
+          api-key: ${{ secrets.POSTMAN_API_KEY }}
+          workspace-id: ${{ vars.POSTMAN_WORKSPACE_ID }}
+          collection-id: ${{ vars.POSTMAN_EMAIL_COLLECTION_ID }}
+          file: discovery/email_spec.yaml
