@@ -6,6 +6,7 @@ paths:
   /:
     get:
       tags: [Product & Category Search v1]
+      summary: Get products
       description:
         Returns product data and attributes based on inputted query structure.
         Queries can also include filters and facets.
@@ -17,7 +18,7 @@ paths:
             A first-party cookie created by the Bloomreach tracking pixel library
             (BrTrk). This cookie creates a unique, anonymous identifier for every
             browser or device. <br><br> Use the default value provided, which is
-            already encoded.
+            already encoded. 
           required: true
           example: '{{ br_uid }}'
           schema:

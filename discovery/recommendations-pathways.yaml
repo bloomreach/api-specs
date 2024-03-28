@@ -6,7 +6,6 @@ paths:
   '/item/{widget_id}':
     get:
       summary: Item-based Recommendation Widget API
-      description: ''
       operationId: item-based-recommendation-widget-api
       parameters:
         - name: widget_id
@@ -183,7 +182,6 @@ paths:
   '/category/{widget_id}':
     get:
       summary: Category-based Widget API
-      description: ''
       operationId: category-based-widget-api
       parameters:
         - name: account_id
@@ -376,7 +374,6 @@ paths:
   '/keyword/{widget_id}':
     get:
       summary: Keyword-based Widget API
-      description: ''
       operationId: keyword-based-widget-api
       parameters:
         - name: account_id
@@ -573,7 +570,6 @@ paths:
       tags:
         - Personalization-based Widgets
       summary: Personalization-based Widget API
-      description: ''
       operationId: personalization-based-widget-api
       parameters:
         - name: account_id
@@ -739,7 +735,6 @@ paths:
   '/global/{widget_id}':
     get:
       summary: Global Recommendation Widget API
-      description: ''
       operationId: global-recommendation-widget-api
       parameters:
         - name: account_id
@@ -877,7 +872,6 @@ paths:
       tags:
         - Personalization-based Widgets
       summary: Recently Viewed Widget API
-      description: ''
       operationId: recently-viewed-widget-api
       parameters:
         - name: recently_viewed_widget_id
@@ -1378,7 +1372,6 @@ paths:
       tags:
         - Visual Search
       summary: Upload API
-      description: ''
       operationId: upload-api
       deprecated: false
       parameters:
@@ -1393,7 +1386,6 @@ paths:
       tags:
         - Visual Search
       summary: Visual Search API
-      description: ''
       operationId: visual-search-response-api
       deprecated: false
       parameters:
