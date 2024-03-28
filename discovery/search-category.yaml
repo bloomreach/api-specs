@@ -1,27 +1,25 @@
-components:
-  securitySchemes: {}
-info:
-  title: Product Search and Category APIs
-  version: '1.0'
 openapi: 3.1.0
+info:
+  title: Product Search and Category API
+  version: '1.0'
 paths:
   /:
     get:
-      summary: Product Search and Category API
+      tags: [Product & Category Search v1]
       description:
-        Returns product data and attriutes based on inputted query structure.
+        Returns product data and attributes based on inputted query structure.
         Queries can also include filters and facets.
-      operationId: product-search-category-api
+      operationId: product-category-search-api
       parameters:
         - name: _br_uid_2
           in: query
           description:
-            A first-party cookie created by the Bloomreach tracking pixel
-            library (BrTrk). This cookie creates a unique, anonymous identifier
-            for every browser or device. <br><br> Use the default value
-            provided, which is already encoded.
+            A first-party cookie created by the Bloomreach tracking pixel library
+            (BrTrk). This cookie creates a unique, anonymous identifier for every
+            browser or device. <br><br> Use the default value provided, which is
+            already encoded.
           required: true
-          example: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
+          example: '{{ br_uid }}'
           schema:
             type: string
             default: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
@@ -29,13 +27,12 @@ paths:
           in: query
           description:
             Your site's numerical Bloomreach account ID. Your Bloomreach
-            representative gives your site's account ID to you before or during
-            your integration kickoff meeting. <br><br> The example value shown
-            here, <i>6702</i>, is included for your convenience to send a
-            request with <b>Try It</b>. </br> <div
-            background-color="red>Callout</div>
+            representative gives your site's account ID to you before or during your
+            integration kickoff meeting. <br><br> The example value shown here,
+            <i>6702</i>, is included for your convenience to send a request with
+            <b>Try It</b>. </br> <div background-color="red>Callout</div>
           required: true
-          example: 6702
+          example: '{{ account_id }}'
           schema:
             type: integer
             format: int32
@@ -43,31 +40,66 @@ paths:
         - name: auth_key
           in: query
           description:
-            The Bloomreach-provided authentication key for the Bloomreach
-            account that's sending the request. <br><br> Pass the auth_key with
-            an empty value in client-side calls.  The auth_key value is a
-            private authorization key. If you include your valid auth_key value
-            in client-side calls, then you inadvertently expose that private
+            The Bloomreach-provided authentication key for the Bloomreach account
+            that's sending the request. <br><br> Pass the auth_key with an empty
+            value in client-side calls.  The auth_key value is a private
+            authorization key. If you include your valid auth_key value in
+            client-side calls, then you inadvertently expose that private
             information to everybody.
           required: true
+          example: '{{ auth_key }}'
           schema:
             type: string
-        - name: br_diagnostics
+        - name: domain_key
           in: query
           description:
-            'This parameter sends Ranking Diagnostics data in the API response
-            to help debug your results.<br>Allowed values are:
-            `all`/`recall`/`ranking`/`merchandising`.<br><br>Refer to the guide
-            for using [Ranking Diagnostics on the
-            API](https://documentation.bloomreach.com/discovery/reference/ranking-diagnostics-on-the-api)
-            for more details.'
+            Your site domain's ID, which is provided by Bloomreach. This ID is for
+            the domain that you want to receive your Bloomreach API requests.  This
+            parameter identifies the specific site version when the one account ID
+            hosts multiple site versions with unique characteristics, such as
+            language versions. Bloomreach uses your domain_key parameter value to
+            ensure that only the data that pertains to that site version is used for
+            query and analytics features, such as autosuggestions. <br><br> The
+            example value shown here, <i>documentation_site</i>, is included for
+            your convenience to send a request with <b>Try It</b>.
+          required: true
+          example: '{{ domain_key }}'
+          schema:
+            type: string
+            default: documentation_site
+        - name: ref_url
+          in: query
+          description:
+            The URL of the page or HTTP referrer where the request is started.
+          required: true
+          example: '{{ ref_url }}'
+          schema:
+            type: string
+        - name: request_type
+          in: query
+          description:
+            The type of API request. Value should be **search** for Product
+            Search or Category requests.
+          required: true
+          example: search
           schema:
             type: string
             enum:
-              - all
-              - recall
-              - ranking
-              - merchandising
+              - search
+            default: search
+        - name: search_type
+          in: query
+          description:
+            The type of search. Value should be **keyword** for Product Search
+            requests, **category** for Category requests.
+          required: true
+          example: keyword
+          schema:
+            type: string
+            enum:
+              - keyword
+              - category
+            default: keyword
         - name: callback
           in: query
           description:
@@ -80,24 +112,6 @@ paths:
             enum:
               - br_server
               - br_app
-        - name: domain_key
-          in: query
-          description:
-            Your site domain's ID, which is provided by Bloomreach. This ID is
-            for the domain that you want to receive your Bloomreach API
-            requests.  This parameter identifies the specific site version when
-            the one account ID hosts multiple site versions with unique
-            characteristics, such as language versions. Bloomreach uses your
-            domain_key parameter value to ensure that only the data that
-            pertains to that site version is used for query and analytics
-            features, such as autosuggestions. <br><br> The example value shown
-            here, <i>documentation_site</i>, is included for your convenience to
-            send a request with <b>Try It</b>.
-          required: true
-          example: documentation_site
-          schema:
-            type: string
-            default: documentation_site
         - name: efq
           in: query
           description:
@@ -111,6 +125,23 @@ paths:
             [Faceting and filtering page](ref:faceting-and-filtering).
           schema:
             type: string
+        - name: br_diagnostics
+          in: query
+          description:
+            'This parameter sends Ranking Diagnostics data in the API response
+            to help debug your results.<br>Allowed values are:
+            `all`/`recall`/`ranking`/`merchandising`.<br><br>Refer to the guide
+            for using [Ranking Diagnostics on the
+            API](https://documentation.bloomreach.com/discovery/reference/ranking-diagnostics-on-the-api)
+            for more details.'
+          example: all
+          schema:
+            type: string
+            enum:
+              - all
+              - recall
+              - ranking
+              - merchandising
         - name: facet.range
           in: query
           description:
@@ -129,6 +160,7 @@ paths:
             Response
             v3](https://documentation.bloomreach.com/discovery/reference/facet-response-v3-unified-ranking).
             This will return the facet information in the new unified format.
+          example: '3.0'
           schema:
             type: number
             format: float
@@ -170,6 +202,7 @@ paths:
             distance from ll. In the response body, this value is returned as an
             additional field with the suffix ‘.distance’. <br><br> Use
             **fq=store_lat_lon** to enable filtering by distance.
+          example: '11.09,10.018'
           schema:
             type: string
         - name: merchandising.ts
@@ -183,6 +216,7 @@ paths:
             dashboard](https://documentation.bloomreach.com/discovery/docs/product-grid-editor#duration),
             this parameter can help you preview their combined impact up to 21
             days in advance.'
+          example: '1703497216'
           schema:
             type: string
             format: date-time
@@ -210,13 +244,6 @@ paths:
           schema:
             type: string
             default: cable
-        - name: ref_url
-          in: query
-          description:
-            The URL of the page or HTTP referrer where the request is started.
-          required: true
-          schema:
-            type: string
         - name: request_id
           in: query
           description:
@@ -227,21 +254,10 @@ paths:
             for each instance of the request_id parameter without triggering an
             error message. However, using a unique value allows us to help you
             if you encounter a problem.
-          required: true
+          required: false
+          example: test
           schema:
             type: string
-        - name: request_type
-          in: query
-          description:
-            The type of API request. Value should be **search** for Product
-            Search or Category requests.
-          required: true
-          example: search
-          schema:
-            type: string
-            enum:
-              - search
-            default: search
         - name: rows
           in: query
           description:
@@ -249,23 +265,12 @@ paths:
             response. The maximum value is 200. <br><br> To enhance performance,
             limit this value to the number of items that you think is reasonable
             for a single page of search results.
-          required: true
+          required: false
+          example: 20
           schema:
             type: integer
             format: int32
-        - name: search_type
-          in: query
-          description:
-            The type of search. Value should be **keyword** for Product Search
-            requests, **category** for Category requests.
-          required: true
-          example: keyword
-          schema:
-            type: string
-            enum:
-              - keyword
-              - category
-            default: keyword
+            default: 20
         - name: sort
           in: query
           description:
@@ -274,6 +279,7 @@ paths:
             Value is a field name, followed by **asc**/**desc** for
             ascending/descending order respectively. For example,
             **sort=sale_price desc** sorts in descending order of the sale price
+          example: sale_price desc
           schema:
             type: string
         - name: start
@@ -282,10 +288,12 @@ paths:
             The number of the first item on a page of results. For example, the
             first item on the first page is 0, making the start value also 0.
             <br><br> The maximum value is 10000.
-          required: true
+          required: false
+          example: 0
           schema:
             type: integer
             format: int32
+            default: 0
         - name: stats.field
           in: query
           description:
@@ -305,7 +313,7 @@ paths:
             <i>https://www.documentation-site.com</i>, is included for your
             convenience to send a request with <b>Try It</b>.
           required: true
-          example: https://www.documentation-site.com
+          example: '{{ url }}'
           schema:
             type: string
             default: https://www.documentation-site.com
