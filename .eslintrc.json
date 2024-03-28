@@ -24,24 +24,6 @@
       {
         "prefer": "single"
       }
-    ],
-    "yml/sort-keys": [
-      "error",
-      {
-        "pathPattern": "^$",
-        "order": {
-          "type": "asc"
-        }
-      }
-    ],
-    "yml/sort-sequence-values": [
-      "error",
-      {
-        "pathPattern": "^$",
-        "order": {
-          "type": "asc"
-        }
-      }
     ]
   }
 }
