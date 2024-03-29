@@ -22,7 +22,7 @@ paths:
             for every browser or device. <br><br> Use the default value
             provided, which is already encoded.
           required: true
-          example: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
+          example: '{{ _br_uid_2 }}'
           schema:
             type: string
             default: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
@@ -34,11 +34,11 @@ paths:
             your integration kickoff meeting. <br><br> The value shown here,
             <i>6702</i>, is provided as an example.
           required: true
-          example: 6092
+          example: '{{ account_id }}'
           schema:
             type: integer
             format: int32
-            default: 6092
+            default: 6702
         - name: auth_key
           in: query
           description:
@@ -49,7 +49,7 @@ paths:
             client-side calls, then you inadvertently expose that private
             information to everybody.
           required: true
-          example: jazzhands
+          example: '{{ auth_key }}'
           schema:
             type: string
             default: jazzhands
@@ -92,7 +92,7 @@ paths:
             pertains to that site version is used for query and analytics
             features, such as autosuggestions.
           required: true
-          example: example_com
+          example: '{{ domain_key }}'
           schema:
             type: string
             default: example_com
@@ -134,6 +134,7 @@ paths:
             Response
             v3](https://documentation.bloomreach.com/discovery/reference/facet-response-v3-unified-ranking).
             This will return the facet information in the new unified format.
+          example: '3.0'
           schema:
             type: number
             format: float
@@ -183,7 +184,7 @@ paths:
           description:
             The URL of the page or HTTP referrer where the request is started.
           required: true
-          example: https://documentation.bloomreach.com/discovery
+          example: '{{ ref_url }}'
           schema:
             type: string
             default: https://documentation.bloomreach.com/discovery
@@ -252,7 +253,7 @@ paths:
             The absolute URL of the page where the request is initiated. Do not
             use a relative URL.
           required: true
-          example: http://www.example.com/index.html?q=popcorn
+          example: '{{ url }}'
           schema:
             type: string
             default: http://www.example.com/index.html?q=popcorn

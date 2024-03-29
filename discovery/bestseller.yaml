@@ -20,6 +20,7 @@ paths:
             for every browser or device. <br><br> Use the default value
             provided, which is already encoded.
           required: true
+          example: '{{ br_uid_2 }}'
           schema:
             type: string
             default: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
@@ -32,7 +33,7 @@ paths:
             here, <i>6702</i>, is included for your convenience to send a
             request with <b>Try It</b>.
           required: true
-          example: 6702
+          example: '{{ account_id }}'
           schema:
             type: integer
             format: int32
@@ -47,6 +48,7 @@ paths:
             in client-side calls, then you inadvertently expose that private
             information to everybody.
           required: true
+          example: '{{ auth_key }}'
           schema:
             type: string
         - name: callback
@@ -73,8 +75,10 @@ paths:
             pertains to that site version is used for query and analytics
             features, such as autosuggestions.
           required: true
+          example: '{{ domain_key }}'
           schema:
             type: string
+            default: example_com
         - name: fl
           in: query
           description:
@@ -104,8 +108,10 @@ paths:
           description:
             The URL of the page or HTTP referrer where the request is started.
           required: true
+          example: '{{ ref_url }}'
           schema:
             type: string
+            default: https://example.com
         - name: request_id
           in: query
           description:
@@ -117,8 +123,10 @@ paths:
             error message. However, using a unique value allows us to help you
             if you encounter a problem.
           required: true
+          example: 1703497216731
           schema:
             type: string
+            default: 1703497216731
         - name: request_type
           in: query
           description:
@@ -175,8 +183,10 @@ paths:
             The absolute URL of the page where the request is initiated. Do not
             use a relative URL.
           required: true
+          example: '{{ url }}'
           schema:
             type: string
+            default: https://www.documentation-site.com
         - name: user_id
           in: query
           description:
