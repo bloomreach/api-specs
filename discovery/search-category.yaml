@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Product Search and Category API
-  version: '1.0'
+  version: "1.0"
 paths:
   /:
     get:
@@ -15,12 +15,12 @@ paths:
         - name: _br_uid_2
           in: query
           description:
-            A first-party cookie created by the Bloomreach tracking pixel library
-            (BrTrk). This cookie creates a unique, anonymous identifier for every
-            browser or device. <br><br> Use the default value provided, which is
-            already encoded. 
+            A first-party cookie created by the Bloomreach tracking pixel
+            library (BrTrk). This cookie creates a unique, anonymous identifier
+            for every browser or device. <br><br> Use the default value
+            provided, which is already encoded.
           required: true
-          example: '{{ br_uid }}'
+          example: "{{ br_uid }}"
           schema:
             type: string
             default: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
@@ -28,12 +28,13 @@ paths:
           in: query
           description:
             Your site's numerical Bloomreach account ID. Your Bloomreach
-            representative gives your site's account ID to you before or during your
-            integration kickoff meeting. <br><br> The example value shown here,
-            <i>6702</i>, is included for your convenience to send a request with
-            <b>Try It</b>. </br> <div background-color="red>Callout</div>
+            representative gives your site's account ID to you before or during
+            your integration kickoff meeting. <br><br> The example value shown
+            here, <i>6702</i>, is included for your convenience to send a
+            request with <b>Try It</b>. </br> <div
+            background-color="red>Callout</div>
           required: true
-          example: '{{ account_id }}'
+          example: "{{ account_id }}"
           schema:
             type: integer
             format: int32
@@ -41,30 +42,31 @@ paths:
         - name: auth_key
           in: query
           description:
-            The Bloomreach-provided authentication key for the Bloomreach account
-            that's sending the request. <br><br> Pass the auth_key with an empty
-            value in client-side calls.  The auth_key value is a private
-            authorization key. If you include your valid auth_key value in
-            client-side calls, then you inadvertently expose that private
+            The Bloomreach-provided authentication key for the Bloomreach
+            account that's sending the request. <br><br> Pass the auth_key with
+            an empty value in client-side calls.  The auth_key value is a
+            private authorization key. If you include your valid auth_key value
+            in client-side calls, then you inadvertently expose that private
             information to everybody.
           required: true
-          example: '{{ auth_key }}'
+          example: "{{ auth_key }}"
           schema:
             type: string
         - name: domain_key
           in: query
           description:
-            Your site domain's ID, which is provided by Bloomreach. This ID is for
-            the domain that you want to receive your Bloomreach API requests.  This
-            parameter identifies the specific site version when the one account ID
-            hosts multiple site versions with unique characteristics, such as
-            language versions. Bloomreach uses your domain_key parameter value to
-            ensure that only the data that pertains to that site version is used for
-            query and analytics features, such as autosuggestions. <br><br> The
-            example value shown here, <i>documentation_site</i>, is included for
-            your convenience to send a request with <b>Try It</b>.
+            Your site domain's ID, which is provided by Bloomreach. This ID is
+            for the domain that you want to receive your Bloomreach API
+            requests.  This parameter identifies the specific site version when
+            the one account ID hosts multiple site versions with unique
+            characteristics, such as language versions. Bloomreach uses your
+            domain_key parameter value to ensure that only the data that
+            pertains to that site version is used for query and analytics
+            features, such as autosuggestions. <br><br> The example value shown
+            here, <i>documentation_site</i>, is included for your convenience to
+            send a request with <b>Try It</b>.
           required: true
-          example: '{{ domain_key }}'
+          example: "{{ domain_key }}"
           schema:
             type: string
             default: documentation_site
@@ -73,7 +75,7 @@ paths:
           description:
             The URL of the page or HTTP referrer where the request is started.
           required: true
-          example: '{{ ref_url }}'
+          example: "{{ ref_url }}"
           schema:
             type: string
         - name: request_type
@@ -129,12 +131,12 @@ paths:
         - name: br_diagnostics
           in: query
           description:
-            'This parameter sends Ranking Diagnostics data in the API response
+            "This parameter sends Ranking Diagnostics data in the API response
             to help debug your results.<br>Allowed values are:
             `all`/`recall`/`ranking`/`merchandising`.<br><br>Refer to the guide
             for using [Ranking Diagnostics on the
             API](https://documentation.bloomreach.com/discovery/reference/ranking-diagnostics-on-the-api)
-            for more details.'
+            for more details."
           example: all
           schema:
             type: string
@@ -161,7 +163,7 @@ paths:
             Response
             v3](https://documentation.bloomreach.com/discovery/reference/facet-response-v3-unified-ranking).
             This will return the facet information in the new unified format.
-          example: '3.0'
+          example: "3.0"
           schema:
             type: number
             format: float
@@ -203,21 +205,21 @@ paths:
             distance from ll. In the response body, this value is returned as an
             additional field with the suffix ‘.distance’. <br><br> Use
             **fq=store_lat_lon** to enable filtering by distance.
-          example: '11.09,10.018'
+          example: "11.09,10.018"
           schema:
             type: string
         - name: merchandising.ts
           in: query
           description:
-            'This parameter allows you to preview the search results that would
+            "This parameter allows you to preview the search results that would
             be produced at a future date.<br>It takes all the merchandising
             rules that will be active at the entered timestamp into
             account.<br>Example (Unix Epoch timestamp): 1703497216<br><br>If you
             have scheduled rules through the [duration selector in the
             dashboard](https://documentation.bloomreach.com/discovery/docs/product-grid-editor#duration),
             this parameter can help you preview their combined impact up to 21
-            days in advance.'
-          example: '1703497216'
+            days in advance."
+          example: "1703497216"
           schema:
             type: string
             format: date-time
@@ -314,7 +316,7 @@ paths:
             <i>https://www.documentation-site.com</i>, is included for your
             convenience to send a request with <b>Try It</b>.
           required: true
-          example: '{{ url }}'
+          example: "{{ url }}"
           schema:
             type: string
             default: https://www.documentation-site.com

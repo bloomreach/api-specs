@@ -1,9 +1,9 @@
 openapi: 3.1.0
 info:
   title: Recommendations and Pathways APIs
-  version: '1.0'
+  version: "1.0"
 paths:
-  '/item/{widget_id}':
+  "/item/{widget_id}":
     get:
       summary: Item-based Recommendation Widget API
       operationId: item-based-recommendation-widget-api
@@ -42,10 +42,10 @@ paths:
             for every browser or device. <br><br> Use the default value
             provided, which is already encoded.
           required: true
-          example: '&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55'
+          example: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
           schema:
             type: string
-            default: '&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55'
+            default: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
         - name: domain_key
           in: query
           description:
@@ -69,10 +69,10 @@ paths:
             <i>4427949</i>, is included for your convenience to send a request
             with <b>Try It</b>.
           required: true
-          example: '4427949'
+          example: "4427949"
           schema:
             type: string
-            default: '4427949'
+            default: "4427949"
         - name: request_id
           in: query
           description:
@@ -97,7 +97,7 @@ paths:
         - name: context_pids
           in: query
           description:
-            'context_pids takes a single product ID for producing Context-based
+            "context_pids takes a single product ID for producing Context-based
             merchandising results for the widget.<br>Contextual Merchandising
             uses Context PID as a primary input for generating the recall set of
             the widget results.<br>In the event that not enough results are
@@ -106,10 +106,10 @@ paths:
             </b>In case context_pids is not provided, the system will use Item
             ID(s) to produce Contextual Merchandising results for the
             widget.<br><br>You can find more information on the Contextual
-            Merchandising Feature in [its guide](doc:contextual-merchandising).'
+            Merchandising Feature in [its guide](doc:contextual-merchandising)."
           schema:
             type: string
-            default: '4500928'
+            default: "4500928"
         - name: fields
           in: query
           description:
@@ -179,7 +179,7 @@ paths:
           schema:
             type: string
       deprecated: false
-  '/category/{widget_id}':
+  "/category/{widget_id}":
     get:
       summary: Category-based Widget API
       operationId: category-based-widget-api
@@ -206,10 +206,10 @@ paths:
             for every browser or device. <br><br> Use the default value
             provided, which is already encoded.
           required: true
-          example: '&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55'
+          example: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
           schema:
             type: string
-            default: '&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55'
+            default: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
         - name: cat_id
           in: query
           description:
@@ -371,7 +371,7 @@ paths:
           required: true
           example: dl4qy396
       deprecated: false
-  '/keyword/{widget_id}':
+  "/keyword/{widget_id}":
     get:
       summary: Keyword-based Widget API
       operationId: keyword-based-widget-api
@@ -398,10 +398,10 @@ paths:
             for every browser or device. <br><br> Use the default value
             provided, which is already encoded.
           required: true
-          example: '&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55'
+          example: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
           schema:
             type: string
-            default: '&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55'
+            default: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
         - name: domain_key
           in: query
           description:
@@ -565,7 +565,7 @@ paths:
           required: true
           example: 1jwq4qjz
       deprecated: false
-  '/personalized/{widget_id}':
+  "/personalized/{widget_id}":
     get:
       tags:
         - Personalization-based Widgets
@@ -594,10 +594,10 @@ paths:
             for every browser or device. <br><br> Use the default value
             provided, which is already encoded.
           required: true
-          example: '&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55'
+          example: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
           schema:
             type: string
-            default: '&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55'
+            default: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
         - name: domain_key
           in: query
           description:
@@ -732,7 +732,7 @@ paths:
           required: true
           example: q9xyqxj0
       deprecated: false
-  '/global/{widget_id}':
+  "/global/{widget_id}":
     get:
       summary: Global Recommendation Widget API
       operationId: global-recommendation-widget-api
@@ -759,10 +759,10 @@ paths:
             for every browser or device. <br><br> Use the default value
             provided, which is already encoded.
           required: true
-          example: '&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55'
+          example: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
           schema:
             type: string
-            default: '&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55'
+            default: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
         - name: domain_key
           in: query
           description:
@@ -867,7 +867,7 @@ paths:
           required: true
           example: r9287r9v
       deprecated: false
-  '/personalized/{recently_viewed_widget_id}':
+  "/personalized/{recently_viewed_widget_id}":
     get:
       tags:
         - Personalization-based Widgets
@@ -898,7 +898,7 @@ paths:
           example: 6702
           schema:
             type: string
-            default: '6702'
+            default: "6702"
         - name: _br_uid_2
           in: query
           description:
@@ -907,10 +907,10 @@ paths:
             for every browser or device. <br><br> Use the default value
             provided, which is already encoded.
           required: true
-          example: '&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55'
+          example: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
           schema:
             type: string
-            default: '&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55'
+            default: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
         - name: domain_key
           in: query
           description:
@@ -1034,8 +1034,8 @@ paths:
           schema:
             type: string
       responses:
-        '200':
-          description: '200'
+        "200":
+          description: "200"
           content:
             application/json:
               examples:
@@ -1345,29 +1345,29 @@ paths:
                           fallback:
                             type: string
                             example: mlt
-        '400':
-          description: '400'
+        "400":
+          description: "400"
           content:
             application/json:
               examples:
                 Result:
                   value: Incorrect/Invalid query params.
-        '401':
-          description: '401'
+        "401":
+          description: "401"
           content:
             application/json:
               examples:
                 Result:
                   value: An invalid auth-key is passed with the request.
-        '404':
-          description: '404'
+        "404":
+          description: "404"
           content:
             application/json:
               examples:
                 Result:
                   value: "The widget ID is not valid.\n\n"
       deprecated: false
-  '/visual/upload/{widget_id}':
+  "/visual/upload/{widget_id}":
     post:
       tags:
         - Visual Search
@@ -1381,7 +1381,7 @@ paths:
           description: The ID of the widget.
           schema:
             type: string
-  '/visual/search/{widget_id}':
+  "/visual/search/{widget_id}":
     get:
       tags:
         - Visual Search
