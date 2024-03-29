@@ -17,13 +17,5 @@
       ],
       "parser": "yaml-eslint-parser"
     }
-  ],
-  "rules": {
-    "yml/quotes": [
-      "error",
-      {
-        "prefer": "single"
-      }
-    ]
-  }
+  ]
 }
