@@ -47,7 +47,6 @@ paths:
             private authorization key. If you include your valid auth_key value
             in client-side calls, then you inadvertently expose that private
             information to everybody.
-          required: true
           example: "{{ auth_key }}"
           schema:
             type: string
@@ -88,8 +87,10 @@ paths:
             from your product feed may be used as a value for fl. <br><br>
             Multiple values should be comma separated, such as **fl=pid,price**.
           required: true
+          example: pid,url,description
           schema:
             type: string
+            default: pid,url,description
         - name: fq
           in: query
           description:
@@ -123,7 +124,7 @@ paths:
             error message. However, using a unique value allows us to help you
             if you encounter a problem.
           required: true
-          example: 1703497216731
+          example: 1234567891234
           schema:
             type: string
             default: 1703497216731
@@ -147,6 +148,7 @@ paths:
             limit this value to the number of items that you think is reasonable
             for a single page of search results.
           required: true
+          example: 10
           schema:
             type: integer
             format: int32
@@ -169,9 +171,11 @@ paths:
             first item on the first page is 0, making the start value also 0.
             <br><br> The maximum value is 10000.
           required: true
+          example: 0
           schema:
             type: integer
             format: int32
+            default: 0
         - name: title
           in: query
           description: The title or name of the product.
