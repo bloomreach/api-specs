@@ -22,7 +22,7 @@ paths:
             for every browser or device. <br><br> Use the default value
             provided, which is already encoded.
           required: true
-          example: "{{ _br_uid_2 }}"
+          example: "{{ br_uid_2 }}"
           schema:
             type: string
             default: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
@@ -48,7 +48,6 @@ paths:
             authorization key. If you include your valid auth_key value in
             client-side calls, then you inadvertently expose that private
             information to everybody.
-          required: true
           example: "{{ auth_key }}"
           schema:
             type: string

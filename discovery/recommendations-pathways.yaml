@@ -80,6 +80,7 @@ paths:
             unique, random values of 13 digits to enable click-tracking.  The
             request_id is also important for debugging.
           required: true
+          example: 1234567891234
           schema:
             type: string
         - name: url
@@ -243,6 +244,7 @@ paths:
             unique, random values of 13 digits to enable click-tracking.  The
             request_id is also important for debugging.
           required: true
+          example: 1234567891234
           schema:
             type: string
         - name: url
@@ -330,9 +332,11 @@ paths:
             The number of the first item on a page of results. For example, the
             first item on the first page is 0, making the start value also 0.
             The maximum value is 10000.
+          example: 0
           schema:
             type: integer
             format: int32
+            default: 0
         - name: user_id
           in: query
           description:
@@ -437,6 +441,7 @@ paths:
             unique, random values of 13 digits to enable click-tracking.  The
             request_id is also important for debugging.
           required: true
+          example: 1234567891234
           schema:
             type: string
         - name: url
@@ -633,6 +638,7 @@ paths:
             unique, random values of 13 digits to enable click-tracking.  The
             request_id is also important for debugging.
           required: true
+          example: 1234567891234
           schema:
             type: string
         - name: url
@@ -785,6 +791,7 @@ paths:
             unique, random values of 13 digits to enable click-tracking.  The
             request_id is also important for debugging.
           required: true
+          example: 1234567891234
           schema:
             type: string
         - name: url
@@ -973,6 +980,7 @@ paths:
             An ID to track site visitor clicks. We recommend that you generate
             unique, random values of 13 digits to enable click-tracking.  The
             request_id is also important for debugging.
+          example: 1234567891234
           schema:
             type: string
         - name: view_id
@@ -1014,9 +1022,11 @@ paths:
             The number of the first item on a page of results. For example, the
             first item on the first page is 0, making the start value also 0.
             The maximum value is 10000.
+          example: 0
           schema:
             type: integer
             format: int32
+            default: 0
         - name: filter
           in: query
           description:

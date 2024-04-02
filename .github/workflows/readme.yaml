@@ -45,4 +45,4 @@ jobs:
         uses: readmeio/rdme@v8
         with:
           rdme:
-            openapi discovery/email_spec.yaml --key=${{ secrets.API_KEY_SANDBOX }} --id=${{ vars.EMAIL_RECS_ID }}
+            openapi discovery/email-spec.yaml --key=${{ secrets.API_KEY_SANDBOX }} --id=${{ vars.EMAIL_RECS_ID }}

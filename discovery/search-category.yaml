@@ -20,7 +20,7 @@ paths:
             for every browser or device. <br><br> Use the default value
             provided, which is already encoded.
           required: true
-          example: "{{ br_uid }}"
+          example: "{{ br_uid_2 }}"
           schema:
             type: string
             default: uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
@@ -48,7 +48,6 @@ paths:
             private authorization key. If you include your valid auth_key value
             in client-side calls, then you inadvertently expose that private
             information to everybody.
-          required: true
           example: "{{ auth_key }}"
           schema:
             type: string
@@ -177,10 +176,10 @@ paths:
             for fl. <br><br> Multiple values should be comma separated, such as
             **fl=pid,price**.
           required: true
-          example: pid
+          example: pid,url,description
           schema:
             type: string
-            default: pid
+            default: pid,url,description
         - name: fq
           in: query
           description:
@@ -258,7 +257,7 @@ paths:
             error message. However, using a unique value allows us to help you
             if you encounter a problem.
           required: false
-          example: test
+          example: 1234567891234
           schema:
             type: string
         - name: rows
