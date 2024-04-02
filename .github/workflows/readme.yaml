@@ -2,7 +2,7 @@ name: Sync OAS to ReadMe
 on:
   push:
     branches:
-      - oas-readme-postman
+      - main
 jobs:
   rdme-openapi:
     runs-on: ubuntu-latest

@@ -2,7 +2,7 @@ name: Sync Postman Collection
 on:
   push:
     branches:
-      - oas-readme-postman
+      - main
 jobs:
   postman-sync:
     runs-on: ubuntu-latest
