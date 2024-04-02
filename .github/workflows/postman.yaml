@@ -12,49 +12,79 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Upload Autosuggest API to Postman Collection
-        uses: jumaevkova04/openapi2postman@main
+        uses: fluximus-prime/openapi-to-postman-action@v2.0.12
         with:
-          api-key: ${{ secrets.POSTMAN_API_KEY }}
-          workspace-id: ${{ vars.POSTMAN_WORKSPACE_ID }}
-          collection-id: ${{ vars.POSTMAN_AUTOSUGGEST_COLLECTION_ID }}
-          file: discovery/autosuggest.yaml
+          postmanApiKey: ${{ secrets.POSTMAN_API_KEY }}
+          postmanCollectionUid: ${{ vars.POSTMAN_AUTOSUGGEST_COLLECTION_ID }}
+          openApiSpec: discovery/autosuggest.yaml
+          options: |
+            requestParametersResolution: Example
+            exampleParametersResolution: Example
+            parametersResolution: Example
+            folderStrategy: Tags
+            enableOptionalParameters: false
 
       - name: Upload Bestseller API to Postman Collection
-        uses: jumaevkova04/openapi2postman@main
+        uses: fluximus-prime/openapi-to-postman-action@v2.0.12
         with:
-          api-key: ${{ secrets.POSTMAN_API_KEY }}
-          workspace-id: ${{ vars.POSTMAN_WORKSPACE_ID }}
-          collection-id: ${{ vars.POSTMAN_BESTSELLER_COLLECTION_ID }}
-          file: discovery/bestseller.yaml
+          postmanApiKey: ${{ secrets.POSTMAN_API_KEY }}
+          postmanCollectionUid: ${{ vars.POSTMAN_BESTSELLER_COLLECTION_ID }}
+          openApiSpec: discovery/bestseller.yaml
+          options: |
+            requestParametersResolution: Example
+            exampleParametersResolution: Example
+            parametersResolution: Example
+            folderStrategy: Tags
+            enableOptionalParameters: false
 
       - name: Upload Content Search API to Postman Collection
-        uses: jumaevkova04/openapi2postman@main
+        uses: fluximus-prime/openapi-to-postman-action@v2.0.12
         with:
-          api-key: ${{ secrets.POSTMAN_API_KEY }}
-          workspace-id: ${{ vars.POSTMAN_WORKSPACE_ID }}
-          collection-id: ${{ vars.POSTMAN_CONTENT_SEARCH_COLLECTION_ID }}
-          file: discovery/content-search.yaml
+          postmanApiKey: ${{ secrets.POSTMAN_API_KEY }}
+          postmanCollectionUid: ${{ vars.POSTMAN_CONTENT_SEARCH_COLLECTION_ID }}
+          openApiSpec: discovery/content-search.yaml
+          options: |
+            requestParametersResolution: Example
+            exampleParametersResolution: Example
+            parametersResolution: Example
+            folderStrategy: Tags
+            enableOptionalParameters: false
 
       - name: Upload Recommendations & Pathways API to Postman Collection
-        uses: jumaevkova04/openapi2postman@main
+        uses: fluximus-prime/openapi-to-postman-action@v2.0.12
         with:
-          api-key: ${{ secrets.POSTMAN_API_KEY }}
-          workspace-id: ${{ vars.POSTMAN_WORKSPACE_ID }}
-          collection-id: ${{ vars.POSTMAN_RECS_PATHS_COLLECTION_ID }}
-          file: discovery/recommendations-pathways.yaml
+          postmanApiKey: ${{ secrets.POSTMAN_API_KEY }}
+          postmanCollectionUid: ${{ vars.POSTMAN_RECS_PATHS_COLLECTION_ID }}
+          openApiSpec: discovery/recommendations-pathways.yaml
+          options: |
+            requestParametersResolution: Example
+            exampleParametersResolution: Example
+            parametersResolution: Example
+            folderStrategy: Tags
+            enableOptionalParameters: false
 
       - name: Upload Search & Category API to Postman Collection
-        uses: jumaevkova04/openapi2postman@main
+        uses: fluximus-prime/openapi-to-postman-action@v2.0.12
         with:
-          api-key: ${{ secrets.POSTMAN_API_KEY }}
-          workspace-id: ${{ vars.POSTMAN_WORKSPACE_ID }}
-          collection-id: ${{ vars.POSTMAN_SEARCH_CATEGORY_COLLECTION_ID }}
-          file: discovery/search-category.yaml
+          postmanApiKey: ${{ secrets.POSTMAN_API_KEY }}
+          postmanCollectionUid: ${{ vars.POSTMAN_SEARCH_CATEGORY_COLLECTION_ID }}
+          openApiSpec: discovery/search-category.yaml
+          options: |
+            requestParametersResolution: Example
+            exampleParametersResolution: Example
+            parametersResolution: Example
+            folderStrategy: Tags
+            enableOptionalParameters: false
 
       - name: Upload Email Widget API to Postman Collection
-        uses: jumaevkova04/openapi2postman@main
+        uses: fluximus-prime/openapi-to-postman-action@v2.0.12
         with:
-          api-key: ${{ secrets.POSTMAN_API_KEY }}
-          workspace-id: ${{ vars.POSTMAN_WORKSPACE_ID }}
-          collection-id: ${{ vars.POSTMAN_EMAIL_COLLECTION_ID }}
-          file: discovery/email_spec.yaml
+          postmanApiKey: ${{ secrets.POSTMAN_API_KEY }}
+          postmanCollectionUid: ${{ vars.POSTMAN_EMAIL_COLLECTION_ID }}
+          openApiSpec: discovery/email-spec.yaml
+          options: |
+            requestParametersResolution: Example
+            exampleParametersResolution: Example
+            parametersResolution: Example
+            folderStrategy: Tags
+            enableOptionalParameters: false
