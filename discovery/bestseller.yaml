@@ -5,7 +5,7 @@ info:
 paths:
   /:
     get:
-      tags: [Bestseller v2]
+      tags: [Bestseller v1]
       summary: Get bestseller products
       description:
         The Bestseller API returns the products that are likely to generate the
