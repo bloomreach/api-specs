@@ -15,34 +15,34 @@ jobs:
         uses: readmeio/rdme@v8
         with:
           rdme:
-            openapi discovery/autosuggest.yaml --key=${{ secrets.API_KEY_SANDBOX }} --id=${{ vars.AUTOSUGGEST_ID }} --version=${{ vars.DOCS_VERSION }}
+            openapi discovery/autosuggest.yaml --key=${{ secrets.RDME_API_KEY }} --id=${{ vars.AUTOSUGGEST_ID }} --version=${{ vars.DOCS_VERSION }}
 
       - name: Upload Bestseller API to Readme
         uses: readmeio/rdme@v8
         with:
           rdme:
-            openapi discovery/bestseller.yaml --key=${{ secrets.API_KEY_SANDBOX }} --id=${{ vars.BESTSELLER_ID }} --version=${{ vars.DOCS_VERSION }}
+            openapi discovery/bestseller.yaml --key=${{ secrets.RDME_API_KEY }} --id=${{ vars.BESTSELLER_ID }} --version=${{ vars.DOCS_VERSION }}
 
       - name: Upload Content Search API to Readme
         uses: readmeio/rdme@v8
         with:
           rdme:
-            openapi discovery/content-search.yaml --key=${{ secrets.API_KEY_SANDBOX }} --id=${{ vars.CONTENT_SEARCH_ID }} --version=${{ vars.DOCS_VERSION }}
+            openapi discovery/content-search.yaml --key=${{ secrets.RDME_API_KEY }} --id=${{ vars.CONTENT_SEARCH_ID }} --version=${{ vars.DOCS_VERSION }}
 
       - name: Upload Recommendations & Pathways API to Readme
         uses: readmeio/rdme@v8
         with:
           rdme:
-            openapi discovery/recommendations-pathways.yaml --key=${{ secrets.API_KEY_SANDBOX }} --id=${{ vars.RECS_PATHWAYS_ID }} --version=${{ vars.DOCS_VERSION }}
+            openapi discovery/recommendations-pathways.yaml --key=${{ secrets.RDME_API_KEY }} --id=${{ vars.RECS_PATHWAYS_ID }} --version=${{ vars.DOCS_VERSION }}
 
       - name: Upload Search & Category API to Readme
         uses: readmeio/rdme@v8
         with:
           rdme:
-            openapi discovery/search-category.yaml --key=${{ secrets.API_KEY_SANDBOX }} --id=${{ vars.SEARCH_CATEGORY_ID }} --version=${{ vars.DOCS_VERSION }}
+            openapi discovery/search-category.yaml --key=${{ secrets.RDME_API_KEY }} --id=${{ vars.SEARCH_CATEGORY_ID }} --version=${{ vars.DOCS_VERSION }}
 
       - name: Upload Email Widget API to Readme
         uses: readmeio/rdme@v8
         with:
           rdme:
-            openapi discovery/email-spec.yaml --key=${{ secrets.API_KEY_SANDBOX }} --id=${{ vars.EMAIL_RECS_ID }} --version=${{ vars.DOCS_VERSION }}
+            openapi discovery/email-spec.yaml --key=${{ secrets.RDME_API_KEY }} --id=${{ vars.EMAIL_RECS_ID }} --version=${{ vars.DOCS_VERSION }}
