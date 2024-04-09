@@ -1,11 +1,11 @@
 openapi: 3.1.0
 info:
   title: Autosuggest API
-  version: "1.0"
+  version: "2.0"
 paths:
   /:
     get:
-      tags: [Autosuggest v1]
+      tags: [Autosuggest v2]
       summary: Get product suggestions
       description: Returns product suggestions based on inputted value
       operationId: autosuggest-api
