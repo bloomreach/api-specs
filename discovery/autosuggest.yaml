@@ -166,6 +166,8 @@ paths:
           schema:
             type: string
       deprecated: false
+servers:
+  - url: https://suggest.dxpapi.com/api/v2/suggest
 x-readme:
   headers: []
   explorer-enabled: true
