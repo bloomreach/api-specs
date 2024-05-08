@@ -39,7 +39,7 @@ paths:
         - name: auth_key
           in: query
           description:
-            The Bloomreach-provided authentication key for the Bloomreach
+            The authentication key provided by Bloomreach for the
             account that's sending the request. <br><br> Autosuggest API calls
             are client-side, so you can leave **auth_key** empty.
           example: "{{ auth_key }}"
