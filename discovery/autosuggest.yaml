@@ -6,7 +6,7 @@ paths:
   /:
     get:
       tags: [Autosuggest v2]
-      summary: Get product suggestions
+      summary: Autosuggest API
       description: This API returns product suggestions based on an inputted search query.
       operationId: autosuggest-api
       parameters:
