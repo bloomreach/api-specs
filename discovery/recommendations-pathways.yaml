@@ -5,6 +5,7 @@ info:
 paths:
   "/item/{widget_id}":
     get:
+      tags: [Item-based Widgets]
       summary: Item-based Recommendation Widget API
       operationId: item-based-recommendation-widget-api
       parameters:
@@ -182,6 +183,7 @@ paths:
       deprecated: false
   "/category/{widget_id}":
     get:
+      tags: [Category-based Widgets]
       summary: Category-based Widget API
       operationId: category-based-widget-api
       parameters:
@@ -377,6 +379,7 @@ paths:
       deprecated: false
   "/keyword/{widget_id}":
     get:
+      tags: [Keyword-based Widgets]
       summary: Keyword-based Widget API
       operationId: keyword-based-widget-api
       parameters:
@@ -572,8 +575,7 @@ paths:
       deprecated: false
   "/personalized/{widget_id}":
     get:
-      tags:
-        - Personalization-based Widgets
+      tags: [Personalization-based Widgets]
       summary: Personalization-based Widget API
       operationId: personalization-based-widget-api
       parameters:
@@ -740,6 +742,7 @@ paths:
       deprecated: false
   "/global/{widget_id}":
     get:
+      tags: [Global Widgets]
       summary: Global Recommendation Widget API
       operationId: global-recommendation-widget-api
       parameters:
@@ -876,8 +879,7 @@ paths:
       deprecated: false
   "/personalized/{recently_viewed_widget_id}":
     get:
-      tags:
-        - Personalization-based Widgets
+      tags: [Personalization-based Widgets]
       summary: Recently Viewed Widget API
       operationId: recently-viewed-widget-api
       parameters:
