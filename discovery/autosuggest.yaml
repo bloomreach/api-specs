@@ -166,6 +166,200 @@ paths:
           schema:
             type: string
       deprecated: false
+      responses:
+        "200":
+          description: Successful response
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/SuggestResponse"
+components:
+  schemas:
+    SuggestResponse:
+      additionalProperties: false
+      properties:
+        queryContext:
+          additionalProperties: false
+          properties:
+            originalQuery:
+              type: string
+          type: object
+        suggestionGroups:
+          items:
+            additionalProperties: false
+            properties:
+              attributeSuggestions:
+                items:
+                  additionalProperties: false
+                  properties:
+                    attributeType:
+                      type: string
+                    name:
+                      type: string
+                    value:
+                      type: string
+                  required:
+                    - name
+                    - value
+                    - attributeType
+                  type: object
+                type: array
+              catalogName:
+                type: string
+              product_suggest_query:
+                type: string
+              querySuggestions:
+                items:
+                  additionalProperties: false
+                  properties:
+                    displayText:
+                      type: string
+                    query:
+                      type: string
+                  required:
+                    - query
+                    - displayText
+                  type: object
+                type: array
+              searchSuggestions:
+                items:
+                  additionalProperties: false
+                  properties:
+                    pid:
+                      type: string
+                    sale_price:
+                      type: string
+                    thumb_image:
+                      type: string
+                    title:
+                      type: string
+                    url:
+                      type: string
+                  required:
+                    - sale_price
+                    - url
+                    - pid
+                    - thumb_image
+                    - title
+                  type: object
+                type: array
+              view:
+                type: string
+            type: object
+          type: array
+      type: object
+    SuggestResponseAttributeSuggestions:
+      additionalProperties: false
+      properties:
+        attributeType:
+          type: string
+        name:
+          type: string
+        value:
+          type: string
+      required:
+        - name
+        - value
+        - attributeType
+      type: object
+    SuggestResponseQueryContext:
+      additionalProperties: false
+      properties:
+        originalQuery:
+          type: string
+      type: object
+    SuggestResponseQuerySuggestions:
+      additionalProperties: false
+      properties:
+        displayText:
+          type: string
+        query:
+          type: string
+      required:
+        - query
+        - displayText
+      type: object
+    SuggestResponseSearchSuggestions:
+      additionalProperties: false
+      properties:
+        pid:
+          type: string
+        sale_price:
+          type: string
+        thumb_image:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+      required:
+        - sale_price
+        - url
+        - pid
+        - thumb_image
+        - title
+      type: object
+    SuggestResponseSuggestionGroups:
+      additionalProperties: false
+      properties:
+        attributeSuggestions:
+          items:
+            additionalProperties: false
+            properties:
+              attributeType:
+                type: string
+              name:
+                type: string
+              value:
+                type: string
+            required:
+              - name
+              - value
+              - attributeType
+            type: object
+          type: array
+        catalogName:
+          type: string
+        product_suggest_query:
+          type: string
+        querySuggestions:
+          items:
+            additionalProperties: false
+            properties:
+              displayText:
+                type: string
+              query:
+                type: string
+            required:
+              - query
+              - displayText
+            type: object
+          type: array
+        searchSuggestions:
+          items:
+            additionalProperties: false
+            properties:
+              pid:
+                type: string
+              sale_price:
+                type: string
+              thumb_image:
+                type: string
+              title:
+                type: string
+              url:
+                type: string
+            required:
+              - sale_price
+              - url
+              - pid
+              - thumb_image
+              - title
+            type: object
+          type: array
+        view:
+          type: string
+      type: object
 servers:
   - url: https://suggest.dxpapi.com/api/v2/suggest
 x-readme:
