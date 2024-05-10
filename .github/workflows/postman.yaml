@@ -6,7 +6,7 @@ on:
 jobs:
   postman-sync:
     runs-on: ubuntu-latest
-    environment: Sandbox
+    environment: Production
     steps:
       - name: Checkout
         uses: actions/checkout@v4
