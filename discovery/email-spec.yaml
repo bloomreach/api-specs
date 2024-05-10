@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  title: Email Widget Api V2
+  title: Email Widget API V2
   description: API Specification For Bloomreach Email Widget APIs
   version: 2.0.0
   contact:
@@ -8,10 +8,10 @@ info:
     email: recs-pathways@bloomreach.com
 paths:
   /api/v2/widgets/image/global/{widget_id}:
-    summary: Email Widget v2 api
     description: Email image api calls for trending products
     get:
-      summary: Global Recommendation Widget products (Image API)
+      tags: [Global Recommendation Widget Products]
+      summary: Image API
       description:
         This API allows you to get the EnrichedImage for the products in global
         widgets like Trending products. Typically used on Context less pages
@@ -51,10 +51,10 @@ paths:
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/filter'
   /api/v2/widgets/proxy/global/{widget_id}:
-    summary: Email Widget v2 api
     description: Email proxy api calls for trending products
     get:
-      summary: Global Recommendation Widget products (Proxy API)
+      tags: [Global Recommendation Widget Products]
+      summary: Proxy API
       description:
         This API allows you to get the Product Description Page for the products
         in global widgets like Trending products. Typically used on Context less
@@ -94,12 +94,12 @@ paths:
       - $ref: '#/components/parameters/start'
       - $ref: '#/components/parameters/filter'
   /api/v2/widgets/image/item/{widget_id}:
-    summary: Email Widget v2 api
     description:
       Email image api calls for item-based widgets such as Frequently bought
       together, Frequently viewed together, Similar products
     get:
-      summary: Item-based Recommendation Widget products (Image API)
+      tags: [Item-based Recommendation Widget Products]
+      summary: Image API
       description:
         This API allows you to get the EnrichedImage for the products in
         item-based widgets such as Bestseller, Frequently bought together,
@@ -141,13 +141,13 @@ paths:
       - $ref: '#/components/parameters/rows'
       - $ref: '#/components/parameters/filter'
   /api/v2/widgets/proxy/item/{widget_id}:
-    summary: Email Widget v2 api
     description:
       Email proxy api calls for item-based widgets such as Frequently bought
       together, Frequently viewed together, Similar products, Experience-Driven
       Recommendations
     get:
-      summary: Item-based Recommendation Widget products (Proxy API)
+      tags: [Item-based Recommendation Widget Products]
+      summary: Proxy API
       description:
         This API allows you to get the Product Description Page for the products
         in item-based widgets such as Bestseller, Frequently bought together,
@@ -189,10 +189,10 @@ paths:
       - $ref: '#/components/parameters/rows'
       - $ref: '#/components/parameters/filter'
   /api/v2/widgets/image/category/{widget_id}:
-    summary: Email Widget v2 api
     description: Email image api for category-based widget
     get:
-      summary: Category-based Widget products (Image API)
+      tags: [Category-based Widget Products]
+      summary: Image API
       description:
         This API allows you to fetch the EnrichedImages for products in a
         category-id based widget.
@@ -235,10 +235,10 @@ paths:
       - $ref: '#/components/parameters/segment'
       - $ref: '#/components/parameters/facet'
   /api/v2/widgets/proxy/category/{widget_id}:
-    summary: Email Widget v2 api
     description: Email proxy api for category-based widget
     get:
-      summary: Category-based Widget products (Proxy API)
+      tags: [Category-based Widget Products]
+      summary: Proxy API
       description:
         This API allows you to fetch the Product Description Page for products
         in a category-id based widget.
@@ -281,10 +281,10 @@ paths:
       - $ref: '#/components/parameters/segment'
       - $ref: '#/components/parameters/facet'
   /api/v2/widgets/image/keyword/{widget_id}:
-    summary: Email Widget v2 api
     description: Email image api for keyword-based widget
     get:
-      summary: Keyword-based Widget products (Image API)
+      tags: [Keyword-based Widget Products]
+      summary: Image API
       description:
         This API allows you to fetch the EnrichedImages for products in
         keyword-based widget results like Search.
@@ -327,10 +327,10 @@ paths:
       - $ref: '#/components/parameters/segment'
       - $ref: '#/components/parameters/facet'
   /api/v2/widgets/proxy/keyword/{widget_id}:
-    summary: Email Widget v2 api
     description: Email proxy api for keyword-based widget
     get:
-      summary: Keyword-based Widget products (Proxy API)
+      tags: [Keyword-based Widget Products]
+      summary: Proxy API
       description:
         This API allows you to fetch the Product Description Page for products
         in keyword-based widget results like Search.
@@ -373,11 +373,11 @@ paths:
       - $ref: '#/components/parameters/segment'
       - $ref: '#/components/parameters/facet'
   /api/v2/widgets/image/personalized/{widget_id}:
-    summary: Email Widget v2 api
     description:
       Email image api for personalization widgets such as Past Purchases
     get:
-      summary: Personalization-based Widget products (Image API)
+      tags: [Personalization-based Widget Products]
+      summary: Image API
       description:
         This API allows you to fetch the EnrichedImage for products in user_id
         based personalization widgets such as Past Purchases
@@ -421,11 +421,11 @@ paths:
       - $ref: '#/components/parameters/segment'
       - $ref: '#/components/parameters/facet'
   /api/v2/widgets/proxy/personalized/{widget_id}:
-    summary: Email Widget v2 api
     description:
       Email proxy api for personalization widgets such as Past Purchases
     get:
-      summary: Personalization-based Widget products (Proxy API)
+      tags: [Personalization-based Widget Products]
+      summary: Proxy API
       description:
         This API allows you to fetch the Product Description Pages for products
         in user_id based personalization widgets such as Past Purchases
