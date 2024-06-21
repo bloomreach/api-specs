@@ -1,0 +1,253 @@
+openapi: 3.0.2
+info:
+  title: Visual Search Widget Api V2
+  description: API Specification For Bloomreach Visual Search Widget APIs
+  version: 2.0.0
+  contact:
+    name: Metal
+    email: recs-pathways@bloomreach.com
+
+tags:
+  - name: "Visual Search and Recommendations Widget APIs"
+    description: >-
+      External Swagger API Specificiation for Bloomreach Visual Search Widgets
+    externalDocs:
+      description: "Bloomreach Dev Docs"
+      url: "https://help.bloomreach.com/"
+
+servers:
+  - url: https://pathways.dxpapi.com/
+    description: Production
+  - url: https://pathways-staging.dxpapi.com
+    description: Staging
+
+components:
+  parameters:
+    auth_key:
+      name: auth_key
+      in: header
+      description: >-
+        Unique key shared during integration phase. This is used to authenticate a merchant API call.
+      required: false
+      schema:
+        type: string
+    widget_id:
+      name: widget_id
+      in: path
+      description: The ID of the widget, which can be found in the Widget Configurator in the Dashboard.
+      required: true
+      schema:
+        type: string
+        default: q9xyqxj0
+    account_id:
+      name: account_id
+      in: query
+      description: Your site's numerical Bloomreach account ID. Your Bloomreach representative gives your site's account ID to you before or during your integration kickoff meeting.
+      required: true
+      schema:
+        type: string
+        default: 6370
+    domain_key:
+      name: domain_key
+      in: query
+      description: Your site domain's ID, which is provided by Bloomreach. This ID is for the domain that you want to receive your Bloomreach API requests. This parameter identifies the specific site version when the one account ID hosts multiple site versions with unique characteristics, such as language versions.
+      required: true
+      schema:
+        type: string
+        default: pacific_supply
+    _br_uid_2:
+      name: _br_uid_2
+      in: query
+      description: A first-party cookie created by the Bloomreach tracking pixel library (BrTrk). This cookie creates a unique, anonymous identifier for every browser or device.
+      required: true
+      schema:
+        type: string
+        default: _br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55
+    url:
+      name: url
+      in: query
+      description: The absolute URL of the page where the request is initiated. Do not use a relative URL.
+      required: true
+      schema:
+        type: string
+        format: uri
+        default: https://www.documentation-site.com
+    ref_url:
+      name: ref_url
+      in: query
+      description: The URL of the page or HTTP referrer where the request is started.
+      required: false
+      schema:
+        type: string
+        format: uri
+    request_id:
+      name: request_id
+      in: query
+      description: An ID to track site visitor clicks. We recommend that you generate unique, random values of 13 digits to enable click-tracking. The request_id is also important for debugging.
+      required: false
+      schema:
+        type: string
+    fields:
+      name: fields
+      in: query
+      description: A comma-separated list of fields to be sent in the request. Alternatively, you may configure the fields in the Widget Configurator in the Dashboard instead. This parameter is required if not sent via the Dashboard. Keep
+      required: false
+      schema:
+        type: string
+        default: pid
+    rows:
+      name: rows
+      in: query
+      description: The number of matching items to return per results page in the API response. The maximum value is 200. The result size is used from the Dashboard if it is not sent in the API.
+                  To enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+        maximum: 200
+    start:
+      name: start
+      in: query
+      description: The number of the first item on a page of results. For example, the first item on the first page is 0, making the start value also 0. The maximum value is 10000.
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+    filter:
+      name: filter
+      in: query
+      description: >-
+        The filter parameter applies a faceted filter to the returned products, searching for products that fit your parameter values. Any facet that you want to filter must be in your feed.
+
+        Attributes must be enabled and mapped by Bloomreach. Let your Bloomreach representative know which attributes in your content feed you want to apply as filters to search results.
+
+        You can filter results based on numeric ranges. For example, &filter=-(price:["*" TO "100"]) or &filter=(price:["100" TO "*"]).
+
+        To provide multiple filters, send multiple filter parameters. For example, &filter=-(price:["*" TO "100"])&filter=-(color_groups: ("blue"))
+      required: false
+      schema:
+        type: string
+    sort:
+      name: sort
+      in: query
+      description: Sort order based on numeric fields. Eg- "price asc", "title desc"
+      required: false
+      schema:
+        type: string
+    item_ids:
+      name: item_ids
+      in: query
+      description: |
+        - Specifies access to a particular set of items. For product catalog, this would be the PID(s) and would be passed for visual recommendations request.
+        - Only one of item_ids or image_id is required
+      required: false
+      schema:
+        type: string
+        default: 1122
+    facet:
+      name: facet
+      in: query
+      description: FFacets are disabled by default. To enable facets, set facet=true.
+      required: false
+      schema:
+        type: boolean
+
+    image_id:
+      name: image_id
+      required: false
+      in: query
+      schema:
+        type: string
+      description: |
+        - unique id of image returned by visual search upload API for visual search request type
+        - Only one of item_ids or image_id is required
+    sku_id:
+      name: sku_id
+      required: false
+      in: query
+      schema:
+        type: string
+      description: |
+        - sku_id for corresponding item_id for visual recommendations request type
+        - valid only when item_ids is being passed and merchant has sku_ids in catalog
+    object_id:
+      name: object_id
+      required: false
+      in: query
+      schema:
+        type: int
+        default: -1
+      description: |
+        - By default, you will get the recommendations for the whole image you uploaded {-1} if you make an API call without the object_id.
+        - To get more targeted results, you can also make API calls specific to object_ids.
+
+    image:
+      name: image
+      required: true
+      in: formData
+      description: The image to upload. This header specifies the media type (image) and format. We accept all image formats - jpg, png, jpeg, webp. The request payload must not exceed 2 MB
+      schema:
+        type: file
+
+
+
+paths:
+  /api/v2/widgets/visual/upload/{widget_id}:
+    summary: Visual Search Upload API
+    description: >-
+      Visual Search upload API for uploading an image
+    post:
+      summary: Visual Search Image Upload API
+      description: >-
+        This API allows you to upload an image and returns an image_id corresponding to the image.
+        The image_id can then be passed to the search API to get visually similar items.
+      tags:
+        - "Visual Search and Recommendations Widget APIs"
+      responses:
+        '400':
+          description: If the query parameters are incorrect/invalid
+        '413':
+          description: The request payload must not exceed 2 MB. If it does, the API will return a HTTP status code 413 - Content too large.
+
+    parameters:
+      - $ref: '#/components/parameters/widget_id'
+      - $ref: '#/components/parameters/account_id'
+      - $ref: '#/components/parameters/domain_key'
+      - $ref: '#/components/parameters/auth_key'
+      - $ref: '#/components/parameters/image'
+
+  /api/v2/widgets/visual/search/{widget_id}:
+      summary: Visual Search API
+      description: >-
+        Visual Search API for getting similar products
+      get:
+        summary: Visual Search API to get similar products against image_id or item_ids
+        description: >-
+          This
+        tags:
+          - "Visual Search and Recommendations Widget APIs"
+        responses:
+          '400':
+            description: |
+              - If the query parameters are incorrect/invalid
+              - If item_ids and image_id both are passed
+              - Neither items_ids nor image_id is passed
+
+        parameters:
+          - $ref: '#/components/parameters/widget_id'
+          - $ref: '#/components/parameters/account_id'
+          - $ref: '#/components/parameters/domain_key'
+          - $ref: '#/components/parameters/url'
+          - $ref: '#/components/parameters/_br_uid_2'
+          - $ref: '#/components/parameters/auth_key'
+          - $ref: '#/components/parameters/image_id'
+          - $ref: '#/components/parameters/item_ids'
+          - $ref: '#/components/parameters/sku_id'
+          - $ref: '#/components/parameters/object_id'
+          - $ref: '#/components/parameters/fields'
+          - $ref: '#/components/parameters/rows'
+          - $ref: '#/components/parameters/filter'
+          - $ref: '#/components/parameters/sort'
+
+
+
