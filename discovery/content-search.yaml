@@ -5,8 +5,8 @@ info:
 paths:
   /:
     get:
-      tags: [Content Search v1]
-      summary: Get non-product content
+      tags: [Content Search API v1]
+      summary: Get Content
       description:
         The Content Search API sends a keyword query to retrieve non-product
         content on your site. You can apply additional facets to return content
