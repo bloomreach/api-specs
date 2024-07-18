@@ -8,8 +8,8 @@ paths:
       tags: [Bestseller v1]
       summary: Get bestseller products
       description:
-        The Bestseller API returns the products that are likely to generate the
-        most revenue.
+        The Bestseller API returns the products likely to generate the
+        most revenue. The algorithm uses a combination of RPV, ATCs and Views, combined in order to maximize revenue.
       operationId: bestseller-api
       parameters:
         - name: _br_uid_2
