@@ -1,15 +1,16 @@
 openapi: 3.1.0
 info:
-  title: Product Search and Category API
+  title: Product and Category Search API
   version: "1.0"
 paths:
   /:
     get:
-      tags: [Product & Category Search v1]
-      summary: Get products
+      tags: [Product & Category Search API v1]
+      summary: Get products/categories
       description:
-        Returns product data and attributes based on inputted query structure.
-        Queries can also include filters and facets.
+        The **Product Search API** sends a keyword query to retrieve results about products and other content on your site. You can apply additional filters and facets to return products and content that either include or exclude specified attributes like colors and brands.
+
+The **Category API** sends a category query to retrieve results about products within the categories that you specify.
       operationId: product-category-search-api
       parameters:
         - name: _br_uid_2
