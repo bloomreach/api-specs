@@ -32,7 +32,7 @@ paths:
             Your site's numerical Bloomreach account ID. Your Bloomreach
             representative gives your site's account ID to you before or during
             your integration kickoff meeting. <br><br> The value shown here,
-            <i>6702</i>, is provided as an example.
+            <i>6413</i>, is provided as an example.
           required: true
           example: "{{ account_id }}"
           schema:
