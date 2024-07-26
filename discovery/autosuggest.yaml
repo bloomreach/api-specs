@@ -28,14 +28,14 @@ paths:
             Your site's numerical Bloomreach account ID. Your Bloomreach
             representative gives your site's account ID to you before or during
             your integration kickoff meeting. <br><br> The example value shown
-            here, <i>6702</i>, is included for your convenience to send a
+            here, <i>6413</i>, is included for your convenience to send a
             request with <b>Try It</b>.
           required: true
           example: "{{ account_id }}"
           schema:
             type: integer
             format: int32
-            default: 6702
+            default: 6413
         - name: auth_key
           in: query
           description:
@@ -73,13 +73,13 @@ paths:
             would return text and attribute suggestions for the product catalog
             in the store1 view, and for the recipe catalog in the premium view;
             only text suggestions will be displayed for the articles catalog.
-            <br><br> The example value shown here, <i>documentation_site</i>, is
+            <br><br> The example value shown here, <i>pacifichome</i>, is
             included for your convenience to send a request with <b>Try It</b>.
           required: true
-          example: documentation_site
+          example: pacifichome
           schema:
             type: string
-            default: documentation_site
+            default: pacifichome
         - name: q
           in: query
           description:
