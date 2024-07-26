@@ -38,7 +38,7 @@ paths:
           schema:
             type: integer
             format: int32
-            default: 6702
+            default: 6413
         - name: auth_key
           in: query
           description:
@@ -75,10 +75,10 @@ paths:
             Catalogs are created in the DataConnect UI by default, you can
             rename the catalogs when you set up your catalogs initially.
           required: true
-          example: contentskodemo_64ae
+          example: content_en
           schema:
             type: string
-            default: contentskodemo_64ae
+            default: content_en
         - name: domain_key
           in: query
           description:
@@ -174,10 +174,10 @@ paths:
             Additionally, most merchandising operations do not work on \* query
             parameters, except for include/exclude operations.
           required: true
-          example: popcorn
+          example: sofa
           schema:
             type: string
-            default: popcorn
+            default: sofa
         - name: ref_url
           in: query
           description:
