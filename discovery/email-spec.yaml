@@ -103,8 +103,8 @@ paths:
       description:
         This API allows you to get the EnrichedImage for the products in
         item-based widgets such as Bestseller, Frequently bought together,
-        Frequently viewed together, Similar products, Experience-Driven
-        Recommendations. They use the unique identifier of the item on your site
+        Frequently viewed together, Similar products.
+        They use the unique identifier of the item on your site
         to show relevant recommendations.
       responses:
         '302':
@@ -151,8 +151,8 @@ paths:
       description:
         This API allows you to get the Product Description Page for the products
         in item-based widgets such as Bestseller, Frequently bought together,
-        Frequently viewed together, Similar products, Experience-Driven
-        Recommendations. They use the unique identifier of the item on your site
+        Frequently viewed together, Similar products.
+        They use the unique identifier of the item on your site
         to show relevant recommendations.
       responses:
         '302':
