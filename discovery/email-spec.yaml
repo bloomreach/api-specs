@@ -38,7 +38,7 @@ paths:
         required: true
         schema:
           type: string
-          default: o9g1py90
+          default: nj3rvrjr
       - $ref: '#/components/parameters/account_id'
       - $ref: '#/components/parameters/domain_key'
       - $ref: '#/components/parameters/_br_uid_2'
@@ -81,7 +81,7 @@ paths:
         required: true
         schema:
           type: string
-          default: o9g1py90
+          default: nj3rvrjr
       - $ref: '#/components/parameters/account_id'
       - $ref: '#/components/parameters/domain_key'
       - $ref: '#/components/parameters/_br_uid_2'
@@ -128,7 +128,7 @@ paths:
         required: true
         schema:
           type: string
-          default: 1jwp539z
+          default: nj3rvrjr
       - $ref: '#/components/parameters/account_id'
       - $ref: '#/components/parameters/domain_key'
       - $ref: '#/components/parameters/_br_uid_2'
@@ -176,7 +176,7 @@ paths:
         required: true
         schema:
           type: string
-          default: 1jwp539z
+          default: nj3rvrjr
       - $ref: '#/components/parameters/account_id'
       - $ref: '#/components/parameters/domain_key'
       - $ref: '#/components/parameters/_br_uid_2'
@@ -218,7 +218,7 @@ paths:
         required: true
         schema:
           type: string
-          default: r92rgmjv
+          default: nj3rvrjr
       - $ref: '#/components/parameters/account_id'
       - $ref: '#/components/parameters/domain_key'
       - $ref: '#/components/parameters/_br_uid_2'
@@ -264,7 +264,7 @@ paths:
         required: true
         schema:
           type: string
-          default: r92rgmjv
+          default: nj3rvrjr
       - $ref: '#/components/parameters/account_id'
       - $ref: '#/components/parameters/domain_key'
       - $ref: '#/components/parameters/_br_uid_2'
@@ -310,7 +310,7 @@ paths:
         required: true
         schema:
           type: string
-          default: kjy4y2jv
+          default: nj3rvrjr
       - $ref: '#/components/parameters/account_id'
       - $ref: '#/components/parameters/domain_key'
       - $ref: '#/components/parameters/_br_uid_2'
@@ -356,7 +356,7 @@ paths:
         required: true
         schema:
           type: string
-          default: kjy4y2jv
+          default: nj3rvrjr
       - $ref: '#/components/parameters/account_id'
       - $ref: '#/components/parameters/domain_key'
       - $ref: '#/components/parameters/_br_uid_2'
@@ -403,7 +403,7 @@ paths:
         required: true
         schema:
           type: string
-          default: 4lee5ol2
+          default: nj3rvrjr
       - $ref: '#/components/parameters/account_id'
       - $ref: '#/components/parameters/domain_key'
       - $ref: '#/components/parameters/_br_uid_2'
@@ -451,7 +451,7 @@ paths:
         required: true
         schema:
           type: string
-          default: 4lee5ol2
+          default: nj3rvrjr
       - $ref: '#/components/parameters/account_id'
       - $ref: '#/components/parameters/domain_key'
       - $ref: '#/components/parameters/_br_uid_2'
@@ -488,7 +488,7 @@ components:
       required: true
       schema:
         type: string
-        default: q9xyqxj0
+        default: nj3rvrjr
     account_id:
       name: account_id
       in: query
