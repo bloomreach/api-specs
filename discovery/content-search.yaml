@@ -158,9 +158,9 @@ paths:
             facet that you want to filter must be in your feed.  Read more about
             using the fq parameter in the "Simple Filtering" section in the
             [Faceting and filtering page](ref:faceting-and-filtering). <br><br>
-            Attributes must be enabled and mapped by Bloomreach Let your
-            Bloomreach representative know which attributes in your content feed
-            you want to apply as filters to search results.
+            You can [configure Attributes](doc:understanding-feed-configuring-attributes)
+            from the Catalog Management Tab. Configure which attributes in your
+            content feed you want to apply as filters to search results.
           schema:
             type: string
         - name: q
