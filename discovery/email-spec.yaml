@@ -1,6 +1,6 @@
 openapi: 3.0.2
 info:
-  title: Email Widget API V2
+  title: Email Widget API
   description: API Specification For Bloomreach Email Widget APIs
   version: 2.0.0
   contact:
@@ -38,8 +38,17 @@ paths:
         required: true
         schema:
           type: string
-          default: nj3rvrjr
-      - $ref: '#/components/parameters/account_id'
+          default: 09zwor59
+      - name: account_id
+        in: query
+        description:
+          Your site's numerical Bloomreach account ID. Your Bloomreach
+          representative gives your site's account ID to you before or during your
+          integration kickoff meeting.
+        required: true
+        schema:
+          type: string
+          default: 6228
       - $ref: '#/components/parameters/domain_key'
       - $ref: '#/components/parameters/_br_uid_2'
       - $ref: '#/components/parameters/url'
@@ -81,8 +90,17 @@ paths:
         required: true
         schema:
           type: string
-          default: nj3rvrjr
-      - $ref: '#/components/parameters/account_id'
+          default: 09zwor59
+      - name: account_id
+        in: query
+        description:
+          Your site's numerical Bloomreach account ID. Your Bloomreach
+          representative gives your site's account ID to you before or during your
+          integration kickoff meeting.
+        required: true
+        schema:
+          type: string
+          default: 6228
       - $ref: '#/components/parameters/domain_key'
       - $ref: '#/components/parameters/_br_uid_2'
       - $ref: '#/components/parameters/url'
