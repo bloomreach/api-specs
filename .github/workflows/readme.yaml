@@ -1,15 +1,14 @@
 name: Sync OAS to ReadMe
 on:
   push:
-    branches:
-      - main
+
 env:
   ENVIRONMENT: ${{ github.ref == 'refs/heads/main' && 'Production' || 'Sandbox' }}
 
 jobs:
   rdme-openapi:
     runs-on: ubuntu-latest
-    environment: $ENVIRONMENT
+    environment: ${{ env.ENVIRONMENT }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4

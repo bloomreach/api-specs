@@ -1,12 +1,14 @@
 name: Sync Postman Collection
 on:
   push:
-    branches:
-      - main
+
+env:
+  ENVIRONMENT: ${{ github.ref == 'refs/heads/main' && 'Production' || 'Sandbox' }}
+
 jobs:
   postman-sync:
     runs-on: ubuntu-latest
-    environment: Production
+    environment: $ENVIRONMENT
     steps:
       - name: Checkout
         uses: actions/checkout@v4
