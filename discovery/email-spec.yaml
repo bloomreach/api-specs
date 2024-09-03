@@ -584,7 +584,7 @@ paths:
     - $ref: '#/components/parameters/segment'
     - $ref: '#/components/parameters/facet'
 
-  /api/v2/widgets/proxy/personalized/{mandatory_user_id}:
+  /api/v2/widgets/proxy/personalized/{pp_search_category_widget_id}:
     summary: Email Widget v2 api
     description: >-
       Email proxy api for personalization widgets such as Past Purchases
@@ -609,7 +609,7 @@ paths:
 
     parameters:
     - $ref: '#/components/parameters/auth_key'
-    - $ref: '#/components/parameters/mandatory_user_id'
+    - $ref: '#/components/parameters/pp_search_category_widget_id'
     - $ref: '#/components/parameters/account_id'
     - $ref: '#/components/parameters/domain_key'
     - $ref: '#/components/parameters/_br_uid_2'
