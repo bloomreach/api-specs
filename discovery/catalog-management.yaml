@@ -1171,7 +1171,7 @@ paths:
 components:
   parameters:
     AccountName:
-      description: "Account name"
+      description: "Your unique account name."
       name: account_name
       in: path
       schema:
