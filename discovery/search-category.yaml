@@ -249,12 +249,11 @@ paths:
         - name: request_id
           in: query
           description:
-            An ID to track site visitor clicks. We recommend that you generate
-            unique, random values of 13 digits to enable click-tracking.
+            An ID to track the API request for identification in logs.
             <br><br> Bloomreach doesn't automatically enforce the requirements
-            for this parameter. For example, you can enter test as your value
+            for this parameter. For example, you can enter `test` as your value
             for each instance of the request_id parameter without triggering an
-            error message. However, using a unique value allows us to help you
+            error message. However, using a unique value (random number/Unix Timestamp) allows us to help you
             if you encounter a problem.
           required: false
           example: 1234567891234
