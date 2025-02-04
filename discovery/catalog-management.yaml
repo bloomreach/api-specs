@@ -1179,9 +1179,10 @@ components:
         minLength: 1
         maxLength: 64
       required: true
-      example: "bloomique"
+      example: "homeoasis"
 
     CatalogName:
+      description: "Points to where this information will be stored on the backend, represented with catalog name and language key. Use the same value as your domain key in your search API requests."
       name: catalog_name
       in: path
       schema:
@@ -1189,9 +1190,10 @@ components:
         minLength: 1
         maxLength: 64
       required: true
-      example: "bloomique_com"
+      example: "homeoasis_fr"
 
     EnvironmentName:
+      description: "The type of environment you want to use (Production/Staging) for the account."
       name: environment_name
       in: path
       schema:
@@ -1212,6 +1214,7 @@ components:
       example: "1324"
 
     JobId:
+      description: "The job ID returned in the response from sending your catalog data (refer to [Send Your Data](https://documentation.bloomreach.com/discovery/reference/send-your-data-product))."
       name: job_id
       in: path
       schema:
@@ -1243,6 +1246,16 @@ components:
       example: 10
 
     JobClass:
+      description: |
+        Filters jobs based on comma separated class values.
+
+        * feed_records_full — Includes full feed jobs in response, ie where type=feed and feed_mode=full
+        * feed_records_delta - Includes delta feed jobs in response, ie where type=feed and feed_mode=delta
+        * index_update - Includes update index jobs from search quality in response, ie where type=index, index_mode=update
+        * index_refresh - Includes refresh index jobs in response, ie where type=index, index_mode=refresh
+        * suggest_refresh - Includes suggest refresh jobs in response
+
+        If no filter value is supplied, the default behavior returns all jobs, regardless of job class. This is equivalent to passing all job class values in the parameter.
       name: class
       in: query
       explode: false
@@ -1257,21 +1270,14 @@ components:
             - index_refresh
             - suggest_refresh
         minItems: 1
-      description: |
-        Filters jobs based on comma separated class values.
-
-        * feed_records_full — Includes full feed jobs in response, ie where type=feed and feed_mode=full
-        * feed_records_delta - Includes delta feed jobs in response, ie where type=feed and feed_mode=delta
-        * index_update - Includes update index jobs from search quality in response, ie where type=index, index_mode=update
-        * index_refresh - Includes refresh index jobs in response, ie where type=index, index_mode=refresh
-        * suggest_refresh - Includes suggest refresh jobs in response
-
-        If no filter value is supplied, the default behavior returns all jobs, regardless of job class. This is equivalent to passing all job class values in the parameter.
       example:
         - "feed_products_full,feed_products_delta"
         - "index_update"
 
     Mode:
+      description: |
+        * raw - returns a record's raw feed data
+        * preview - returns a preview of what a record view will look like after indexing
       name: mode
       in: query
       schema:
@@ -1280,9 +1286,6 @@ components:
           - "raw"
           - "preview"
       required: false
-      description: |
-        * raw - returns a record's raw feed data
-        * preview - returns a preview of what a record view will look like after indexing
 
     RecordId:
       name: record_id
@@ -1295,6 +1298,13 @@ components:
       example: "1324"
 
     ViewId:
+      description: |
+        A unique identifier for a specific view of your product catalog.
+        If you have multiple versions of your site, each with their own product 
+        catalog characteristics like product titles and prices, then add view_id to your call. \n\n
+        
+        Bloomreach uses your view_id parameter value to display the right product information for your customers based on their individual site views. 
+        You can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and product catalog.
       name: view_id
       in: path
       schema:
@@ -1315,21 +1325,21 @@ components:
       example: "1324"
 
     IndexRefreshHeader:
+      description: "Optionally triggers a full index refresh, in which all products in the catalog are reindexed with the latest configuration."
       name: Index-Refresh
       in: header
       schema:
         type: boolean
       required: false
-      description: "Optionally triggers a full index refresh, in which all products in the catalog are reindexed with the latest configuration"
-
+     
     IgnoreCountDropHeader:
+      description: "Optionally ignores any count drops that occur during the job, allowing the index to be updated even if the number of products drops below the allowed threshold."
       name: BR-Ignore-Document-Count-Drop
       in: header
       schema:
         type: boolean
       required: false
-      description: "Optionally ignores any count drops that occur during the job, allowing the index to be updated even if the number of products drops below the allowed threshold"
-
+     
   schemas:
     SnapReservedAttributes:
       type: object
