@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: DataConnect API V3
+  title: Catalog management API v3
   version: 1.0.0
 servers:
   - url: https://discovery.bloomreach.com/dataconnect/api/v3
@@ -15,9 +15,7 @@ paths:
       tags: [Catalog configuration]
       summary: Get current configuration
       description: |
-        Understand the current state of catalog configuration, including custom attributes configuration 
-        and all [catalog settings](https://documentation.bloomreach.com/discovery/docs/catalog-settings) present in the UI./n/n
-        The catalog configuration is key to understanding how your data will be indexed and how other applications like search, autosuggest, and recommendations are globally configured to use that data.
+        Understand the current state of catalog configuration, including custom attributes configuration and all [catalog settings](https://documentation.bloomreach.com/discovery/docs/catalog-settings) present in the dashboard.
       responses:
         200:
           description: OK
@@ -70,6 +68,10 @@ paths:
               schema:
                 $ref: "#/components/schemas/500Response"
     post:
+      tags: [Catalog configuration]
+      summary: Modify current configuration
+      description: |
+        Programmatically modify the current catalog configuration to automate common tasks.
       requestBody:
         content:
           application/json:
