@@ -306,7 +306,7 @@ paths:
       - $ref: "#/components/parameters/EnvironmentName"
       - $ref: "#/components/parameters/JobId"
     get:
-    tags: [Job processing]
+      tags: [Job processing]
       summary: Get job details
       description: |
         Get all the details about a particular job including its status.
