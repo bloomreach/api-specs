@@ -450,7 +450,7 @@ paths:
       - $ref: "#/components/parameters/EnvironmentName"
     get:
       tags: [Catalog data]
-      summary: Get a catalog
+      summary: Get catalog details
       description: |
         View the current state of a catalog. This returns the entire catalog with product and item feed record data.
       responses:
@@ -1280,6 +1280,7 @@ components:
       required: true
 
     ConfigId:
+      description: "The unique ID associated with a particular state of the catalog configuration."
       name: config_id
       in: path
       schema:
@@ -1301,6 +1302,7 @@ components:
       example: "1324"
 
     PageNumber:
+      description: "To navigate through paginated results, use the page number to switch between pages."
       name: page
       in: query
       schema:
@@ -1311,6 +1313,7 @@ components:
       example: 1
 
     PageLimit:
+      description: "Specify the maximum number of pages to return in the response."
       name: limit
       in: query
       schema:
@@ -1323,7 +1326,7 @@ components:
 
     JobClass:
       description: |
-        Filters jobs based on comma separated class values.
+        Filter the jobs based on comma-separated class values:
 
         * feed_records_full — Includes full feed jobs in response, ie where type=feed and feed_mode=full
         * feed_records_delta - Includes delta feed jobs in response, ie where type=feed and feed_mode=delta
@@ -1364,6 +1367,7 @@ components:
       required: false
 
     RecordId:
+      description: "The unique ID associated with a product or item feed record."
       name: record_id
       in: path
       schema:
@@ -1371,13 +1375,12 @@ components:
         minLength: 1
         maxLength: 64
       required: true
-      example: "1324"
+      example: "1111abcd"
 
     ViewId:
       description: |
         A unique identifier for a specific view of your product catalog.
-        If you have multiple versions of your site, each with their own product 
-        catalog characteristics like product titles and prices, then add view_id to your call. \n\n
+        If you have multiple versions of your site, each with its product catalog characteristics like product titles and prices, then add view_id to your call.
         
         Bloomreach uses your view_id parameter value to display the right product information for your customers based on their individual site views. 
         You can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and product catalog.
@@ -1388,9 +1391,10 @@ components:
         minLength: 1
         maxLength: 64
       required: true
-      example: "1324"
+      example: "1324abc"
 
     VariantId:
+      description: "A unique identifier for a specific variant of a product or item feed record."
       name: variant_id
       in: path
       schema:
@@ -1398,7 +1402,7 @@ components:
         minLength: 1
         maxLength: 64
       required: true
-      example: "1324"
+      example: "123xyz"
 
     IndexRefreshHeader:
       description: "Optionally triggers a full index refresh, in which all products in the catalog are reindexed with the latest configuration."
