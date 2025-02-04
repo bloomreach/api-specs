@@ -18,7 +18,7 @@ paths:
         Understand the current state of catalog configuration, including custom attributes configuration and all [catalog settings](https://documentation.bloomreach.com/discovery/docs/catalog-settings) present in the dashboard.
       responses:
         200:
-          description: OK
+          description: OK. Click to see the response structure.
           content:
             application/json:
               schema:
@@ -94,7 +94,7 @@ paths:
                         - $ref: "#/components/schemas/ContentConfiguration"
       responses:
         200:
-          description: OK - if the new config matches the previous one
+          description: OK - if the new config matches with the current one. Click to see the response structure.
           content:
             application/json:
               schema:
@@ -115,7 +115,7 @@ paths:
                           - $ref: "#/components/schemas/ProductConfiguration"
                           - $ref: "#/components/schemas/ContentConfiguration"
         201:
-          description: Created - if the new config differs from the previous one
+          description: Created - if the new config differs from the current one, Click to see the response structure.
           content:
             application/json:
               schema:
@@ -185,9 +185,13 @@ paths:
       - $ref: "#/components/parameters/EnvironmentName"
       - $ref: "#/components/parameters/ConfigId"
     get:
+      tags: [Catalog configuration]
+      summary: Get an older configuration
+      description: |
+        Understand what the catalog configuration looked like at the point in time an index was generated. 
       responses:
         200:
-          description: OK
+          description: OK. Click to see the response structure.
           content:
             application/json:
               schema:
@@ -243,9 +247,13 @@ paths:
       - $ref: "#/components/parameters/CatalogName"
       - $ref: "#/components/parameters/EnvironmentName"
     get:
+      tags: [Catalog configuration]
+      summary: Get reserved attributes
+      description: |
+        Get a list of all [reserved attributes](https://documentation.bloomreach.com/discovery/reference/reserved-fields-api) for the catalog.
       responses:
         200:
-          description: OK
+          description: OK. Click to see the response structure.
           content:
             application/json:
               schema:
@@ -298,9 +306,13 @@ paths:
       - $ref: "#/components/parameters/EnvironmentName"
       - $ref: "#/components/parameters/JobId"
     get:
+    tags: [Job processing]
+      summary: Get job details
+      description: |
+        Get all the details about a particular job including its status.
       responses:
         200:
-          description: OK
+          description: OK. Click to see the response structure.
           content:
             application/json:
               schema:
@@ -341,9 +353,13 @@ paths:
       - $ref: "#/components/parameters/PageLimit"
       - $ref: "#/components/parameters/JobClass"
     get:
+      tags: [Job processing]
+      summary: Get all jobs
+      description: |
+        Get all the jobs associated with a catalog.
       responses:
         200:
-          description: OK
+          description: OK. Click to see the response structure.
           content:
             application/json:
               schema:
@@ -389,9 +405,13 @@ paths:
     parameters:
       - $ref: "#/components/parameters/AccountName"
     get:
+      tags: [Catalog data]
+      summary: Get all catalogs
+      description: |
+        Get all the catalogs present for an account.
       responses:
         200:
-          description: OK
+          description: OK. Click to see the response structure.
           content:
             application/json:
               schema:
@@ -429,9 +449,13 @@ paths:
       - $ref: "#/components/parameters/CatalogName"
       - $ref: "#/components/parameters/EnvironmentName"
     get:
+      tags: [Catalog data]
+      summary: Get a catalog
+      description: |
+        View the current state of a catalog. This returns the entire catalog with product and item feed record data.
       responses:
         200:
-          description: OK
+          description: OK. Click to see the response structure.
           content:
             application/json:
               schema:
@@ -483,9 +507,13 @@ paths:
       - $ref: "#/components/parameters/IndexRefreshHeader"
       - $ref: "#/components/parameters/IgnoreCountDropHeader"
     post:
+      tags: [Feed indexing]
+      summary: Run an indexing job
+      description: |
+        Trigger an indexing job to [update the catalog's index](https://documentation.bloomreach.com/discovery/docs/promoting-changes-viewing-jobs#3-update-catalogs-index).
       responses:
         200:
-          description: OK
+          description: OK. Click to see the response structure.
           content:
             application/json:
               schema:
@@ -536,9 +564,13 @@ paths:
       - $ref: "#/components/parameters/PageNumber"
       - $ref: "#/components/parameters/PageLimit"
     get:
+      tags: [Manage feed records]
+      summary: Get current records
+      description: |
+        View the current state of product and item feed records in a catalog.
       responses:
         200:
-          description: OK
+          description: OK. Click to see the response structure.
           content:
             application/json:
               schema:
@@ -587,6 +619,10 @@ paths:
               schema:
                 $ref: "#/components/schemas/500Response"
     put:
+      tags: [Manage feed records]
+      summary: Add records
+      description: |
+        Upload new product or item records to the feed data.
       requestBody:
         content:
           application/json:
@@ -607,7 +643,7 @@ paths:
               type: object
       responses:
         200:
-          description: OK
+          description: OK. Click to see the response structure.
           content:
             application/json:
               schema:
@@ -648,6 +684,10 @@ paths:
               schema:
                 $ref: "#/components/schemas/429Response"
     patch:
+      tags: [Manage feed records]
+      summary: Edit records
+      description: |
+        Edit or change the details of particular product or item records in the feed. 
       requestBody:
         content:
           application/json:
@@ -668,7 +708,7 @@ paths:
               type: object
       responses:
         200:
-          description: OK
+          description: OK. Click to see the response structure.
           content:
             application/json:
               schema:
@@ -717,9 +757,13 @@ paths:
       - $ref: "#/components/parameters/RecordId"
       - $ref: "#/components/parameters/Mode"
     get:
+      tags: [Manage feed records]
+      summary: Get record details
+      description: |
+        View the details of a product or item feed record.
       responses:
         200:
-          description: OK
+          description: OK. Click to see the response structure.
           content:
             application/json:
               schema:
@@ -765,9 +809,13 @@ paths:
       - $ref: "#/components/parameters/PageLimit"
       - $ref: "#/components/parameters/Mode"
     get:
+      tags: [Manage feed records]
+      summary: Get record variants
+      description: |
+        View the [variants](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#variant) associated with a product or item feed record.
       responses:
         200:
-          description: OK
+          description: OK. Click to see the response structure.
           content:
             application/json:
               schema:
@@ -836,9 +884,13 @@ paths:
       - $ref: "#/components/parameters/VariantId"
       - $ref: "#/components/parameters/Mode"
     get:
+      tags: [Manage feed records]
+      summary: Get variant details
+      description: |
+        View the details of a [variant](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#variant) of any product or item in the feed data.
       responses:
         200:
-          description: OK
+          description: OK. Click to see the response structure.
           content:
             application/json:
               schema:
@@ -893,9 +945,13 @@ paths:
       - $ref: "#/components/parameters/PageLimit"
       - $ref: "#/components/parameters/Mode"
     get:
+      tags: [Manage feed records]
+      summary: Get views
+      description: |
+        Get all the [views](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#views) associated with a product or item feed record.
       responses:
         200:
-          description: OK
+          description: OK. Click to see the response structure.
           content:
             application/json:
               schema:
@@ -984,9 +1040,13 @@ paths:
       - $ref: "#/components/parameters/ViewId"
       - $ref: "#/components/parameters/Mode"
     get:
+      tags: [Manage feed records]
+      summary: Get view details
+      description: |
+        Get the details of a [view](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#views) of any product or item feed record.
       responses:
         200:
-          description: OK
+          description: OK. Click to see the response structure.
           content:
             application/json:
               schema:
@@ -1050,9 +1110,13 @@ paths:
       - $ref: "#/components/parameters/PageLimit"
       - $ref: "#/components/parameters/Mode"
     get:
+      tags: [Manage feed records]
+      summary: Get view variants
+      description: |
+        Get all the [variants](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#variant) associated with a different [view](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#views) of any product feed record.
       responses:
         200:
-          description: OK
+          description: OK. Click to see the response structure.
           content:
             application/json:
               schema:
@@ -1129,9 +1193,13 @@ paths:
       - $ref: "#/components/parameters/VariantId"
       - $ref: "#/components/parameters/Mode"
     get:
+      tags: [Manage feed records]
+      summary: Get view variant details
+      description: |
+        Get the details of a [variant](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#variant) for a different [view](https://documentation.bloomreach.com/discovery/docs/discovery-glossary#views) of a product feed record.
       responses:
         200:
-          description: OK
+          description: OK. Click to see the response structure.
           content:
             application/json:
               schema:
