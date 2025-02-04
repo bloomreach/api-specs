@@ -12,6 +12,12 @@ paths:
       - $ref: "#/components/parameters/CatalogName"
       - $ref: "#/components/parameters/EnvironmentName"
     get:
+      tags: [Catalog configuration]
+      summary: Get current configuration
+      description: |
+        Understand the current state of catalog configuration, including custom attributes configuration 
+        and all [catalog settings](https://documentation.bloomreach.com/discovery/docs/catalog-settings) present in the UI./n/n
+        The catalog configuration is key to understanding how your data will be indexed and how other applications like search, autosuggest, and recommendations are globally configured to use that data.
       responses:
         200:
           description: OK
