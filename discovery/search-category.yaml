@@ -38,7 +38,7 @@ paths:
           schema:
             type: integer
             format: int32
-            default: 6702
+            default: 6370
         - name: auth_key
           in: query
           description:
@@ -355,7 +355,7 @@ paths:
       deprecated: false
       responses:
         "200":
-          description: Successful response
+          description: Successful response. Click to see response body.
           content:
             "application/json":
               schema:
