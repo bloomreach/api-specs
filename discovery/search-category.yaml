@@ -374,8 +374,10 @@ components:
             type: string
           type: array
         facet_counts:
+          type: object
           additionalProperties: false
           properties:
+            type: {}
             facet_fields:
               additionalProperties:
                 type: array
@@ -455,8 +457,6 @@ components:
                           type: string
                         tree_path:
                           type: string
-            type: array
-          type: object
         group_response:
           additionalProperties:
             additionalProperties: false
