@@ -449,7 +449,7 @@ paths:
       - $ref: "#/components/parameters/CatalogName"
       - $ref: "#/components/parameters/EnvironmentName"
     get:
-      tags: [Catalog data]
+      tags: [View Catalogs data]
       summary: Get catalog details
       description: |
         View the current state of a catalog. This returns the entire catalog with product and item feed record data.
