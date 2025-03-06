@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
-  title: Catalog management API v3
-  version: 1.0.0
+  title: Catalog management API
+  version: 3.0.0
 servers:
   - url: https://discovery.bloomreach.com/dataconnect/api/v3
 paths:
@@ -405,7 +405,7 @@ paths:
     parameters:
       - $ref: "#/components/parameters/AccountName"
     get:
-      tags: [Catalog data]
+      tags: [View Catalogs data]
       summary: Get all catalogs
       description: |
         Get all the catalogs present for an account.
