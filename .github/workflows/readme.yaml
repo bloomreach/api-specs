@@ -15,7 +15,7 @@ jobs:
         uses: readmeio/rdme@v8
         with:
           rdme:
-            openapi discovery/catalog-management.yaml --key=${{ secrets.RDME_API_KEY }} --id=${{ vars.CATALOG_MANAGEMENT_SANDBOX_ID }} --version=${{ vars.DOCS_VERSION }}
+            openapi discovery/catalog-management.yaml --key=${{ secrets.RDME_API_KEY }} --id=${{ vars.CATALOG_MANAGEMENT_ID }} --version=${{ vars.DOCS_VERSION }}
             
   rdme-openapi:
     runs-on: ubuntu-latest
