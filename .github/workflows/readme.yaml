@@ -3,25 +3,19 @@ on:
   push:
     branches:
       - main
-jobs:
-  rdme-sandbox-openapi:
-    runs-on: ubuntu-latest
-    environment: Sandbox
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Upload Catalog Management API to Readme Sandbox
-        uses: readmeio/rdme@v8
-        with:
-          rdme:
-            openapi discovery/catalog-management.yaml --key=${{ secrets.RDME_API_KEY }} --id=${{ vars.DATACONNECT_ID }} --version=${{ vars.DOCS_VERSION }}
+jobs: 
   rdme-openapi:
     runs-on: ubuntu-latest
     environment: Production
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Upload Catalog Management API v3 to Readme
+        uses: readmeio/rdme@v8
+        with:
+          rdme:
+            openapi discovery/catalog-management.yaml --key=${{ secrets.RDME_API_KEY }} --id=${{ vars.DATACONNECT_ID }} --version=${{ vars.DOCS_VERSION }}
 
       - name: Upload Autosuggest API to Readme
         uses: readmeio/rdme@v8
