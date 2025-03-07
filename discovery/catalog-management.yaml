@@ -620,9 +620,9 @@ paths:
                 $ref: "#/components/schemas/500Response"
     put:
       tags: [Manage feed records]
-      summary: Add records
+      summary: Upload full feed
       description: |
-        Upload new product or item records to the feed data.
+        Upload the entire feed data at once.
       requestBody:
         content:
           application/json:
@@ -685,9 +685,9 @@ paths:
                 $ref: "#/components/schemas/429Response"
     patch:
       tags: [Manage feed records]
-      summary: Edit records
+      summary: Modify feed records
       description: |
-        Edit or change the details of particular product or item records in the feed. 
+        Edit/change or add particular product or item records in the feed. 
       requestBody:
         content:
           application/json:
