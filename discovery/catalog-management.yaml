@@ -94,7 +94,7 @@ paths:
                         - $ref: "#/components/schemas/ContentConfiguration"
       responses:
         200:
-          description: OK - if the new config matches with the current one. Click to see the response structure.
+          description: OK - The new config matches the current one, and no change is made. Click to see the response structure.
           content:
             application/json:
               schema:
@@ -115,7 +115,7 @@ paths:
                           - $ref: "#/components/schemas/ProductConfiguration"
                           - $ref: "#/components/schemas/ContentConfiguration"
         201:
-          description: Created - if the new config differs from the current one, Click to see the response structure.
+          description: Created - The new config differs from the current one, and the changes are applied. Click to see the response structure.
           content:
             application/json:
               schema:
@@ -1258,7 +1258,7 @@ components:
       example: "homeoasis"
 
     CatalogName:
-      description: "Points to where this information will be stored on the backend, represented with catalog name and language key. Use the same value as your domain key in your search API requests."
+      description: "\"Catalog name\" is also called domain key. Use the same value as your domain key in your search API requests."
       name: catalog_name
       in: path
       schema:
@@ -1269,7 +1269,7 @@ components:
       example: "homeoasis_fr"
 
     EnvironmentName:
-      description: "The type of environment you want to use (Production/Staging) for the account."
+      description: "The type of environment you want to use for the request (Production/Staging)."
       name: environment_name
       in: path
       schema:
@@ -1405,7 +1405,7 @@ components:
       example: "123xyz"
 
     IndexRefreshHeader:
-      description: "Optionally triggers a full index refresh, in which all products in the catalog are reindexed with the latest configuration."
+      description: "Optionally triggers a full index refresh, in which all products in the catalog are reindexed with the latest configuration.\n\nThis only affects products that were already existing and indexed in the feed. Any newly ingested products will not be affected."
       name: Index-Refresh
       in: header
       schema:
