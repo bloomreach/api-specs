@@ -81,10 +81,11 @@ paths:
                 "meta":
                   type: object
                   properties:
-                    "etag":
+                    "if_match_etag":
                       type: string
+                      description: "The ETag of the catalog's current configuration"
                   required:
-                    - "etag"
+                    - "if_match_etag"
                 "data":
                   type: object
                   properties:
@@ -502,8 +503,6 @@ paths:
       - $ref: "#/components/parameters/AccountName"
       - $ref: "#/components/parameters/CatalogName"
       - $ref: "#/components/parameters/EnvironmentName"
-      - $ref: "#/components/parameters/PageNumber"
-      - $ref: "#/components/parameters/PageLimit"
       - $ref: "#/components/parameters/IndexRefreshHeader"
       - $ref: "#/components/parameters/IgnoreCountDropHeader"
     post:
