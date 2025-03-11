@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Catalog management APIs
+  title: Catalog management API
   version: 3.0.0
 servers:
   - url: https://discovery.bloomreach.com/dataconnect/api/v3
