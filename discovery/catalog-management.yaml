@@ -83,7 +83,7 @@ paths:
                   properties:
                     "if_match_etag":
                       type: string
-                      description: "The ETag of the catalog's current configuration"
+                      description: "The ETag of the catalog's current configuration."
                   required:
                     - "if_match_etag"
                 "data":
