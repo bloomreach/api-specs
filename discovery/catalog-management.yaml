@@ -81,10 +81,11 @@ paths:
                 "meta":
                   type: object
                   properties:
-                    "etag":
+                    "if_match_etag":
                       type: string
+                      description: "The ETag of the catalog's current configuration."
                   required:
-                    - "etag"
+                    - "if_match_etag"
                 "data":
                   type: object
                   properties:
