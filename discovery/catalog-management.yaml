@@ -1411,7 +1411,7 @@ components:
       required: false
      
     IgnoreCountDropHeader:
-      description: "Optionally ignores any count drops that occur during the job, allowing the index to be updated even if the number of products drops below the allowed threshold."
+      description: "Optionally ignore any count drops that occur during the job, allowing the index to be updated even if the number of products drops below the allowed threshold."
       name: BR-Ignore-Document-Count-Drop
       in: header
       schema:
