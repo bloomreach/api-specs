@@ -1332,7 +1332,7 @@ components:
         * index_refresh - Includes refresh index jobs in response, ie where type=index, index_mode=refresh
         * suggest_refresh - Includes suggest refresh jobs in response
 
-        If no filter value is supplied, the default behavior returns all jobs, regardless of job class. This is equivalent to passing all job class values in the parameter.
+        If no filter value is provided, all jobs are returned by default, regardless of job class. This is equivalent to passing all job class values in the parameter.
       name: class
       in: query
       explode: false
