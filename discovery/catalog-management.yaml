@@ -1290,7 +1290,7 @@ components:
       example: "1324"
 
     JobId:
-      description: "The job ID returned in the response from sending your catalog data (refer to [Send Your Data](https://documentation.bloomreach.com/discovery/reference/send-your-data-product))."
+      description: "The job ID returned in the response from sending your catalog data (refer to [Upload full feed](https://documentation.bloomreach.com/discovery/reference/put_accounts-account-name-catalogs-catalog-name-environments-environment-name-records))."
       name: job_id
       in: path
       schema:
@@ -1327,11 +1327,11 @@ components:
       description: |
         Filter the jobs based on comma-separated class values:
 
-        * feed_records_full — Includes full feed jobs in response, ie where type=feed and feed_mode=full
-        * feed_records_delta - Includes delta feed jobs in response, ie where type=feed and feed_mode=delta
-        * index_update - Includes update index jobs from search quality in response, ie where type=index, index_mode=update
-        * index_refresh - Includes refresh index jobs in response, ie where type=index, index_mode=refresh
-        * suggest_refresh - Includes suggest refresh jobs in response
+        * feed_records_full — Include full feed jobs in response, that is, if type=feed and feed_mode=full
+        * feed_records_delta - Include delta feed jobs in response, that is, if type=feed and feed_mode=delta
+        * index_update - Include update index jobs from search quality in response, that is, if type=index, index_mode=update
+        * index_refresh - Include refresh index jobs in response, that is, if type=index, index_mode=refresh
+        * suggest_refresh - Include suggestions for refresh jobs in response
 
         If no filter value is provided, all jobs are returned by default, regardless of job class. This is equivalent to passing all job class values in the parameter.
       name: class
