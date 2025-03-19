@@ -1354,8 +1354,8 @@ components:
 
     Mode:
       description: |
-        * raw - returns a record's raw feed data
-        * preview - returns a preview of what a record view will look like after indexing
+        * raw - returns only the raw view/variant data of a feed record
+        * preview - returns a preview of the complete feed record containing all attributes, views, and variants
       name: mode
       in: query
       schema:
