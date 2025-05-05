@@ -18,23 +18,23 @@ paths:
             convenience to send a request with <b>Try It</b>.
           schema:
             type: string
-            default: kl6pne92
+            default: 1jwy7eg9
           required: true
-          example: kl6pne92
+          example: 1jwy7eg9
         - name: account_id
           in: query
           description:
             Your site's numerical Bloomreach account ID. Your Bloomreach
             representative gives your site's account ID to you before or during
             your integration kickoff meeting. <br><br> The example value shown
-            here, <i>6702</i>, is included for your convenience to send a
+            here, <i>6276</i>, is included for your convenience to send a
             request with <b>Try It</b>.
           required: true
-          example: 6702
+          example: 6276
           schema:
             type: integer
             format: int32
-            default: 6702
+            default: 6276
         - name: _br_uid_2
           in: query
           description:
@@ -70,18 +70,18 @@ paths:
             <i>4427949</i>, is included for your convenience to send a request
             with <b>Try It</b>.
           required: true
-          example: "4427949"
+          example: "61d87251460d4a01f7c82608"
           schema:
             type: string
-            default: "4427949"
+            default: "61d87251460d4a01f7c82608"
         - name: request_id
           in: query
           description:
             An ID to track site visitor clicks. We recommend that you generate
             unique, random values of 13 digits to enable click-tracking.  The
-            request_id is also important for debugging.
+            `request_id` is also important for debugging.
           required: true
-          example: 1234567891234
+          example: aghbr56ghb77g
           schema:
             type: string
         - name: url
@@ -111,7 +111,7 @@ paths:
             Merchandising Feature in [its guide](doc:contextual-merchandising)."
           schema:
             type: string
-            default: "4500928"
+            default: "61d87251460d4a01f7c82608"
         - name: fields
           in: query
           description:
@@ -193,14 +193,14 @@ paths:
             Your site's numerical Bloomreach account ID. Your Bloomreach
             representative gives your site's account ID to you before or during
             your integration kickoff meeting. <br><br> The example value shown
-            here, <i>6702</i>, is included for your convenience to send a
+            here, <i>6276</i>, is included for your convenience to send a
             request with <b>Try It</b>.
           required: true
-          example: 6702
+          example: 6276
           schema:
             type: integer
             format: int32
-            default: 6702
+            default: 6276
         - name: _br_uid_2
           in: query
           description:
@@ -373,9 +373,9 @@ paths:
             convenience to send a request with <b>Try It</b>.
           schema:
             type: string
-            default: dl4qy396
+            default: 1jwy7eg9
           required: true
-          example: dl4qy396
+          example: 1jwy7eg9
       deprecated: false
   "/keyword/{widget_id}":
     get:
@@ -389,14 +389,14 @@ paths:
             Your site's numerical Bloomreach account ID. Your Bloomreach
             representative gives your site's account ID to you before or during
             your integration kickoff meeting. <br><br> The example value shown
-            here, <i>6702</i>, is included for your convenience to send a
+            here, <i>6276</i>, is included for your convenience to send a
             request with <b>Try It</b>.
           required: true
-          example: 6702
+          example: 6276
           schema:
             type: integer
             format: int32
-            default: 6702
+            default: 6276
         - name: _br_uid_2
           in: query
           description:
@@ -433,7 +433,7 @@ paths:
             value shown here, <i>cable</i>, is included for your convenience to
             send a request with <b>Try It</b>.
           required: true
-          example: cable
+          example: pricing
           schema:
             type: string
             default: cable
@@ -569,9 +569,9 @@ paths:
             convenience to send a request with <b>Try It</b>.
           schema:
             type: string
-            default: 1jwq4qjz
+            default: 1jwy7eg9
           required: true
-          example: 1jwq4qjz
+          example: 1jwy7eg9
       deprecated: false
   "/personalized/{widget_id}":
     get:
@@ -585,14 +585,14 @@ paths:
             Your site's numerical Bloomreach account ID. Your Bloomreach
             representative gives your site's account ID to you before or during
             your integration kickoff meeting. <br><br> The example value shown
-            here, <i>6702</i>, is included for your convenience to send a
+            here, <i>6276</i>, is included for your convenience to send a
             request with <b>Try It</b>.
           required: true
-          example: 6702
+          example: 6276
           schema:
             type: integer
             format: int32
-            default: 6702
+            default: 6276
         - name: _br_uid_2
           in: query
           description:
@@ -736,9 +736,9 @@ paths:
             convenience to send a request with <b>Try It</b>.
           schema:
             type: string
-            default: q9xyqxj0
+            default: 1jwy7eg9
           required: true
-          example: q9xyqxj0
+          example: 1jwy7eg9
       deprecated: false
   "/global/{widget_id}":
     get:
@@ -752,14 +752,14 @@ paths:
             Your site's numerical Bloomreach account ID. Your Bloomreach
             representative gives your site's account ID to you before or during
             your integration kickoff meeting. <br><br> The example value shown
-            here, <i>6702</i>, is included for your convenience to send a
+            here, <i>6276</i>, is included for your convenience to send a
             request with <b>Try It</b>.
           required: true
-          example: 6702
+          example: 6276
           schema:
             type: integer
             format: int32
-            default: 6702
+            default: 6276
         - name: _br_uid_2
           in: query
           description:
@@ -873,9 +873,9 @@ paths:
             convenience to send a request with <b>Try It</b>.
           schema:
             type: string
-            default: r9287r9v
+            default: 1jwy7eg9
           required: true
-          example: r9287r9v
+          example: 1jwy7eg9
       deprecated: false
   "/personalized/{recently_viewed_widget_id}":
     get:
@@ -892,22 +892,22 @@ paths:
             for your convenience to send a request with <b>Try It</b>.
           schema:
             type: string
-            default: q9xyqxj0
+            default: 1jwy7eg9
           required: true
-          example: q9xyqxj0
+          example: 1jwy7eg9
         - name: account_id
           in: query
           description:
             Your site's numerical Bloomreach account ID. Your Bloomreach
             representative gives your site's account ID to you before or during
             your integration kickoff meeting. <br><br> The example value shown
-            here, <i>6702</i>, is included for your convenience to send a
+            here, <i>6276</i>, is included for your convenience to send a
             request with <b>Try It</b>.
           required: true
-          example: 6702
+          example: 6276
           schema:
             type: string
-            default: "6702"
+            default: "6276"
         - name: _br_uid_2
           in: query
           description:
