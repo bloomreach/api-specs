@@ -14,7 +14,7 @@ paths:
           description:
             The ID of the widget, which can be found in the [Widget
             Configurator](doc:widget-configurator) in the Dashboard. <br><br>
-            The example value shown here, <i>kl6pne92</i>, is included for your
+            The example value shown here, <i>1jwy7eg9</i>, is included for your
             convenience to send a request with <b>Try It</b>.
           schema:
             type: string
