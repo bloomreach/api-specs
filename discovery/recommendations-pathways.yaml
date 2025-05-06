@@ -21,7 +21,7 @@ paths:
         - $ref: "#/components/parameters/ViewId"
         - name: query
           in: query
-          description:
+          description: |
             Your site visitor's search query. Search queries are composed of one
             or more terms. <br><br> You can percent encode spaces between terms
             as %20, or you can leave the spaces unencoded. <br><br> The example
@@ -34,7 +34,7 @@ paths:
             default: cable
         - name: facet
           in: query
-          description:
+          description: |
             Facets are disabled by default. To enable facets, set
             **facet=true**.
           schema:
@@ -42,7 +42,7 @@ paths:
             default: false
         - name: filter_facet
           in: query
-          description:
+          description: |
             'With the filter parameter, after a user selects a facet value for
             filtering, the other facet values in that field are not returned by
             the API and are no longer visible. The filter_facet parameter allows
@@ -59,7 +59,7 @@ paths:
             type: string
         - name: start
           in: query
-          description:
+          description: |
             The number of the first item on a page of results. For example, the
             first item on the first page is 0, making the start value also 0.
             The maximum value is 10000.
@@ -68,7 +68,7 @@ paths:
             format: int32
         - name: user_id
           in: query
-          description:
+          description: |
             The universal customer ID of the user. You only need to pass this
             field if your particular integration tracks customers this way. The
             parameter captures user IDs from the customer side and reuses the
@@ -96,7 +96,7 @@ paths:
         - $ref: "#/components/parameters/ViewId"
         - name: item_ids
           in: query
-          description:
+          description: |
             Specifies access to a particular set of items. For product catalog,
             this would be the PID(s). <br><br> The example value shown here,
             <i>4427949</i>, is included for your convenience to send a request
@@ -108,7 +108,7 @@ paths:
             default: "61d87251460d4a01f7c82608"
         - name: context_pids
           in: query
-          description:
+          description: |
             "context_pids takes a single product ID for producing Context-based
             merchandising results for the widget.<br>Contextual Merchandising
             uses Context PID as a primary input for generating the recall set of
@@ -124,7 +124,7 @@ paths:
             default: "61d87251460d4a01f7c82608"
         - name: user_id
           in: query
-          description:
+          description: |
             The universal customer ID of the user. You only need to pass this
             field if your particular integration tracks customers this way. The
             parameter captures user IDs from the customer side and reuses the
@@ -153,7 +153,7 @@ paths:
         - $ref: "#/components/parameters/ViewId"
         - name: cat_id
           in: query
-          description:
+          description: |
             Your site's category ID. <br><br> The example value shown here,
             <i>pnb160000000000</i>, is included for your convenience to send a
             request with <b>Try It</b>.
@@ -164,7 +164,7 @@ paths:
             default: pnb160000000000
         - name: facet
           in: query
-          description:
+          description: |
             Facets are disabled by default. To enable facets, set
             **facet=true**.
           schema:
@@ -172,7 +172,7 @@ paths:
             default: false
         - name: filter_facet
           in: query
-          description:
+          description: |
             'With the filter parameter, after a user selects a facet value for
             filtering, the other facet values in that field are not returned by
             the API and are no longer visible. The filter_facet parameter allows
@@ -189,7 +189,7 @@ paths:
             type: string
         - name: start
           in: query
-          description:
+          description: |
             The number of the first item on a page of results. For example, the
             first item on the first page is 0, making the start value also 0.
             The maximum value is 10000.
@@ -200,7 +200,7 @@ paths:
             default: 0
         - name: user_id
           in: query
-          description:
+          description: |
             The universal customer ID of the user. You only need to pass this
             field if your particular integration tracks customers this way. The
             parameter captures user IDs from the customer side and reuses the
@@ -229,7 +229,7 @@ paths:
         - $ref: "#/components/parameters/ViewId"
         - name: query
           in: query
-          description:
+          description: |
             Your site visitor's search query. Search queries are composed of one
             or more terms. <br><br> You can percent encode spaces between terms
             as %20, or you can leave the spaces unencoded. <br><br> The example
@@ -242,7 +242,7 @@ paths:
             default: cable
         - name: user_id
           in: query
-          description:
+          description: |
             The universal customer ID of the user. Required for
             Personalization-based Recommendation widgets. The parameter captures
             user IDs from the customer side and reuses the information when
@@ -293,7 +293,7 @@ paths:
         - $ref: "#/components/parameters/ViewId"
         - name: recently_viewed_widget_id
           in: path
-          description:
+          description: |
             The ID of the Recently Viewed widget, which can be found in the
             [Widget Configurator](doc:widget-configurator) in the Dashboard.
             <br><br> The example value shown here, <i>1jwy7eg9</i>, is included
@@ -305,7 +305,7 @@ paths:
           example: 1jwy7eg9
         - name: auth_key
           in: query
-          description:
+          description: |
             The Bloomreach-provided authentication key for the Bloomreach
             account that's sending the request. <br><br> Autosuggest API calls
             are client-side, so you can leave **auth_key** empty.
@@ -313,7 +313,7 @@ paths:
             type: string
         - name: user_id
           in: query
-          description:
+          description: |
             The universal customer ID of the user. Required for
             Personalization-based Recommendation widgets. The parameter captures
             user IDs from the customer side and reuses the information when
@@ -328,7 +328,7 @@ paths:
             default: abc123
         - name: start
           in: query
-          description:
+          description: |
             The number of the first item on a page of results. For example, the
             first item on the first page is 0, making the start value also 0.
             The maximum value is 10000.
@@ -684,15 +684,15 @@ paths:
         - $ref: "#/components/parameters/DomainKey"
         - name: auth_key
           in: query
-          description:
+          description: |
             The unique key shared during the integration phase. This is used to authenticate your API call.
           schema:
             type: string
           required: false
         - name: Content-Disposition
-          description: 
+          description: |
             This specifies the form field as \"image\" and the suggested filename of the image being uploaded.
-            <br><br>Example syntax\: Content-Disposition: form-data; name="image"; filename="filename.jpg"
+            <br><br>Example syntax: Content-Disposition: form-data; name="image"; filename="filename.jpg"
           in: header
           schema:
             type: string
@@ -700,7 +700,7 @@ paths:
           required: true
           example: form-data; name="image"; filename="filename.jpg"
         - name: Content-Type
-          description: 
+          description: |
             This header specifies the media type (image) and format. We accept all image formats - jpg, png, jpeg, webp.
             Example syntax: Content-Type: image/jpeg
           in: header
@@ -727,7 +727,7 @@ paths:
         - $ref: "#/components/parameters/Rows"
         - name: image_id
           in: query
-          description:
+          description: |
             You’ll get this value in the Upload API response once an image is uploaded.
             You can use image_id to make any number of subsequent queries for widget 
             responses (with different parameters/filters and objects) without the need to re-upload.
@@ -738,7 +738,7 @@ paths:
           example: str123
         - name: item_ids
           in: query
-          description:
+          description: |
             Item ID/PID of the item for which you want visual recommendations. 
             Passing this parameter makes it a [Visual Recommendations](https://documentation.bloomreach.com/discovery/reference/visual-search-response-api#visual-recommendations-api) request.
           schema:
@@ -748,14 +748,14 @@ paths:
           example: pid123
         - name: sku_id
           in: query
-          description:
+          description: |
             If you have SKUs in the catalog, `sku_id` should be passed, else this can be skipped.
           schema:
             type: string
           required: false
         - name: object_id
           in: query
-          description:
+          description: |
             By default, you will get the recommendations for the whole image you uploaded if you make an API call without the object_id [denoted by -1]. 
             To get more targeted results, you can also make API calls specific to an `object_id`.
           schema:
@@ -763,7 +763,7 @@ paths:
           required: false
         - name: auth_key
           in: query
-          description:
+          description: |
             The unique key shared during the integration phase. This is used to authenticate your API call.
           schema:
             type: string
@@ -774,7 +774,7 @@ components:
     WidgetId:
       name: widget_id
       in: path
-      description:
+      description: |
         The ID of the widget, which can be found in the [Widget
         Configurator](doc:widget-configurator) in the Dashboard. <br><br>
         The example value shown here, <i>1jwy7eg9</i>, is included for your
@@ -788,7 +788,7 @@ components:
     AccountId:
       name: account_id
       in: query
-      description:
+      description: |
         Your site's numerical Bloomreach account ID. Your Bloomreach
         representative gives your site's account ID to you before or during
         your integration kickoff meeting. <br><br> The example value shown
@@ -804,7 +804,7 @@ components:
     BrUid:
       name: _br_uid_2
       in: query
-      description:
+      description: |
         A first-party cookie created by the Bloomreach tracking pixel
         library (BrTrk). This cookie creates a unique, anonymous identifier
         for every browser or device. <br><br> Use the default value
@@ -818,7 +818,7 @@ components:
     DomainKey:
       name: domain_key
       in: query
-      description:
+      description: |
         Your site domain's ID, which is provided by Bloomreach. This ID is
         for the domain that you want to receive your Bloomreach API
         requests.  This parameter identifies the specific site version when
@@ -835,7 +835,7 @@ components:
     RequestId:
       name: request_id
       in: query
-      description:
+      description: |
         An ID to track site visitor clicks. We recommend that you generate
         unique, random values of 13 digits to enable click-tracking.  The
         `request_id` is also important for debugging.
@@ -848,7 +848,7 @@ components:
     Url:
       name: url
       in: query
-      description:
+      description: |
         The absolute URL of the page where the request is initiated. Do not
         use a relative URL. <br><br> The example value shown here,
         <i>https://www.documentation-site.com</i>, is included for your
@@ -862,7 +862,7 @@ components:
     Fields:
       name: fields
       in: query
-      description:
+      description: |
         A comma-separated list of fields to be sent in the request. <br><br>
         Alternatively, you may configure the fields in the Widget
         Configurator in the Dashboard instead. This parameter is required if
@@ -873,7 +873,7 @@ components:
     Filter:
       name: filter
       in: query
-      description:
+      description: |
         The filter parameter applies a faceted filter to the returned
         products, searching for products that fit your parameter values. Any
         facet that you want to filter must be in your feed. <br><br>
@@ -891,7 +891,7 @@ components:
     RefUrl:
       name: ref_url
       in: query
-      description:
+      description: |
         The URL of the page or HTTP referrer where the request is started.
         <br><br> Required if you want to use [Targeting](doc:targeting).
       schema:
@@ -900,7 +900,7 @@ components:
     Rows:
       name: rows
       in: query
-      description:
+      description: |
         The number of matching items to return per results page in the API
         response. The maximum value is 200. The result size is used from the
         Dashboard if it is not sent in the API. <br><br> To enhance
@@ -912,7 +912,7 @@ components:
     ViewId:
       name: view_id
       in: query
-      description:
+      description: |
         A unique identifier for a specific view of your product catalog. If
         you have multiple versions of your site, each with their own product
         catalog characteristics like product titles and prices, then add
@@ -926,11 +926,6 @@ components:
 
 servers:
   - url: https://pathways.dxpapi.com/api/v2/widgets
-tags:
-  - name: Personalization-based Widgets
-    description: Personalization-based Widget API
-  - name: Visual Search
-    description: Visual Search APIs
 x-readme:
   headers: []
   explorer-enabled: true
