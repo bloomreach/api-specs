@@ -5,7 +5,8 @@ info:
 paths:
   "/keyword/{widget_id}":
     get:
-      summary: Keyword-based widget
+      tags: [Keyword-based widget]
+      summary: Keyword widget
       operationId: keyword-based-widget-api
       parameters:
         - $ref: "#/components/parameters/WidgetId"
@@ -80,7 +81,8 @@ paths:
             type: string
   "/item/{widget_id}":
     get:
-      summary: Item-based recommendation widget
+      tags: [Item-based recommendation widget]
+      summary: Item-based widget
       operationId: item-based-recommendation-widget-api
       parameters:
         - $ref: "#/components/parameters/WidgetId"
@@ -137,7 +139,8 @@ paths:
       deprecated: false
   "/category/{widget_id}":
     get:
-      summary: Category-based widget
+      tags: [Category-based widget]
+      summary: Category widget
       operationId: category-based-widget-api
       parameters:
         - $ref: "#/components/parameters/WidgetId"
@@ -213,7 +216,7 @@ paths:
   "/personalized/{widget_id}":
     get:
       tags: [Personalization-based widgets]
-      summary: Personalization-based widget
+      summary: Personalized widget
       operationId: personalization-based-widget-api
       parameters:
         - $ref: "#/components/parameters/WidgetId"
@@ -260,7 +263,8 @@ paths:
       deprecated: false
   "/global/{widget_id}":
     get:
-      summary: Global recommendations widget
+      tags: [Global recommendations widget]
+      summary: Global widget
       operationId: global-recommendation-widget-api
       parameters:
         - $ref: "#/components/parameters/WidgetId"
