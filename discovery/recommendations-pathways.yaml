@@ -21,20 +21,7 @@ paths:
             default: 1jwy7eg9
           required: true
           example: 1jwy7eg9
-        - name: account_id
-          in: query
-          description:
-            Your site's numerical Bloomreach account ID. Your Bloomreach
-            representative gives your site's account ID to you before or during
-            your integration kickoff meeting. <br><br> The example value shown
-            here, <i>6276</i>, is included for your convenience to send a
-            request with <b>Try It</b>.
-          required: true
-          example: 6276
-          schema:
-            type: integer
-            format: int32
-            default: 6276
+        - $ref: "#/components/parameters/AccountId"
         - name: _br_uid_2
           in: query
           description:
@@ -1387,6 +1374,7 @@ paths:
       operationId: upload-api
       deprecated: false
       parameters:
+        - $ref: "#/components/parameters/AccountId"
         - name: widget_id
           in: path
           required: true
@@ -1401,12 +1389,33 @@ paths:
       operationId: visual-search-response-api
       deprecated: false
       parameters:
+        - $ref: "#/components/parameters/AccountId"
         - name: widget_id
           in: path
           required: true
           description: The ID of the widget.
           schema:
             type: string
+
+components:
+  parameters:
+    AccountId:
+      name: account_id
+      in: query
+      description:
+        Your site's numerical Bloomreach account ID. Your Bloomreach
+        representative gives your site's account ID to you before or during
+        your integration kickoff meeting. <br><br> The example value shown
+        here, <i>6276</i>, is included for your convenience to send a
+        request with <b>Try It</b>.
+      required: true
+      example: 6276
+      schema:
+        type: integer
+        format: int32
+        default: 6276
+      
+    
 servers:
   - url: https://pathways.dxpapi.com/api/v2/widgets
 tags:
