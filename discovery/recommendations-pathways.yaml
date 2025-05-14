@@ -13,24 +13,23 @@ paths:
         - $ref: "#/components/parameters/AccountId"
         - $ref: "#/components/parameters/BrUid"
         - $ref: "#/components/parameters/DomainKey"
-        - $ref: "#/components/parameters/RequestId"
-        - $ref: "#/components/parameters/Url"
-        - $ref: "#/components/parameters/RefUrl"
-        - $ref: "#/components/parameters/Fields"
-        - $ref: "#/components/parameters/Filter"
-        - $ref: "#/components/parameters/Rows"
-        - $ref: "#/components/parameters/ViewId"
         - name: query
           in: query
           description: |
-            Your site visitor's search query. Search queries are composed of one or more terms.<br><be>
-            You can percent encode spaces between terms as %20, or you can leave the spaces unencoded.<br><be>
+            Your site visitor's search query. Search queries are composed of one or more terms.
+            You can percent encode spaces between terms as %20, or you can leave the spaces unencoded.
+            
             The example value shown here, <i>cable</i>, is included for your convenience to send a request with <b>Try It</b>.
           required: true
           example: pricing
           schema:
             type: string
             default: cable
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/Url"
+        - $ref: "#/components/parameters/RefUrl"
+        - $ref: "#/components/parameters/Fields"
+        - $ref: "#/components/parameters/Filter"
         - name: facet
           in: query
           description: |
@@ -42,28 +41,38 @@ paths:
           in: query
           description: |
             With the filter parameter, after a user selects a facet value for filtering, the other facet values in that field are not returned by the API and are no longer visible.
+            
             The filter_facet parameter allows other facet values to be returned after a facet value has been selected.
-            <br><br>`filter_facet` doesn't support complex boolean operations, but they can be supported by including both `filter` and `filter_facet`.
-            <br><br>Note that the attributes used in filter will not return all values after the user selects a facet value in that field.
-            <br><br>Example values: <br><br> Single filter with multiple values <br>**&filter_facet=color:"red" OR "purple"**
-            <br><br>Multiple filters on different attributes <br>**&filter_facet=color:"red"&filter_facet=brand:"Bloomreach"**
+            `filter_facet` doesn't support complex boolean operations, but they can be supported by including both `filter` and `filter_facet`.
+            Note that the attributes used in filter will not return all values after the user selects a facet value in that field.
+            
+            <b>Example values:</b>
+            Single filter with multiple values <br>**&filter_facet=color:"red" OR "purple"**
+            
+            Multiple filters on different attributes <br>**&filter_facet=color:"red"&filter_facet=brand:"Bloomreach"**
           schema:
             type: string
         - name: start
           in: query
           description: |
             The number of the first item on a page of results. For example, the first item on the first page is 0, making the start value also 0.
+            
             The maximum value is 10000.
           schema:
             type: integer
             format: int32
+        - $ref: "#/components/parameters/Rows"
+        - $ref: "#/components/parameters/ViewId"
         - name: user_id
           in: query
           description: |
-            The universal customer ID of the user. You only need to pass this field if your particular integration tracks customers this way.
+            The universal customer ID of the user.
+            You only need to pass this field if your particular integration tracks customers this way.
+            
             The parameter captures user IDs from the customer side and reuses the information when powering apps or enhancing cross-device linking.
-            In this way, Bloomreach recognizes users in a way that's aligned with your system.
-            <br><br>Use an anonymous string. Don't use email or other personally identifiable information.
+            This way, Bloomreach recognizes users in a way that's aligned with your system.
+            
+            Use an anonymous string. Don't use email or other personally identifiable information.
           schema:
             type: string
   "/item/{widget_id}":
@@ -76,6 +85,17 @@ paths:
         - $ref: "#/components/parameters/AccountId"
         - $ref: "#/components/parameters/BrUid"
         - $ref: "#/components/parameters/DomainKey"
+        - name: item_ids
+          in: query
+          description: |
+            Specifies access to a particular set of items. For the product catalog, this would be the PID(s).
+            
+            The example value shown here, <i>61d87251460d4a01f7c82608</i>, is included for your convenience to send a request with <b>Try It</b>.
+          required: true
+          example: "61d87251460d4a01f7c82608"
+          schema:
+            type: string
+            default: "61d87251460d4a01f7c82608"
         - $ref: "#/components/parameters/RequestId"
         - $ref: "#/components/parameters/Url"
         - $ref: "#/components/parameters/RefUrl"
@@ -83,25 +103,16 @@ paths:
         - $ref: "#/components/parameters/Filter"
         - $ref: "#/components/parameters/Rows"
         - $ref: "#/components/parameters/ViewId"
-        - name: item_ids
-          in: query
-          description: |
-            Specifies access to a particular set of items. For the product catalog, this would be the PID(s).
-            <br><br>The example value shown here,
-            <i>61d87251460d4a01f7c82608</i> is included for your convenience to send a request with <b>Try It</b>.
-          required: true
-          example: "61d87251460d4a01f7c82608"
-          schema:
-            type: string
-            default: "61d87251460d4a01f7c82608"
         - name: context_pids
           in: query
           description: |
             `context_pids` takes a single product ID for producing Context-based merchandising results for the widget.
-            <br>Contextual Merchandising uses Context PID as a primary input for generating the recall set of the widget results.
-            <br>In the event that not enough results are produced based on context_pids, the system depends on Item ID(s) as a fallback to fill the recall set of the widget.
-            <br><br><b>Note: </b>In case context_pids isn't provided, the system will use Item ID(s) to produce Contextual Merchandising results for the widget.
-            <br><br>You can find more information on the Contextual Merchandising Feature in [its guide](https://documentation.bloomreach.com/discovery/docs/contextual-merchandising).
+            
+            Contextual Merchandising uses Context PID as a primary input for generating the recall set of the widget results.
+            If not enough results are produced based on `context_pids`, the system depends on Item ID(s) as a fallback to fill the widget's recall set.
+            <b>Note: </b>In case `context_pids` isn't provided, the system will use Item ID(s) to produce Contextual Merchandising results for the widget.
+            
+            You can find more information on Contextual Merchandising in [the feature guide](https://documentation.bloomreach.com/discovery/docs/contextual-merchandising).
           schema:
             type: string
             default: "61d87251460d4a01f7c82608"
@@ -109,11 +120,11 @@ paths:
           in: query
           description: |
             The universal customer ID of the user.
-            
             You only need to pass this field if your particular integration tracks customers this way.
-            The parameter captures user IDs from the customer side and reuses the information when powering apps or enhancing cross-device linking.
-            In this way, Bloomreach recognizes users in a way that's aligned with your system.
-            <br><br>Use an anonymous string. Don't use email or other personally identifiable information.
+            
+            The parameter captures user IDs from the customer side and reuses the information when powering apps or enhancing cross-device linking. This way, Bloomreach recognizes users in a way that's aligned with your system.
+            
+            Use an anonymous string. Don't use email or other personally identifiable information.
           schema:
             type: string
       deprecated: false
@@ -127,23 +138,23 @@ paths:
         - $ref: "#/components/parameters/AccountId"
         - $ref: "#/components/parameters/BrUid"
         - $ref: "#/components/parameters/DomainKey"
-        - $ref: "#/components/parameters/RequestId"
-        - $ref: "#/components/parameters/Url"
-        - $ref: "#/components/parameters/RefUrl"
-        - $ref: "#/components/parameters/Fields"
-        - $ref: "#/components/parameters/Filter"
-        - $ref: "#/components/parameters/Rows"
-        - $ref: "#/components/parameters/ViewId"
         - name: cat_id
           in: query
           description: |
             Your site's category ID.
-            <br><br>The example value shown here, <i>pnb160000000000</i>, is included for your convenience to send a request with <b>Try It</b>.
+            
+            The example value shown here, <i>pnb160000000000</i>, is included for your convenience to send a request with <b>Try It</b>.
           required: true
           example: pnb160000000000
           schema:
             type: string
             default: pnb160000000000
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/Url"
+        - $ref: "#/components/parameters/RefUrl"
+        - $ref: "#/components/parameters/ViewId"
+        - $ref: "#/components/parameters/Fields"
+        - $ref: "#/components/parameters/Filter"
         - name: facet
           in: query
           description: |
@@ -156,11 +167,14 @@ paths:
           description: |
             With the filter parameter, after a user selects a facet value for filtering, the other facet values in that field are not returned by the API and are no longer visible.
             The `filter_facet` parameter allows other facet values to be returned after a facet value has been selected.
-            <br><br>`filter_facet` doesn't support complex boolean operations, but they can be supported by including both `filter` and filter_facet`.
-            <br><br>Note that the attributes used in `filter` will not return all values after the user selects a facet value in that field.
-            <br><br>Example values:
-            <br><br>Single filter with multiple values<br>**&filter_facet=color:"red" OR "purple"**
-            <br><br>Multiple filters on different attributes <br>**&filter_facet=color:"red"&filter_facet=brand:"Bloomreach"**
+            
+            `filter_facet` doesn't support complex boolean operations, but they can be supported by including both `filter` and filter_facet`.
+            Note that the attributes used in `filter` will not return all values after the user selects a facet value in that field.
+            
+            <b>Example values:</b>
+            Single filter with multiple values <br>**&filter_facet=color:"red" OR "purple"**
+            
+            Multiple filters on different attributes <br>**&filter_facet=color:"red"&filter_facet=brand:"Bloomreach"**
           schema:
             type: string
         - name: start
@@ -173,15 +187,17 @@ paths:
             type: integer
             format: int32
             default: 0
+        - $ref: "#/components/parameters/Rows"
         - name: user_id
           in: query
           description: |
             The universal customer ID of the user.
-            
             You only need to pass this field if your particular integration tracks customers this way.
+            
             The parameter captures user IDs from the customer side and reuses the information when powering apps or enhancing cross-device linking.
             This way, Bloomreach recognizes users in a way that is aligned with your system.
-            <br><br>Use an anonymous string. Don't use email or other personally identifiable information.
+            
+            Use an anonymous string. Don't use email or other personally identifiable information.
           schema:
             type: string
   "/personalized/{widget_id}":
@@ -194,19 +210,13 @@ paths:
         - $ref: "#/components/parameters/AccountId"
         - $ref: "#/components/parameters/BrUid"
         - $ref: "#/components/parameters/DomainKey"
-        - $ref: "#/components/parameters/RequestId"
-        - $ref: "#/components/parameters/Url"
-        - $ref: "#/components/parameters/RefUrl"
-        - $ref: "#/components/parameters/Fields"
-        - $ref: "#/components/parameters/Filter"
-        - $ref: "#/components/parameters/Rows"
-        - $ref: "#/components/parameters/ViewId"
         - name: query
           in: query
           description: |
             Your site visitor's search query. Search queries are composed of one or more terms.
-            <br><br> You can percent encode spaces between terms as `%20`, or you can leave the spaces unencoded.
-            <br><br>The example value shown here, <i>cable</i>, is included for your convenience to send a request with <b>Try It</b>.
+            You can percent encode spaces between terms as `%20`, or you can leave the spaces unencoded.
+            
+            The example value shown here, <i>cable</i>, is included for your convenience to send a request with <b>Try It</b>.
           required: true
           example: cable
           schema:
@@ -215,15 +225,25 @@ paths:
         - name: user_id
           in: query
           description: |
-            The universal customer ID of the user. Required for Personalization-based Recommendation widgets.
+            The universal customer ID of the user. Required for Personalization-based widgets.
+            
             The parameter captures user IDs from the customer side and reuses the information when powering apps or enhancing cross-device linking.
-            In this way, Bloomreach recognizes users in a way that's aligned with your system. <br><br> Use an anonymous string. Don't use email or other personally identifiable information.
-            <br><br>The example value shown here, <i>abc123</i>, is included for your convenience to send a request with <b>Try It</b>.
+            This way, Bloomreach recognizes users in a way that's aligned with your system.
+            
+            Use an anonymous string. Don't use email or other personally identifiable information.
+            The example value shown here, <i>abc123</i>, is included for your convenience to send a request with <b>Try It</b>.
           required: true
           example: abc123
           schema:
             type: string
             default: abc123
+        - $ref: "#/components/parameters/RequestId"
+        - $ref: "#/components/parameters/Url"
+        - $ref: "#/components/parameters/RefUrl"
+        - $ref: "#/components/parameters/Fields"
+        - $ref: "#/components/parameters/Filter"
+        - $ref: "#/components/parameters/Rows"
+        - $ref: "#/components/parameters/ViewId"
       deprecated: false
   "/global/{widget_id}":
     get:
@@ -252,6 +272,17 @@ paths:
         - $ref: "#/components/parameters/AccountId"
         - $ref: "#/components/parameters/BrUid"
         - $ref: "#/components/parameters/DomainKey"
+        - name: recently_viewed_widget_id
+          in: path
+          description: |
+            The ID of the Recently Viewed widget, which can be found in the [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard.
+            
+            The example value shown here, <i>1jwy7eg9</i>, is included for your convenience to send a request with <b>Try It</b>.
+          schema:
+            type: string
+            default: 1jwy7eg9
+          required: true
+          example: 1jwy7eg9
         - $ref: "#/components/parameters/RequestId"
         - $ref: "#/components/parameters/Url"
         - $ref: "#/components/parameters/RefUrl"
@@ -259,32 +290,24 @@ paths:
         - $ref: "#/components/parameters/Filter"
         - $ref: "#/components/parameters/Rows"
         - $ref: "#/components/parameters/ViewId"
-        - name: recently_viewed_widget_id
-          in: path
-          description: |
-            The ID of the Recently Viewed widget, which can be found in the
-            [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard.
-            <br><br>The example value shown here, <i>1jwy7eg9</i>, is included for your convenience to send a request with <b>Try It</b>.
-          schema:
-            type: string
-            default: 1jwy7eg9
-          required: true
-          example: 1jwy7eg9
         - name: auth_key
           in: query
           description: |
             The Bloomreach-provided authentication key for the Bloomreach account that's sending the request.
-            <br><br> Autosuggest API calls are client-side, so you can leave `auth_key` empty.
+            
+            Widget API calls are client-side, so you can leave `auth_key` empty.
           schema:
             type: string
         - name: user_id
           in: query
           description: |
             The universal customer ID of the user. Required for Personalization-based Recommendation widgets.
+            
             The parameter captures user IDs from the customer side and reuses the information when powering apps or enhancing cross-device linking.
-            In this way, Bloomreach recognizes users in a way that's aligned with your system.
-            <br><br>Use an anonymous string. Don't use email or other personally identifiable information.
-            <br><br>The example value shown here, <i>abc123</i>, is included for your convenience to send a request with <b>Try It</b>.
+            This way, Bloomreach recognizes users in a way that's aligned with your system.
+            
+            Use an anonymous string. Don't use email or other personally identifiable information.
+            The example value shown here, <i>abc123</i>, is included for your convenience to send a request with <b>Try It</b>.
           schema:
             type: string
             default: abc123
@@ -652,8 +675,8 @@ paths:
           required: false
         - name: Content-Disposition
           description: |
-            This specifies the form field as \"image\" and the suggested filename of the image being uploaded.
-            <br><br>Example syntax: Content-Disposition: form-data; name="image"; filename="filename.jpg"
+            This specifies the form field as "image" and the suggested filename of the image being uploaded.         
+            Example syntax: `Content-Disposition: form-data; name="image"; filename="filename.jpg"`
           in: header
           schema:
             type: string
@@ -663,7 +686,7 @@ paths:
         - name: Content-Type
           description: |
             This header specifies the media type (image) and format. We accept all image formats - jpg, png, jpeg, webp.
-            Example syntax: Content-Type: image/jpeg
+            Example syntax: `Content-Type: image/jpeg`
           in: header
           schema:
             type: string
@@ -690,7 +713,7 @@ paths:
           in: query
           description: |
             You’ll get this value in the Upload API response once an image is uploaded.
-            You can use image_id to make any number of subsequent queries for widget responses (with different parameters/filters and objects) without the need to re-upload.
+            You can use `image_id` to make any number of subsequent queries for widget responses (with different parameters/filters and objects) without the need to re-upload.
           schema:
             type: string
             default: str123
@@ -735,9 +758,9 @@ components:
       name: widget_id
       in: path
       description: |
-        The ID of the widget, which can be found in the
-        [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard.
-        <br><br>The example value shown here, <i>1jwy7eg9</i>, is included for your convenience to send a request with <b>Try It</b>.
+        The ID of the widget, which can be found in the [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard.
+        
+        The example value shown here, <i>1jwy7eg9</i>, is included for your convenience to send a request with <b>Try It</b>.
       schema:
         type: string
         default: 1jwy7eg9
@@ -751,7 +774,7 @@ components:
         Your site's numerical Bloomreach account ID.
         
         Your Bloomreach representative gives your site's account ID to you before or during your integration kickoff meeting.
-        <br><br>The example value shown here, <i>6276</i>, is included for your convenience to send a request with <b>Try It</b>.
+        The example value shown here, <i>6276</i>, is included for your convenience to send a request with <b>Try It</b>.
       required: true
       example: 6276
       schema:
@@ -765,7 +788,7 @@ components:
       description: |
         A first-party cookie created by the Bloomreach tracking pixel library (BrTrk).
         This cookie creates a unique, anonymous identifier for every browser or device.
-        <br><br>Use the default value provided, which is already encoded.
+        Use the default value provided, which is already encoded.
       required: true
       example: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
       schema:
@@ -776,9 +799,10 @@ components:
       name: domain_key
       in: query
       description: |
-        Your site domain's ID, which is provided by Bloomreach. This ID is for the domain that you want to receive your Bloomreach API requests. 
+        Your site domain's ID, which is provided by Bloomreach. This ID is for the domain that you want to receive your Bloomreach API requests.
+        
         This parameter identifies the specific site version when the one account ID hosts multiple site versions with unique characteristics, such as language versions.
-        <br><br>The example value shown here, <i>documentation_site</i>, is included for your convenience to send a request with <b>Try It</b>.
+        The example value shown here, <i>documentation_site</i>, is included for your convenience to send a request with <b>Try It</b>.
       required: true
       example: documentation_site
       schema:
@@ -802,7 +826,8 @@ components:
       in: query
       description: |
         The absolute URL of the page where the request is initiated. Don't use a relative URL.
-        <br><br>The example value shown here, <i>https://www.documentation-site.com</i>, is included for your convenience to send a request with <b>Try It</b>.
+        
+        The example value shown here, <i>https://www.documentation-site.com</i>, is included for your convenience to send a request with <b>Try It</b>.
       required: true
       example: https://www.documentation-site.com
       schema:
@@ -814,8 +839,8 @@ components:
       in: query
       description: |
         A comma-separated list of fields to be sent in the request.
-        <br><br>Alternatively, you may configure the fields in the
-        [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard instead.
+        
+        Alternatively, you may configure the fields in the [Widget Configurator](https://documentation.bloomreach.com/discovery/docs/widget-configurator) in the Dashboard instead.
         This parameter is required if not sent via the Dashboard.
       schema:
         type: string
@@ -825,11 +850,13 @@ components:
       in: query
       description: |
         The filter parameter applies a faceted filter to the returned products, searching for products that fit your parameter values.
-        Any facet that you want to filter must be in your feed. <br><br> Attributes must be enabled and mapped by Bloomreach.
+        
+        Any facet that you want to filter must be in your feed. Attributes must be enabled and mapped by Bloomreach.
         Let your Bloomreach representative know which attributes in your content feed you want to apply as filters to search results.
-        <br><br>You can filter results based on numeric ranges. For example, `&filter=(price:["100" TO "*"])`.
+        
+        You can filter results based on numeric ranges. For example, `&filter=(price:["100" TO "*"])`.
         Note that a negative filter on ranges isn't supported.
-        <br><br>To provide multiple filters, send multiple filter parameters.
+        To provide multiple filters, send multiple filter parameters.
         For example, `&filter=(price:["*" TO "100"])&filter=(color_groups: ("blue"))`.
       schema:
         type: string
@@ -839,7 +866,8 @@ components:
       in: query
       description: |
         The URL of the page or HTTP referrer where the request is started.
-        <br><br>Required if you want to use [Targeting](https://documentation.bloomreach.com/discovery/docs/targeting).
+        
+        Required if you want to use [Targeting](https://documentation.bloomreach.com/discovery/docs/targeting).
       schema:
         type: string
 
@@ -849,7 +877,8 @@ components:
       description: |
         The number of matching items to return per results page in the API response. The maximum value is 200.
         The result size is used from the Dashboard if it isn't sent in the API.
-        <br><br> To enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.
+        
+        To enhance performance, limit this value to the number of items that you think is reasonable for a single page of search results.
       schema:
         type: integer
         format: int32
@@ -858,9 +887,10 @@ components:
       in: query
       description: |
         A unique identifier for a specific view of your product catalog.
-        If you have multiple versions of your site, each with their own product catalog characteristics like product titles and prices, then add `view_id` to your call.
+        If you have multiple versions of your site, each with its own product catalog characteristics like product titles and prices, then add `view_id` to your call.
         Bloomreach uses your `view_id` parameter value to display the right product information for your customers based on their individual site views.
-        <br><br>You can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and product catalog.
+        
+        You can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and product catalog.
       schema:
         type: string
 
