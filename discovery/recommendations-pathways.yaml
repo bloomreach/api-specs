@@ -790,10 +790,10 @@ components:
         This cookie creates a unique, anonymous identifier for every browser or device.
         Use the default value provided, which is already encoded.
       required: true
-      example: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
+      example: "uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
       schema:
         type: string
-        default: "&_br_uid_2=uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
+        default: "uid%3D7797686432023%3Av%3D11.5%3Ats%3D1428617911187%3Ahc%3D55"
 
     DomainKey:
       name: domain_key
@@ -801,13 +801,13 @@ components:
       description: |
         Your site domain's ID, which is provided by Bloomreach. This ID is for the domain that you want to receive your Bloomreach API requests.
         
-        This parameter identifies the specific site version when the one account ID hosts multiple site versions with unique characteristics, such as language versions.
-        The example value shown here, <i>documentation_site</i>, is included for your convenience to send a request with <b>Try It</b>.
+        This parameter identifies the specific site version when one account ID hosts multiple site versions with unique characteristics, such as language versions.
+        The example value shown here, <i>bloomreach_devdocs</i>, is included for your convenience to send a request with <b>Try It</b>.
       required: true
-      example: documentation_site
+      example: bloomreach_devdocs
       schema:
         type: string
-        default: documentation_site
+        default: bloomreach_devdocs
 
     RequestId:
       name: request_id
