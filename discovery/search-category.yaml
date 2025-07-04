@@ -362,337 +362,7 @@ paths:
                 $ref: "#/components/schemas/SearchResponse"
 components:
   schemas:
-    SearchResponse:
-      additionalProperties: false
-      properties:
-        autoCorrectQuery:
-          type: string
-        category_map:
-          type: object
-        did_you_mean:
-          items:
-            type: string
-          type: array
-        facet_counts:
-          type: object
-          additionalProperties: false
-          properties:
-            type: {}
-            facet_fields:
-              additionalProperties:
-                type: array
-                items: {}
-              properties:
-                category:
-                  items:
-                    additionalProperties: false
-                    properties:
-                      cat_id:
-                        type: string
-                      cat_name:
-                        type: string
-                      count:
-                        type: number
-                      crumb:
-                        type: string
-                      parent:
-                        type: string
-                      tree_path:
-                        type: string
-                    type: object
-                  type: array
-              type: object
-            facet_queries:
-              type: object
-            facet_ranges:
-              additionalProperties: false
-              properties:
-                price:
-                  items:
-                    additionalProperties: false
-                    properties:
-                      count:
-                        type: number
-                      end:
-                        type: number
-                      start:
-                        type: number
-                    required:
-                      - count
-                      - start
-                      - end
-                    type: object
-                  type: array
-              type: object
-            facets:
-              additionalProperties: false
-              type: array
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                  type:
-                    type: string
-                  value:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        start:
-                          type: {}
-                        end:
-                          type: {}
-                        name:
-                          type: string
-                        cat_id:
-                          type: string
-                        cat_name:
-                          type: string
-                        count:
-                          type: number
-                        crumb:
-                          type: string
-                        parent:
-                          type: string
-                        tree_path:
-                          type: string
-        group_response:
-          additionalProperties:
-            additionalProperties: false
-            properties:
-              groups:
-                items:
-                  additionalProperties: false
-                  properties:
-                    doclist:
-                      additionalProperties: false
-                      properties:
-                        docs:
-                          items:
-                            additionalProperties: false
-                            properties:
-                              brand:
-                                type: string
-                              description:
-                                type: string
-                              pid:
-                                type: string
-                              price:
-                                type: number
-                              price_range:
-                                items:
-                                  type: number
-                                type: array
-                              promotions:
-                                items:
-                                  type: string
-                                type: array
-                              sale_price:
-                                type: number
-                              sale_price_range:
-                                items:
-                                  type: number
-                                type: array
-                              score:
-                                type: number
-                              thumb_image:
-                                type: string
-                              title:
-                                type: string
-                              url:
-                                type: string
-                              variants:
-                                items:
-                                  additionalProperties: false
-                                  properties:
-                                    sku_color_group:
-                                      type: string
-                                    sku_price:
-                                      type: number
-                                    sku_sale_price:
-                                      type: number
-                                    sku_swatch_images:
-                                      items:
-                                        type: string
-                                      type: array
-                                    sku_thumb_images:
-                                      items:
-                                        type: string
-                                      type: array
-                                    skuid:
-                                      type: string
-                                  required:
-                                    - sku_color_group
-                                    - sku_swatch_images
-                                    - sku_thumb_images
-                                  type: object
-                                type: array
-                            required:
-                              - sale_price
-                              - price
-                              - description
-                              - title
-                              - url
-                              - brand
-                              - pid
-                              - thumb_image
-                              - sale_price_range
-                              - price_range
-                              - variants
-                            type: object
-                          type: array
-                        maxScore:
-                          type: number
-                        numFound:
-                          type: number
-                        start:
-                          type: number
-                      type: object
-                    groupValue:
-                      type: string
-                  required:
-                    - groupValue
-                  type: object
-                type: array
-              matches:
-                type: number
-            required:
-              - matches
-              - groups
-            type: object
-          type: object
-        keywordRedirect:
-          additionalProperties: false
-          properties:
-            original query:
-              type: string
-            redirected query:
-              type: string
-            redirected url:
-              type: string
-          required:
-            - original query
-            - redirected query
-            - redirected url
-          type: object
-        response:
-          additionalProperties: false
-          properties:
-            docs:
-              items:
-                additionalProperties: false
-                properties:
-                  brand:
-                    type: string
-                  description:
-                    type: string
-                  pid:
-                    type: string
-                  price:
-                    type: number
-                  price_range:
-                    items:
-                      type: number
-                    type: array
-                  promotions:
-                    items:
-                      type: string
-                    type: array
-                  sale_price:
-                    type: number
-                  sale_price_range:
-                    items:
-                      type: number
-                    type: array
-                  score:
-                    type: number
-                  thumb_image:
-                    type: string
-                  title:
-                    type: string
-                  url:
-                    type: string
-                  variants:
-                    items:
-                      additionalProperties: false
-                      properties:
-                        sku_color_group:
-                          type: string
-                        sku_price:
-                          type: number
-                        sku_sale_price:
-                          type: number
-                        sku_swatch_images:
-                          items:
-                            type: string
-                          type: array
-                        sku_thumb_images:
-                          items:
-                            type: string
-                          type: array
-                        skuid:
-                          type: string
-                      required:
-                        - sku_color_group
-                        - sku_swatch_images
-                        - sku_thumb_images
-                      type: object
-                    type: array
-                required:
-                  - sale_price
-                  - price
-                  - description
-                  - title
-                  - url
-                  - brand
-                  - pid
-                  - thumb_image
-                  - sale_price_range
-                  - price_range
-                  - variants
-                type: object
-              type: array
-            maxScore:
-              type: number
-            numFound:
-              type: number
-            start:
-              type: number
-          type: object
-        stats:
-          additionalProperties: false
-          properties:
-            stats_fields:
-              additionalProperties: false
-              properties:
-                price:
-                  additionalProperties: false
-                  properties:
-                    max:
-                      type: number
-                    min:
-                      type: number
-                  required:
-                    - max
-                    - min
-                  type: object
-                sale_price:
-                  additionalProperties: false
-                  properties:
-                    max:
-                      type: number
-                    min:
-                      type: number
-                  required:
-                    - max
-                    - min
-                  type: object
-              type: object
-          required:
-            - stats_fields
-          type: object
-      type: object
+    # The main Product data object
     SearchResponseDoc:
       additionalProperties: false
       properties:
@@ -705,19 +375,19 @@ components:
         price:
           type: number
         price_range:
+          type: array
           items:
             type: number
-          type: array
         promotions:
+          type: array
           items:
             type: string
-          type: array
         sale_price:
           type: number
         sale_price_range:
+          type: array
           items:
             type: number
-          type: array
         score:
           type: number
         thumb_image:
@@ -727,31 +397,9 @@ components:
         url:
           type: string
         variants:
-          items:
-            additionalProperties: false
-            properties:
-              sku_color_group:
-                type: string
-              sku_price:
-                type: number
-              sku_sale_price:
-                type: number
-              sku_swatch_images:
-                items:
-                  type: string
-                type: array
-              sku_thumb_images:
-                items:
-                  type: string
-                type: array
-              skuid:
-                type: string
-            required:
-              - sku_color_group
-              - sku_swatch_images
-              - sku_thumb_images
-            type: object
           type: array
+          items:
+            $ref: "#/components/schemas/Variant"
       required:
         - sale_price
         - price
@@ -765,80 +413,82 @@ components:
         - price_range
         - variants
       type: object
+
+    # Variant for products
+    Variant:
+      additionalProperties: false
+      properties:
+        sku_color_group:
+          type: string
+        sku_price:
+          type: number
+        sku_sale_price:
+          type: number
+        sku_swatch_images:
+          type: array
+          items:
+            type: string
+        sku_thumb_images:
+          type: array
+          items:
+            type: string
+        skuid:
+          type: string
+      required:
+        - sku_color_group
+        - sku_swatch_images
+        - sku_thumb_images
+      type: object
+
+    # Search Response (main)
+    SearchResponse:
+      additionalProperties: false
+      properties:
+        response:
+          $ref: "#/components/schemas/SearchResponseResponse"
+        facet_counts:
+          $ref: "#/components/schemas/SearchResponseFacetCounts"
+        category_map:
+          type: object
+        autoCorrectQuery:
+          type: string
+        did_you_mean:
+          type: array
+          items:
+            type: string
+        keywordRedirect:
+          $ref: "#/components/schemas/SearchResponseKeywords"
+        group_response:
+          $ref: "#/components/schemas/SearchResponseGroupResponse"
+        stats:
+          $ref: "#/components/schemas/SearchResponseStats"
+        metadata:
+          $ref: "#/components/schemas/SearchResponseMetadata"
+      type: object
+
+    # Facet counts for search response
     SearchResponseFacetCounts:
       additionalProperties: false
       properties:
         facet_fields:
-          additionalProperties:
-            type: array
-            items: {}
-          properties:
-            category:
-              items:
-                additionalProperties: false
-                properties:
-                  cat_id:
-                    type: string
-                  cat_name:
-                    type: string
-                  count:
-                    type: number
-                  crumb:
-                    type: string
-                  parent:
-                    type: string
-                  tree_path:
-                    type: string
-                type: object
-              type: array
-          type: object
+          $ref: "#/components/schemas/SearchResponseFacetCountsFacetFields"
         facet_queries:
           type: object
         facet_ranges:
-          additionalProperties: false
-          properties:
-            price:
-              items:
-                additionalProperties: false
-                properties:
-                  count:
-                    type: number
-                  end:
-                    type: number
-                  start:
-                    type: number
-                required:
-                  - count
-                  - start
-                  - end
-                type: object
-              type: array
-          type: object
+          $ref: "#/components/schemas/SearchResponseFacetCountsFacetRanges"
       type: object
+
     SearchResponseFacetCountsFacetFields:
       additionalProperties:
         type: array
         items: {}
       properties:
         category:
-          items:
-            additionalProperties: false
-            properties:
-              cat_id:
-                type: string
-              cat_name:
-                type: string
-              count:
-                type: number
-              crumb:
-                type: string
-              parent:
-                type: string
-              tree_path:
-                type: string
-            type: object
           type: array
+          items:
+            $ref: "#/components/schemas/SearchResponseFacetCountsFacetFieldsCategory"
       type: object
+
     SearchResponseFacetCountsFacetFieldsCategory:
       additionalProperties: false
       properties:
@@ -855,325 +505,62 @@ components:
         tree_path:
           type: string
       type: object
-    SearchResponseFacetCountsFacetFieldsGeneral:
-      additionalProperties: false
-      properties:
-        count:
-          type: number
-        name:
-          type: string
-      required:
-        - count
-        - name
-      type: object
+
     SearchResponseFacetCountsFacetRanges:
       additionalProperties: false
       properties:
         price:
-          items:
-            additionalProperties: false
-            properties:
-              count:
-                type: number
-              end:
-                type: number
-              start:
-                type: number
-            required:
-              - count
-              - start
-              - end
-            type: object
           type: array
+          items:
+            $ref: "#/components/schemas/SearchResponseFacetCountsFacetRangesPrice"
       type: object
-    SearchResponseGroupResponse:
-      additionalProperties:
-        additionalProperties: false
-        properties:
-          groups:
-            items:
-              additionalProperties: false
-              properties:
-                doclist:
-                  additionalProperties: false
-                  properties:
-                    docs:
-                      items:
-                        additionalProperties: false
-                        properties:
-                          brand:
-                            type: string
-                          description:
-                            type: string
-                          pid:
-                            type: string
-                          price:
-                            type: number
-                          price_range:
-                            items:
-                              type: number
-                            type: array
-                          promotions:
-                            items:
-                              type: string
-                            type: array
-                          sale_price:
-                            type: number
-                          sale_price_range:
-                            items:
-                              type: number
-                            type: array
-                          score:
-                            type: number
-                          thumb_image:
-                            type: string
-                          title:
-                            type: string
-                          url:
-                            type: string
-                          variants:
-                            items:
-                              additionalProperties: false
-                              properties:
-                                sku_color_group:
-                                  type: string
-                                sku_price:
-                                  type: number
-                                sku_sale_price:
-                                  type: number
-                                sku_swatch_images:
-                                  items:
-                                    type: string
-                                  type: array
-                                sku_thumb_images:
-                                  items:
-                                    type: string
-                                  type: array
-                                skuid:
-                                  type: string
-                              required:
-                                - sku_color_group
-                                - sku_swatch_images
-                                - sku_thumb_images
-                              type: object
-                            type: array
-                        required:
-                          - sale_price
-                          - price
-                          - description
-                          - title
-                          - url
-                          - brand
-                          - pid
-                          - thumb_image
-                          - sale_price_range
-                          - price_range
-                          - variants
-                        type: object
-                      type: array
-                    maxScore:
-                      type: number
-                    numFound:
-                      type: number
-                    start:
-                      type: number
-                  type: object
-                groupValue:
-                  type: string
-              required:
-                - groupValue
-              type: object
-            type: array
-          matches:
-            type: number
-        required:
-          - matches
-          - groups
-        type: object
-      type: object
-    SearchResponseGroupResponseGroupList:
+
+    SearchResponseFacetCountsFacetRangesPrice:
       additionalProperties: false
       properties:
-        groups:
-          items:
-            additionalProperties: false
-            properties:
-              doclist:
-                additionalProperties: false
-                properties:
-                  docs:
-                    items:
-                      additionalProperties: false
-                      properties:
-                        brand:
-                          type: string
-                        description:
-                          type: string
-                        pid:
-                          type: string
-                        price:
-                          type: number
-                        price_range:
-                          items:
-                            type: number
-                          type: array
-                        promotions:
-                          items:
-                            type: string
-                          type: array
-                        sale_price:
-                          type: number
-                        sale_price_range:
-                          items:
-                            type: number
-                          type: array
-                        score:
-                          type: number
-                        thumb_image:
-                          type: string
-                        title:
-                          type: string
-                        url:
-                          type: string
-                        variants:
-                          items:
-                            additionalProperties: false
-                            properties:
-                              sku_color_group:
-                                type: string
-                              sku_price:
-                                type: number
-                              sku_sale_price:
-                                type: number
-                              sku_swatch_images:
-                                items:
-                                  type: string
-                                type: array
-                              sku_thumb_images:
-                                items:
-                                  type: string
-                                type: array
-                              skuid:
-                                type: string
-                            required:
-                              - sku_color_group
-                              - sku_swatch_images
-                              - sku_thumb_images
-                            type: object
-                          type: array
-                      required:
-                        - sale_price
-                        - price
-                        - description
-                        - title
-                        - url
-                        - brand
-                        - pid
-                        - thumb_image
-                        - sale_price_range
-                        - price_range
-                        - variants
-                      type: object
-                    type: array
-                  maxScore:
-                    type: number
-                  numFound:
-                    type: number
-                  start:
-                    type: number
-                type: object
-              groupValue:
-                type: string
-            required:
-              - groupValue
-            type: object
-          type: array
-        matches:
+        count:
           type: number
+        end:
+          type: number
+        start:
+          type: number
+      required:
+        - count
+        - start
+        - end
+      type: object
+
+    SearchResponseGroupResponse:
+      additionalProperties:
+        $ref: "#/components/schemas/SearchResponseGroupResponseGroupList"
+      type: object
+
+    SearchResponseGroupResponseGroupList:
+      additionalProperties: false
       required:
         - matches
         - groups
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: "#/components/schemas/SearchResponseGroupResponseGroupListGroup"
+        matches:
+          type: number
       type: object
+
     SearchResponseGroupResponseGroupListGroup:
       additionalProperties: false
+      required:
+        - groupValue
       properties:
         doclist:
           additionalProperties: false
           properties:
             docs:
-              items:
-                additionalProperties: false
-                properties:
-                  brand:
-                    type: string
-                  description:
-                    type: string
-                  pid:
-                    type: string
-                  price:
-                    type: number
-                  price_range:
-                    items:
-                      type: number
-                    type: array
-                  promotions:
-                    items:
-                      type: string
-                    type: array
-                  sale_price:
-                    type: number
-                  sale_price_range:
-                    items:
-                      type: number
-                    type: array
-                  score:
-                    type: number
-                  thumb_image:
-                    type: string
-                  title:
-                    type: string
-                  url:
-                    type: string
-                  variants:
-                    items:
-                      additionalProperties: false
-                      properties:
-                        sku_color_group:
-                          type: string
-                        sku_price:
-                          type: number
-                        sku_sale_price:
-                          type: number
-                        sku_swatch_images:
-                          items:
-                            type: string
-                          type: array
-                        sku_thumb_images:
-                          items:
-                            type: string
-                          type: array
-                        skuid:
-                          type: string
-                      required:
-                        - sku_color_group
-                        - sku_swatch_images
-                        - sku_thumb_images
-                      type: object
-                    type: array
-                required:
-                  - sale_price
-                  - price
-                  - description
-                  - title
-                  - url
-                  - brand
-                  - pid
-                  - thumb_image
-                  - sale_price_range
-                  - price_range
-                  - variants
-                type: object
               type: array
+              items:
+                $ref: "#/components/schemas/SearchResponseDoc"
             maxScore:
               type: number
             numFound:
@@ -1183,11 +570,14 @@ components:
           type: object
         groupValue:
           type: string
-      required:
-        - groupValue
       type: object
+
     SearchResponseKeywords:
       additionalProperties: false
+      required:
+        - original query
+        - redirected query
+        - redirected url
       properties:
         original query:
           type: string
@@ -1195,88 +585,16 @@ components:
           type: string
         redirected url:
           type: string
-      required:
-        - original query
-        - redirected query
-        - redirected url
       type: object
+
+    # Standard search response with docs (products)
     SearchResponseResponse:
       additionalProperties: false
       properties:
         docs:
-          items:
-            additionalProperties: false
-            properties:
-              brand:
-                type: string
-              description:
-                type: string
-              pid:
-                type: string
-              price:
-                type: number
-              price_range:
-                items:
-                  type: number
-                type: array
-              promotions:
-                items:
-                  type: string
-                type: array
-              sale_price:
-                type: number
-              sale_price_range:
-                items:
-                  type: number
-                type: array
-              score:
-                type: number
-              thumb_image:
-                type: string
-              title:
-                type: string
-              url:
-                type: string
-              variants:
-                items:
-                  additionalProperties: false
-                  properties:
-                    sku_color_group:
-                      type: string
-                    sku_price:
-                      type: number
-                    sku_sale_price:
-                      type: number
-                    sku_swatch_images:
-                      items:
-                        type: string
-                      type: array
-                    sku_thumb_images:
-                      items:
-                        type: string
-                      type: array
-                    skuid:
-                      type: string
-                  required:
-                    - sku_color_group
-                    - sku_swatch_images
-                    - sku_thumb_images
-                  type: object
-                type: array
-            required:
-              - sale_price
-              - price
-              - description
-              - title
-              - url
-              - brand
-              - pid
-              - thumb_image
-              - sale_price_range
-              - price_range
-              - variants
-            type: object
           type: array
+          items:
+            $ref: "#/components/schemas/SearchResponseDoc"
         maxScore:
           type: number
         numFound:
@@ -1284,99 +602,74 @@ components:
         start:
           type: number
       type: object
+
+    # Stats/aggregations
     SearchResponseStats:
       additionalProperties: false
-      properties:
-        stats_fields:
-          additionalProperties: false
-          properties:
-            price:
-              additionalProperties: false
-              properties:
-                max:
-                  type: number
-                min:
-                  type: number
-              required:
-                - max
-                - min
-              type: object
-            sale_price:
-              additionalProperties: false
-              properties:
-                max:
-                  type: number
-                min:
-                  type: number
-              required:
-                - max
-                - min
-              type: object
-          type: object
       required:
         - stats_fields
+      properties:
+        stats_fields:
+          $ref: "#/components/schemas/SearchResponseStatsStatsFields"
       type: object
+
     SearchResponseStatsStatsFields:
       additionalProperties: false
       properties:
         price:
-          additionalProperties: false
-          properties:
-            max:
-              type: number
-            min:
-              type: number
-          required:
-            - max
-            - min
-          type: object
+          $ref: "#/components/schemas/SearchResponseStatsStatsFieldsPrice"
         sale_price:
-          additionalProperties: false
-          properties:
-            max:
-              type: number
-            min:
-              type: number
-          required:
-            - max
-            - min
-          type: object
+          $ref: "#/components/schemas/SearchResponseStatsStatsFieldsPrice"
       type: object
+
     SearchResponseStatsStatsFieldsPrice:
       additionalProperties: false
+      required:
+        - max
+        - min
       properties:
         max:
           type: number
         min:
           type: number
-      required:
-        - max
-        - min
       type: object
-    Variant:
-      additionalProperties: false
+
+    SearchResponseMetadata:
+      type: object
       properties:
-        sku_color_group:
-          type: string
-        sku_price:
-          type: number
-        sku_sale_price:
-          type: number
-        sku_swatch_images:
-          items:
-            type: string
+        query:
+          type: object
+          properties:
+            query_tags:
+              type: object
+              properties:
+                untagged_tokens:
+                  type: array
+                  items:
+                    type: string
+            precision:
+              type: object
+              properties:
+                configured:
+                  type: object
+                  properties:
+                    value:
+                      type: string
+                applied:
+                  type: object
+                  properties:
+                    value:
+                      type: string
+        experiments:
           type: array
-        sku_thumb_images:
           items:
-            type: string
-          type: array
-        skuid:
-          type: string
-      required:
-        - sku_color_group
-        - sku_swatch_images
-        - sku_thumb_images
-      type: object
+            type: object
+            properties:
+              ab_test_experiment_name:
+                type: string
+              ab_test_variant_name:
+                type: string
+            
 security:
   - {}
 servers:
