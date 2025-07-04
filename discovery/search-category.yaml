@@ -413,7 +413,6 @@ components:
         - price_range
         - variants
       type: object
-
     # Variant for products
     Variant:
       additionalProperties: false
@@ -439,7 +438,6 @@ components:
         - sku_swatch_images
         - sku_thumb_images
       type: object
-
     # Search Response (main)
     SearchResponse:
       additionalProperties: false
@@ -465,7 +463,6 @@ components:
         metadata:
           $ref: "#/components/schemas/SearchResponseMetadata"
       type: object
-
     # Facet counts for search response
     SearchResponseFacetCounts:
       additionalProperties: false
@@ -477,7 +474,6 @@ components:
         facet_ranges:
           $ref: "#/components/schemas/SearchResponseFacetCountsFacetRanges"
       type: object
-
     SearchResponseFacetCountsFacetFields:
       additionalProperties:
         type: array
@@ -488,7 +484,6 @@ components:
           items:
             $ref: "#/components/schemas/SearchResponseFacetCountsFacetFieldsCategory"
       type: object
-
     SearchResponseFacetCountsFacetFieldsCategory:
       additionalProperties: false
       properties:
@@ -505,7 +500,6 @@ components:
         tree_path:
           type: string
       type: object
-
     SearchResponseFacetCountsFacetRanges:
       additionalProperties: false
       properties:
@@ -514,7 +508,6 @@ components:
           items:
             $ref: "#/components/schemas/SearchResponseFacetCountsFacetRangesPrice"
       type: object
-
     SearchResponseFacetCountsFacetRangesPrice:
       additionalProperties: false
       properties:
@@ -529,12 +522,10 @@ components:
         - start
         - end
       type: object
-
     SearchResponseGroupResponse:
       additionalProperties:
         $ref: "#/components/schemas/SearchResponseGroupResponseGroupList"
       type: object
-
     SearchResponseGroupResponseGroupList:
       additionalProperties: false
       required:
@@ -548,7 +539,6 @@ components:
         matches:
           type: number
       type: object
-
     SearchResponseGroupResponseGroupListGroup:
       additionalProperties: false
       required:
@@ -571,7 +561,6 @@ components:
         groupValue:
           type: string
       type: object
-
     SearchResponseKeywords:
       additionalProperties: false
       required:
@@ -586,23 +575,21 @@ components:
         redirected url:
           type: string
       type: object
-
     # Standard search response with docs (products)
     SearchResponseResponse:
       additionalProperties: false
       properties:
-        docs:
-          type: array
-          items:
-            $ref: "#/components/schemas/SearchResponseDoc"
         maxScore:
           type: number
         numFound:
           type: number
         start:
           type: number
+        docs:
+          type: array
+          items:
+            $ref: "#/components/schemas/SearchResponseDoc"
       type: object
-
     # Stats/aggregations
     SearchResponseStats:
       additionalProperties: false
@@ -612,7 +599,6 @@ components:
         stats_fields:
           $ref: "#/components/schemas/SearchResponseStatsStatsFields"
       type: object
-
     SearchResponseStatsStatsFields:
       additionalProperties: false
       properties:
@@ -621,7 +607,6 @@ components:
         sale_price:
           $ref: "#/components/schemas/SearchResponseStatsStatsFieldsPrice"
       type: object
-
     SearchResponseStatsStatsFieldsPrice:
       additionalProperties: false
       required:
@@ -633,7 +618,6 @@ components:
         min:
           type: number
       type: object
-
     SearchResponseMetadata:
       type: object
       properties:
@@ -668,8 +652,7 @@ components:
               ab_test_experiment_name:
                 type: string
               ab_test_variant_name:
-                type: string
-            
+                type: string     
 security:
   - {}
 servers:
