@@ -456,6 +456,7 @@ paths:
                     properties:
                       ranges:
                         type: array
+                        required: false
                         items:
                           type: object
                           properties:
@@ -487,11 +488,21 @@ paths:
                             key:
                               type: string
                               example: colour
+                            type:
+                              type: string
+                              enum: [number, number_range, text]
+                              example: number_range
                             value:
                               type: array
                               items:
                                 type: object
                                 properties:
+                                  start:
+                                    type: integer
+                                    example: 1
+                                  end:
+                                    type: integer
+                                    example: 25
                                   count:
                                     type: integer
                                     example: 231
