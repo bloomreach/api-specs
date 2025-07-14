@@ -349,75 +349,7 @@ paths:
                         ]
                       },
                       "facet": {
-                        "ranges": [
-                          {
-                            "key": "slider_price",
-                            "value": [
-                              {
-                                "count": 10,
-                                "start": 0,
-                                "end": 500
-                              },
-                              {
-                                "count": 23,
-                                "start": 501,
-                                "end": 1000
-                              }
-                            ]
-                          },
-                          {
-                            "key": "price",
-                            "value": [
-                              {
-                                "count": 8,
-                                "start": 0,
-                                "end": 500
-                              },
-                              {
-                                "count": 25,
-                                "start": 501,
-                                "end": 1000
-                              }
-                            ]
-                          }
-                        ],
-                        "fields": [
-                          {
-                            "key": "colour",
-                            "value": [
-                              {
-                                "count": 231,
-                                "name": "black"
-                              },
-                              {
-                                "count": 122,
-                                "name": "red"
-                              }
-                            ]
-                          },
-                          {
-                            "key": "brand",
-                            "value": [
-                              {
-                                "count": 101,
-                                "name": "nike"
-                              },
-                              {
-                                "count": 201,
-                                "name": "puma"
-                              }
-                            ]
-                          }
-                        ],
                         "category": [
-                          {
-                            "count": 12,
-                            "cat_id": "some id",
-                            "cat_name": "sale",
-                            "children": [
-                              "empty_arry"
-                            ]
-                          },
                           {
                             "count": 44,
                             "cat_id": "cat id",
@@ -442,24 +374,27 @@ paths:
                                   }
                                 ]
                               },
-                              {
-                                "count": 23,
-                                "cat_id": "cat_id",
-                                "cat_name": "boys",
-                                "children": [
-                                  {
-                                    "count": 23,
-                                    "cat_id": "cat_id",
-                                    "cat_name": "boys' shirts",
-                                    "children": null
-                                  }
-                                ]
-                              }
-                            ]
+                            ] 
+                        },
+                        ],
+                        "fields":[
+                          {
+                            "key": "Size",
+                            "type": "text",
+                            "value": [],
+                          },
+                          {
+                            "key": "Color",
+                            "type": "number",
+                            "value":[]
+                          },
+                          {
+                            "key": "sale_price_test",
+                            "type": "number_range",
+                            "value": []
                           }
                         ],
-                        "query": null
-                      },
+                      }
                       "metadata": {
                         "widget": {
                           "rid": "some id",
