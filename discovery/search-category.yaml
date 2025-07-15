@@ -468,16 +468,13 @@ components:
       additionalProperties: false
       properties:
         facets:
-          $ref: "#/components/schemas/SearchResponseFacetCountsFacets"
-          required: false      
+          $ref: "#/components/schemas/SearchResponseFacetCountsFacets"  
         facet_fields:
           $ref: "#/components/schemas/SearchResponseFacetCountsFacetFields"
-          required: false
         facet_queries:
           type: object
         facet_ranges:
           $ref: "#/components/schemas/SearchResponseFacetCountsFacetRanges"
-          required: false
       type: object
     SearchResponseFacetCountsFacets:
         type: array
