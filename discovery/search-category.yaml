@@ -477,32 +477,32 @@ components:
           $ref: "#/components/schemas/SearchResponseFacetCountsFacetRanges"
       type: object
     SearchResponseFacetCountsFacets:
-        type: array
-        items:
-          type: {}
-          properties:
-            name:
-              type: string
-              example: AverageRating
-            type:
-              type: string
-              enum: [number, number_range, number_stats, text]
-              example: text
-            value:
-              type: array
-              items:
-                type: {}
-                properties:
-                  name:
-                    type: string
-                    example: Decent
-                  count:
-                    type: integer
-                    example: 15
-                  start:
-                    type: number
-                  end:
-                    type: number      
+      type: array
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+            example: AverageRating
+          type:
+            type: string
+            enum: [number, number_range, number_stats, text]
+            example: text
+          value:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Decent
+                count:
+                  type: integer
+                  example: 15
+                start:
+                  type: number
+                end:
+                  type: number  
     SearchResponseFacetCountsFacetFields:
       additionalProperties:
         type: array
