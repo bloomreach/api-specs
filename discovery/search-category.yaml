@@ -506,7 +506,8 @@ components:
     SearchResponseFacetCountsFacetFields:
       additionalProperties:
         type: array
-        items: {}
+        items:
+          type: object
       properties:
         category:
           type: array
@@ -593,15 +594,15 @@ components:
     SearchResponseKeywords:
       additionalProperties: false
       required:
-        - original query
-        - redirected query
-        - redirected url
+        - original_query
+        - redirected_query
+        - redirected_url
       properties:
-        original query:
+        original_query:
           type: string
-        redirected query:
+        redirected_query:
           type: string
-        redirected url:
+        redirected_url:
           type: string
       type: object
     # Standard search response with docs (products)
