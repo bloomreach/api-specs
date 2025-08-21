@@ -130,12 +130,11 @@ paths:
         - name: br_diagnostics
           in: query
           description:
-            "This parameter sends Ranking Diagnostics data in the API response
-            to help debug your results.<br>Allowed values are:
+            "This parameter sends Product grid insights data in the API response
+            to help debug your search results.<br>Allowed values are:
             `all`/`recall`/`ranking`/`merchandising`.<br><br>Refer to the guide
-            for using [Ranking Diagnostics on the
-            API](https://documentation.bloomreach.com/discovery/reference/ranking-diagnostics-on-the-api)
-            for more details."
+            [Product grid insights on the API](https://documentation.bloomreach.com/discovery/reference/ranking-diagnostics-on-the-api)
+            for more details, like the response format."
           example: all
           schema:
             type: string
