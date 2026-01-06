@@ -61,6 +61,7 @@ paths:
           schema:
             type: integer
             format: int32
+        - $ref: "#/components/parameters/ContentInjection"
         - $ref: "#/components/parameters/Rows"
         - $ref: "#/components/parameters/ViewId"
         - name: user_id
@@ -101,6 +102,7 @@ paths:
         - $ref: "#/components/parameters/RefUrl"
         - $ref: "#/components/parameters/Fields"
         - $ref: "#/components/parameters/Filter"
+        - $ref: "#/components/parameters/ContentInjection"
         - $ref: "#/components/parameters/Rows"
         - $ref: "#/components/parameters/ViewId"
         - name: context_pids
@@ -187,6 +189,7 @@ paths:
             type: integer
             format: int32
             default: 0
+        - $ref: "#/components/parameters/ContentInjection"
         - $ref: "#/components/parameters/Rows"
         - name: user_id
           in: query
@@ -242,6 +245,7 @@ paths:
         - $ref: "#/components/parameters/RefUrl"
         - $ref: "#/components/parameters/Fields"
         - $ref: "#/components/parameters/Filter"
+        - $ref: "#/components/parameters/ContentInjection"
         - $ref: "#/components/parameters/Rows"
         - $ref: "#/components/parameters/ViewId"
       deprecated: false
@@ -260,6 +264,7 @@ paths:
         - $ref: "#/components/parameters/RefUrl"
         - $ref: "#/components/parameters/Fields"
         - $ref: "#/components/parameters/Filter"
+        - $ref: "#/components/parameters/ContentInjection"
         - $ref: "#/components/parameters/Rows"
         - $ref: "#/components/parameters/ViewId"
       deprecated: false
@@ -288,6 +293,7 @@ paths:
         - $ref: "#/components/parameters/RefUrl"
         - $ref: "#/components/parameters/Fields"
         - $ref: "#/components/parameters/Filter"
+        - $ref: "#/components/parameters/ContentInjection"
         - $ref: "#/components/parameters/Rows"
         - $ref: "#/components/parameters/ViewId"
         - name: auth_key
@@ -654,6 +660,7 @@ paths:
         - $ref: "#/components/parameters/Url"
         - $ref: "#/components/parameters/Fields"
         - $ref: "#/components/parameters/Filter"
+        - $ref: "#/components/parameters/ContentInjection"
         - $ref: "#/components/parameters/Rows"
         - name: image_id
           in: query
@@ -712,6 +719,19 @@ components:
         default: 1jwy7eg9
       required: true
       example: 1jwy7eg9
+
+    ContentInjection:
+      name: content_injection
+      in: query
+      description: |
+            This parameter enables the [Personalized media in grid](https://documentation.bloomreach.com/discovery/docs/personalized-media-in-the-grid) feature.
+            <br>If `true`, the API response includes media objects along with product results. The content and positions
+            <br>of the media objects are governed by the [assets and media rules](https://documentation.bloomreach.com/discovery/docs/assets-and-media-rules)
+            configured in the Bloomreach dashboard. 
+      required: false
+      example: true
+      schema:
+        type: boolean
           
     AccountId:
       name: account_id
