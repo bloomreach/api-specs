@@ -245,6 +245,17 @@ paths:
           schema:
             type: string
             default: cable
+        - name: content_injection
+          in: query
+          description:
+            This parameter enables the [Personalized media in grid](https://documentation.bloomreach.com/discovery/docs/personalized-media-in-the-grid) feature.
+            <br>If `true`, the API response includes media objects along with product results. The content and positions
+            <br>of the media objects are governed by the [assets and media rules](https://documentation.bloomreach.com/discovery/docs/assets-and-media-rules)
+            configured in the Bloomreach dashboard. 
+          required: false
+          example: true
+          schema:
+            type: boolean
         - name: request_id
           in: query
           description:
@@ -262,7 +273,7 @@ paths:
           in: query
           description:
             The number of matching items to return per results page in the API
-            response. The maximum value is 200. <br><br> To enhance performance,
+            response. The maximum value is 200.<br><br>To enhance performance,
             limit this value to the number of items that you think is reasonable
             for a single page of search results.
           required: false
@@ -277,7 +288,7 @@ paths:
             Sorts results based on the field value in ascending, descending, or
             another combination of orders. You can sort any fl field. <br><br>
             Value is a field name, followed by **asc**/**desc** for
-            ascending/descending order respectively. For example,
+            ascending/descending order, respectively. For example,
             **sort=sale_price desc** sorts in descending order of the sale price
           example: sale_price desc
           schema:
