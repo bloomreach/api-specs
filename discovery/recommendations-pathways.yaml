@@ -725,8 +725,8 @@ components:
       in: query
       description: |
             This parameter enables the [Personalized media in grid](https://documentation.bloomreach.com/discovery/docs/personalized-media-in-the-grid) feature.
-            <br>If `true`, the API response includes media objects along with product results. The content and positions of the media objects are governed by the [assets and media rules](https://documentation.bloomreach.com/discovery/docs/assets-and-media-rules)
-            configured in the Bloomreach dashboard. 
+            <br>If `true`, the API response includes media objects along with product results.
+            The content and positions of the media objects are governed by the [assets and media rules](https://documentation.bloomreach.com/discovery/docs/assets-and-media-rules) configured in the Bloomreach dashboard. 
       required: false
       example: true
       schema:
