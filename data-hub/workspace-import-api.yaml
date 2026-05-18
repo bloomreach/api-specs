@@ -28,7 +28,7 @@ paths:
         Trigger the run of an existing workspace-scoped import programmatically.
 
         The following types of imports can be triggered: [URL](https://documentation.bloomreach.com/data-hub/docs/url-imports), [File storage
-        (GCS, SFTP)](https://documentation.bloomreach.com/data-hub/docs/file-storage-imports), [Data warehouse](https://documentation.bloomreach.com/data-hub/docs/data-warehouse-imports).
+        (GCS, S3, SFTP)](https://documentation.bloomreach.com/data-hub/docs/file-storage-imports), [Data warehouse](https://documentation.bloomreach.com/data-hub/docs/data-warehouse-imports).
 
         If you're using a URL or File storage (GCS, SFTP) import, you can
         override its original path or URL. When overridden, the path
