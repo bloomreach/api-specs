@@ -46,8 +46,6 @@ paths:
 
         ### Limitations
         - Cannot trigger **Copy & paste** or **File upload** imports.
-        - Cannot trigger imports created and managed through the Imports
-          Management API (`/imports/v1`).
       parameters:
         - $ref: '#/components/parameters/WorkspaceId'
         - $ref: '#/components/parameters/ImportId'
