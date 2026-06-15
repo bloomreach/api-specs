@@ -15,7 +15,7 @@ jobs:
         uses: readmeio/rdme@v10
         with:
           rdme:
-            openapi upload data-hub/workspace-import-api.yaml --key=${{ secrets.DATA_HUB_API_KEY }} --slug=workspace-import-api.json --branch=v1.0
+            openapi upload data-hub/workspace-import-api.yaml --key=${{ secrets.DATA_HUB_API_KEY }} --slug=workspace-import-api --branch=v1.0
 
       - name: Upload Catalog Management API v3 to Readme
         uses: readmeio/rdme@v10
