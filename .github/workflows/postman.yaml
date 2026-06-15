@@ -16,7 +16,7 @@ jobs:
         with:
           postmanApiKey: ${{ secrets.POSTMAN_API_KEY }}
           postmanCollectionUid: ${{ vars.POSTMAN_AUTOSUGGEST_COLLECTION_ID }}
-          openApiSpec: discovery/autosuggest.yaml
+          openApiSpec: search/autosuggest.yaml
           options: |
             requestParametersResolution: Example
             exampleParametersResolution: Example
@@ -29,7 +29,7 @@ jobs:
         with:
           postmanApiKey: ${{ secrets.POSTMAN_API_KEY }}
           postmanCollectionUid: ${{ vars.POSTMAN_BESTSELLER_COLLECTION_ID }}
-          openApiSpec: discovery/bestseller.yaml
+          openApiSpec: search/bestseller.yaml
           options: |
             requestParametersResolution: Example
             exampleParametersResolution: Example
@@ -42,7 +42,7 @@ jobs:
         with:
           postmanApiKey: ${{ secrets.POSTMAN_API_KEY }}
           postmanCollectionUid: ${{ vars.POSTMAN_CONTENT_SEARCH_COLLECTION_ID }}
-          openApiSpec: discovery/content-search.yaml
+          openApiSpec: search/content-search.yaml
           options: |
             requestParametersResolution: Example
             exampleParametersResolution: Example
@@ -55,7 +55,7 @@ jobs:
         with:
           postmanApiKey: ${{ secrets.POSTMAN_API_KEY }}
           postmanCollectionUid: ${{ vars.POSTMAN_RECS_PATHS_COLLECTION_ID }}
-          openApiSpec: discovery/recommendations-pathways.yaml
+          openApiSpec: search/recommendations-pathways.yaml
           options: |
             requestParametersResolution: Example
             exampleParametersResolution: Example
@@ -68,7 +68,7 @@ jobs:
         with:
           postmanApiKey: ${{ secrets.POSTMAN_API_KEY }}
           postmanCollectionUid: ${{ vars.POSTMAN_SEARCH_CATEGORY_COLLECTION_ID }}
-          openApiSpec: discovery/search-category.yaml
+          openApiSpec: search/search-category.yaml
           options: |
             requestParametersResolution: Example
             exampleParametersResolution: Example
@@ -81,7 +81,7 @@ jobs:
         with:
           postmanApiKey: ${{ secrets.POSTMAN_API_KEY }}
           postmanCollectionUid: ${{ vars.POSTMAN_EMAIL_COLLECTION_ID }}
-          openApiSpec: discovery/email-spec.yaml
+          openApiSpec: search/email-spec.yaml
           options: |
             requestParametersResolution: Example
             exampleParametersResolution: Example
