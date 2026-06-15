@@ -376,6 +376,16 @@ components:
     SearchResponseDoc:
       additionalProperties: false
       properties:
+        docType:
+          type: string
+          enum:
+            - product
+          description:
+            Identifies the kind of document returned in the `docs` array.
+            For standard Solr product documents, this value is `product`.
+            This field is present when the [Personalized media in grid](https://documentation.bloomreach.com/discovery/docs/personalized-media-in-the-grid)
+            feature is enabled for the query, so that product results can be
+            distinguished from injected content results.
         brand:
           type: string
         description:
@@ -447,6 +457,52 @@ components:
         - sku_color_group
         - sku_swatch_images
         - sku_thumb_images
+      type: object
+    # Injected content document (Personalized media in grid)
+    SearchResponseContentDoc:
+      additionalProperties: false
+      description:
+        A content document injected into the `docs` array by the
+        [Personalized media in grid](https://documentation.bloomreach.com/discovery/docs/personalized-media-in-the-grid)
+        feature. These documents appear interleaved with product documents
+        only when the feature is enabled for the query. The content and
+        position of each injected document are governed by the
+        [assets and media rules](https://documentation.bloomreach.com/discovery/docs/assets-and-media-rules)
+        configured in the Bloomreach dashboard.
+      properties:
+        docType:
+          type: string
+          enum:
+            - content
+          description:
+            Identifies the kind of document returned in the `docs` array.
+            For injected content, this value is `content`.
+        contentType:
+          type: string
+          description:
+            The type of content being injected, such as `banner_url`, `html`,
+            `weblayer`, or `clarity`. Determines how to interpret the `content`
+            field.
+          example: banner_url
+        content:
+          type: string
+          description:
+            The content payload. Depending on `contentType`, this is a URL, an
+            HTML string, or a widget identifier.
+          example: https://cdn.example.com/banners/sale.jpg
+        metaInfo:
+          type: object
+          description:
+            Arbitrary metadata set by the merchandiser for this content.
+        dimension:
+          type: string
+          description:
+            A display size hint for the content, such as `1x2` or `2x2`.
+            An empty string when not set.
+          example: 1x2
+        slots:
+          type: array
+          items: {}
       type: object
     # Search Response (main)
     SearchResponse:
@@ -625,10 +681,37 @@ components:
           type: number
         start:
           type: number
+          description:
+            The number of the first item on the page of results. When the
+            [Personalized media in grid](https://documentation.bloomreach.com/discovery/docs/personalized-media-in-the-grid)
+            feature is enabled, this reflects the original `start` value sent
+            in the request, not any internally adjusted offset.
+        inserts:
+          type: number
+          description:
+            The total number of content rules configured for this request.
+            This field is only present when the [Personalized media in grid](https://documentation.bloomreach.com/discovery/docs/personalized-media-in-the-grid)
+            feature is enabled for the query. It reflects the number of
+            configured rules, not the number of content documents actually
+            injected into this page of results — for example, rules that fall
+            outside the current display window still count toward this total.
+          example: 2
         docs:
           type: array
+          description:
+            The list of result documents. When the [Personalized media in grid](https://documentation.bloomreach.com/discovery/docs/personalized-media-in-the-grid)
+            feature is enabled for the query, this array contains both product
+            documents and injected content documents, interleaved according to
+            the configured rules. Use the `docType` field on each document to
+            distinguish products (`product`) from injected content (`content`).
+            When the feature is disabled, the array contains only product
+            documents and the response is identical to the standard format.
+            <br><br>More details on integrating this feature can be found in the
+            [Technical integration guide](https://documentation.bloomreach.com/discovery/docs/technical-integration-media-in-the-grid).
           items:
-            $ref: "#/components/schemas/SearchResponseDoc"
+            oneOf:
+              - $ref: "#/components/schemas/SearchResponseDoc"
+              - $ref: "#/components/schemas/SearchResponseContentDoc"
       type: object
     # Stats/aggregations
     SearchResponseStats:
