@@ -8,7 +8,7 @@ paths:
       tags: [Product & Category Search API v1]
       summary: Get products/categories
       description:
-        The <b>Product Search API</b> sends a keyword query to retrieve results about products and other content on your site. You can apply additional filters and facets to return products and content that either include or exclude specified attributes like colors and brands.
+        The <b>Product Search API</b> sends a keyword query to retrieve results about products, categories, or other content on your site. You can apply additional filters and facets to return products and content that include or exclude specified attributes, such as colors and brands.
         The <b>Category Search API</b> sends a category query to retrieve results about products within the categories that you specify.
       operationId: product-category-search-api
       parameters:
