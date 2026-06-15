@@ -15,46 +15,46 @@ jobs:
         uses: readmeio/rdme@v10
         with:
           rdme:
-            openapi upload data-hub/workspace-import-api.yaml --key=${{ secrets.DATA_HUB_API_KEY }} --slug=workspace-import-api --branch=v1.0
+            openapi upload data-hub/workspace-import-api.yaml --key=${{ secrets.DATA_HUB_API_KEY }} --slug=workspace-import-api.json --branch=v1.0
 
       - name: Upload Catalog Management API v3 to Readme
         uses: readmeio/rdme@v10
         with:
           rdme:
-            openapi upload search/catalog-management.yaml --key=${{ secrets.SEARCH_API_KEY }} --slug=catalog-management-api --branch=v1.0
+            openapi upload search/catalog-management.yaml --key=${{ secrets.SEARCH_API_KEY }} --slug=catalog-management-api.json --branch=v1.0
 
       - name: Upload Autosuggest API to Readme
         uses: readmeio/rdme@v10
         with:
           rdme:
-            openapi upload search/autosuggest.yaml --key=${{ secrets.SEARCH_API_KEY }} --slug=autosuggest-api --branch=v1.0
+            openapi upload search/autosuggest.yaml --key=${{ secrets.SEARCH_API_KEY }} --slug=autosuggest-api.json --branch=v1.0
 
       - name: Upload Bestseller API to Readme
         uses: readmeio/rdme@v10
         with:
           rdme:
-            openapi upload search/bestseller.yaml --key=${{ secrets.SEARCH_API_KEY }} --slug=bestseller-api-1 --branch=v1.0
+            openapi upload search/bestseller.yaml --key=${{ secrets.SEARCH_API_KEY }} --slug=bestseller-api-1.json --branch=v1.0
 
       - name: Upload Content Search API to Readme
         uses: readmeio/rdme@v10
         with:
           rdme:
-            openapi upload search/content-search.yaml --key=${{ secrets.SEARCH_API_KEY }} --slug=content-search-api-1 --branch=v1.0
+            openapi upload search/content-search.yaml --key=${{ secrets.SEARCH_API_KEY }} --slug=content-search-api-1.json --branch=v1.0
 
       - name: Upload Recommendations & Pathways API to Readme
         uses: readmeio/rdme@v10
         with:
           rdme:
-            openapi upload search/recommendations-pathways.yaml --key=${{ secrets.SEARCH_API_KEY }} --slug=recommendations-and-pathways-api --branch=v1.0
+            openapi upload search/recommendations-pathways.yaml --key=${{ secrets.SEARCH_API_KEY }} --slug=recommendations-and-pathways-api.json --branch=v1.0
 
       - name: Upload Search & Category API to Readme
         uses: readmeio/rdme@v10
         with:
           rdme:
-            openapi upload search/search-category.yaml --key=${{ secrets.SEARCH_API_KEY }} --slug=product-and-category-search-api --branch=v1.0
+            openapi upload search/search-category.yaml --key=${{ secrets.SEARCH_API_KEY }} --slug=product-and-category-search-api.json --branch=v1.0
 
       - name: Upload Email Widget API to Readme
         uses: readmeio/rdme@v10
         with:
           rdme:
-            openapi upload search/email-spec.yaml --key=${{ secrets.SEARCH_API_KEY }} --slug=email-widget-api --branch=v1.0
+            openapi upload search/email-spec.yaml --key=${{ secrets.SEARCH_API_KEY }} --slug=email-widget-api.json --branch=v1.0
