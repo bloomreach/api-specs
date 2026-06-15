@@ -382,7 +382,7 @@ components:
             - product
           description:
             Identifies the kind of document returned in the `docs` array.
-            For standard Solr product documents, this value is `product`.
+            For standard product documents, this value is `product`.
             This field is present when the [Personalized media in grid](https://documentation.bloomreach.com/discovery/docs/personalized-media-in-the-grid)
             feature is enabled for the query, so that product results can be
             distinguished from injected content results.
