@@ -1,9 +1,8 @@
 openapi: 3.1.0
 info:
-  title: Workspace Imports API
+  title: Workspace API
   description: |
-    API to programmatically trigger an existing workspace-scoped
-    import in Bloomreach Engagement.
+    API to programmatically work with a workspace's data.
   version: "2.1"
 
 servers:
@@ -15,7 +14,9 @@ security:
 
 tags:
   - name: Imports
-    description: Operations for working with existing imports.
+    description: Operations to work with existing workspace imports.
+  - name: IP addresses
+    description: Operations to work with IP addresses for a workspace.
 
 paths:
   /data/v2/workspaces/{workspaceId}/imports/{import_id}/start:
@@ -63,6 +64,54 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 
+  /data/v2/workspaces/{workspace_id}/outbound-ips:
+    get:
+      summary: Get outbound IPs
+      tags:
+        - IP addresses
+      description: >
+        Returns the outbound IP addresses used for connections from this
+        workspace's instance. Use updated_at to detect changes between polls.
+      security: []
+      parameters:
+        - name: workspace_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The workspace ID.
+      responses:
+        '200':
+          description: Outbound IP groups
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [updated_at, groups]
+                properties:
+                  groups:
+                    type: array
+                    items:
+                      type: object
+                      required: [name, ips]
+                      properties:
+                        ips:
+                          type: array
+                          items:
+                            type: string
+                            format: ipv4
+                          example: ["34.120.1.5", "34.120.1.6"]
+                        name:
+                          type: string
+                          example: "Outbound IPs"
+                  updated_at:
+                    type: string
+                    format: date-time
+                    description: ISO-8601 UTC timestamp of the last change to the IP list.
+                    example: "2026-05-29T10:00:00Z"
+        '404':
+          description: Workspace not found
+          
 components:
   securitySchemes:
     basicAuth:
