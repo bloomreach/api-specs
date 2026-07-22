@@ -70,8 +70,8 @@ paths:
       tags:
         - IP addresses
       description: >
-        Returns the outbound IP addresses used for connections from this
-        workspace's instance. Use updated_at to detect changes between polls.
+        Returns the outbound IP addresses used for connections from the
+        workspace's instance. Use the `updated_at` response field to detect changes between polls.
       security: []
       parameters:
         - name: workspace_id
