@@ -7,7 +7,7 @@ info:
 
 servers:
   - url: https://api.bloomreach.com
-    description: "{user.br} API"
+    description: "Bloomreach API"
 
 security:
   - basicAuth: []
