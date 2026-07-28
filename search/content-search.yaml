@@ -17,7 +17,7 @@ paths:
         - name: _br_uid_2
           in: query
           description:
-            A first-party cookie created by the Bloomreach tracking pixel
+            A first-party cookie created by the {user.br} tracking pixel
             library (BrTrk). This cookie creates a unique, anonymous identifier
             for every browser or device. <br><br> Use the default value
             provided, which is already encoded.
@@ -29,7 +29,7 @@ paths:
         - name: account_id
           in: query
           description:
-            Your site's numerical Bloomreach account ID. Your Bloomreach
+            Your site's numerical {user.br} account ID. Your {user.br}
             representative gives your site's account ID to you before or during
             your integration kickoff meeting. <br><br> The value shown here,
             <i>6413</i>, is provided as an example.
@@ -42,7 +42,7 @@ paths:
         - name: auth_key
           in: query
           description:
-            The Bloomreach-provided authentication key for the Bloomreach
+            The {user.br}-provided authentication key for the {user.br}
             account that's sending the request. <br><br> Pass the auth_key with
             an empty value in client-side calls. The auth_key value is a private
             authorization key. If you include your valid auth_key value in
@@ -82,11 +82,11 @@ paths:
         - name: domain_key
           in: query
           description:
-            Your site domain's ID, which is provided by Bloomreach. This ID is
-            for the domain that you want to receive your Bloomreach API
+            Your site domain's ID, which is provided by {user.br}. This ID is
+            for the domain that you want to receive your {user.br} API
             requests.  This parameter identifies the specific site version when
             the one account ID hosts multiple site versions with unique
-            characteristics, such as language versions. Bloomreach uses your
+            characteristics, such as language versions. {user.br} uses your
             domain_key parameter value to ensure that only the data that
             pertains to that site version is used for query and analytics
             features, such as autosuggestions.
@@ -170,7 +170,7 @@ paths:
             or more terms. <br><br> You can percent encode spaces between terms
             as %20, or you can leave the spaces unencoded. <br><br> If you use
             q=\*, the latency of the response will vary depending on your
-            catalog size and it may not adhere to Bloomreach's standard SLA.
+            catalog size and it may not adhere to {user.br}'s standard SLA.
             Additionally, most merchandising operations do not work on \* query
             parameters, except for include/exclude operations.
           required: true
@@ -263,7 +263,7 @@ paths:
             field if your particular integration tracks customers this way.  The
             parameter captures user IDs from the customer side, and reuses the
             information when powering apps or enhancing cross-device linking. In
-            this way, Bloomreach recognizes users in a way that's aligned with
+            this way, {user.br} recognizes users in a way that's aligned with
             your system. <br><br> Use an anonymous string. Don't use email or
             other personally identifiable information. <br><br> If you do not
             track users this way, then omit this field.
@@ -275,15 +275,15 @@ paths:
             A unique identifier for a specific view of your content catalog. If
             you have multiple versions of your site, each with their own content
             catalog characteristics like content titles and descriptions, then
-            add **view_id** to your call. <br><br> Bloomreach uses your view_id
+            add **view_id** to your call. <br><br> {user.br} uses your view_id
             parameter value to display the right content information for your
             customers based on their individual site views.  You can enter any
             string value to identify the specific site catalog view. This string
             must be consistent in your pixel, API, and content catalog. <br><br>
-            Bloomreach Content Search can support a single view_id, multiple
+            {user.br} Content Search can support a single view_id, multiple
             view_ids (separated by commas) or * view_id in a single API
             parameter for a single content catalog. If no view_ids are passed
-            for a content item in a catalog, Bloomreach will assign a
+            for a content item in a catalog, {user.br} will assign a
             br_default_view value. If an API call is made with no view_id in the
             request, the br_default_view content items will return. <br><br> If
             a content item contains more than one view_id in the catalog and

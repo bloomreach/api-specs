@@ -1,7 +1,7 @@
 openapi: 3.0.2
 info:
   title: Email Widget API
-  description: API Specification For Bloomreach Email Widget APIs
+  description: API Specification For {user.br} Email Widget APIs
   version: 2.0.0
   contact:
     name: Metal
@@ -42,7 +42,7 @@ paths:
       - name: account_id
         in: query
         description:
-          Your site's numerical Bloomreach account ID. Your Bloomreach
+          Your site's numerical {user.br} account ID. Your {user.br}
           representative gives your site's account ID to you before or during your
           integration kickoff meeting.
         required: true
@@ -94,7 +94,7 @@ paths:
       - name: account_id
         in: query
         description:
-          Your site's numerical Bloomreach account ID. Your Bloomreach
+          Your site's numerical {user.br} account ID. Your {user.br}
           representative gives your site's account ID to you before or during your
           integration kickoff meeting.
         required: true
@@ -492,7 +492,7 @@ components:
       name: auth_key
       in: query
       description: >-
-        Unique key shared by your Bloomreach representative during integration.
+        Unique key shared by your {user.br} representative during integration.
         This is used to authenticate a merchant API call.
       required: false
       schema:
@@ -511,7 +511,7 @@ components:
       name: account_id
       in: query
       description:
-        Your site's numerical Bloomreach account ID. Your Bloomreach
+        Your site's numerical {user.br} account ID. Your {user.br}
         representative gives your site's account ID to you before or during your
         integration kickoff meeting.
       required: true
@@ -522,9 +522,9 @@ components:
       name: domain_key
       in: query
       description:
-        Your site domain's ID, which is provided by Bloomreach during initial
+        Your site domain's ID, which is provided by {user.br} during initial
         scoping and integration. This ID is for the domain that you want to
-        receive your Bloomreach API requests. This parameter identifies the
+        receive your {user.br} API requests. This parameter identifies the
         specific site version when the one account ID hosts multiple site
         versions with unique characteristics, such as language versions.
       required: true
@@ -535,7 +535,7 @@ components:
       name: _br_uid_2
       in: query
       description:
-        A first-party cookie created by the Bloomreach tracking pixel library
+        A first-party cookie created by the {user.br} tracking pixel library
         (BrTrk). This cookie creates a unique, anonymous identifier for every
         browser or device. </br></br> Mostly the default value provided is used,
         which is already encoded.
@@ -582,7 +582,7 @@ components:
         A unique identifier for a specific view of your product catalog. If you
         have multiple versions of your site, each with their own product catalog
         characteristics like product titles and prices, then add view_id to your
-        call. Bloomreach uses your view_id parameter value to display the right
+        call. {user.br} uses your view_id parameter value to display the right
         product information for your customers based on their individual site
         views. You can enter any string value to identify the specific site
         catalog view. This string must be consistent in your pixel, API, and
@@ -647,7 +647,7 @@ components:
       in: query
       description: |-
         The filter parameter applies a faceted filter to the returned products, searching for products that fit your parameter values. Any facet that you want to filter must be in your feed.
-        Attributes must be enabled and mapped by Bloomreach. Let your Bloomreach representative know which attributes in your content feed you want to apply as filters to search results.
+        Attributes must be enabled and mapped by {user.br}. Let your {user.br} representative know which attributes in your content feed you want to apply as filters to search results.
         You can filter results based on numeric ranges.
         For example, &filter=(price:["100" TO "*"]).
 
@@ -674,7 +674,7 @@ components:
         The universal customer ID of the user. You only need to pass this field
         if your particular integration tracks customers this way. The parameter
         captures user IDs from the customer side and reuses the information when
-        powering apps or enhancing cross-device linking. In this way, Bloomreach
+        powering apps or enhancing cross-device linking. In this way, {user.br}
         recognizes users in a way that's aligned with your system. Use an
         anonymous string. Don't use email or other personally identifiable
         information.

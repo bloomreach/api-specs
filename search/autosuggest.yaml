@@ -13,7 +13,7 @@ paths:
         - name: _br_uid_2
           in: query
           description:
-            A first-party cookie created by the Bloomreach tracking pixel
+            A first-party cookie created by the {user.br} tracking pixel
             library (BrTrk). This cookie creates a unique, anonymous identifier
             for every browser or device. <br><br> Use the default value
             provided, which is already encoded.
@@ -25,7 +25,7 @@ paths:
         - name: account_id
           in: query
           description:
-            Your site's numerical Bloomreach account ID. Your Bloomreach
+            Your site's numerical {user.br} account ID. Your {user.br}
             representative gives your site's account ID to you before or during
             your integration kickoff meeting. <br><br> The example value shown
             here, <i>6413</i>, is included for your convenience to send a
@@ -39,7 +39,7 @@ paths:
         - name: auth_key
           in: query
           description:
-            The authentication key provided by Bloomreach for the
+            The authentication key provided by {user.br} for the
             account that's sending the request. <br><br> Autosuggest API calls
             are client-side, so you can leave **auth_key** empty.
           example: "{{ auth_key }}"
@@ -107,7 +107,7 @@ paths:
           description:
             An ID to track site visitor clicks. We recommend generating
             unique, random values of 13 digits to enable click-tracking.
-            <br><br> Bloomreach doesn't automatically enforce the requirements
+            <br><br> {user.br} doesn't automatically enforce the requirements
             for this parameter. For example, you can enter test as your value
             for each instance of the request_id parameter without triggering an
             error message. However, using a unique value allows us to help you
@@ -148,7 +148,7 @@ paths:
             <br><br> Make sure that this value in your API request is the same
             as the value in the original request from your user. We optimize
             pages in part by crawling and gathering data, and the original
-            user_agent lets us distinguish between our internal Bloomreach users
+            user_agent lets us distinguish between our internal {user.br} users
             who QA pages and everyone else who visits your site.
           schema:
             type: string
@@ -159,7 +159,7 @@ paths:
             field if your particular integration tracks customers this way.  The
             parameter captures user IDs from the customer side, and reuses the
             information when powering apps or enhancing cross-device linking. In
-            this way, Bloomreach recognizes users in a way that's aligned with
+            this way, {user.br} recognizes users in a way that's aligned with
             your system. <br><br> Use an anonymous string. Don't use email or
             other personally identifiable information. <br><br> If you do not
             track users this way, then omit this field.

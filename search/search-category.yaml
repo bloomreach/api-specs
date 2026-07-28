@@ -15,7 +15,7 @@ paths:
         - name: _br_uid_2
           in: query
           description:
-            A first-party cookie created by the Bloomreach tracking pixel
+            A first-party cookie created by the {user.br} tracking pixel
             library (BrTrk). This cookie creates a unique, anonymous identifier
             for every browser or device. <br><br> Use the default value
             provided, which is already encoded.
@@ -27,7 +27,7 @@ paths:
         - name: account_id
           in: query
           description:
-            Your site's numerical Bloomreach account ID. Your Bloomreach
+            Your site's numerical {user.br} account ID. Your {user.br}
             representative gives your site's account ID to you before or during
             your integration kickoff meeting. <br><br> The example value shown
             here, <i>6702</i>, is included for your convenience to send a
@@ -42,7 +42,7 @@ paths:
         - name: auth_key
           in: query
           description:
-            The Bloomreach-provided authentication key for the Bloomreach
+            The {user.br}-provided authentication key for the {user.br}
             account that's sending the request. <br><br> Pass the auth_key with
             an empty value in client-side calls.  The auth_key value is a
             private authorization key. If you include your valid auth_key value
@@ -54,11 +54,11 @@ paths:
         - name: domain_key
           in: query
           description:
-            Your site domain's ID, which is provided by Bloomreach. This ID is
-            for the domain that you want to receive your Bloomreach API
+            Your site domain's ID, which is provided by {user.br}. This ID is
+            for the domain that you want to receive your {user.br} API
             requests.  This parameter identifies the specific site version when
             the one account ID hosts multiple site versions with unique
-            characteristics, such as language versions. Bloomreach uses your
+            characteristics, such as language versions. {user.br} uses your
             domain_key parameter value to ensure that only the data that
             pertains to that site version is used for query and analytics
             features, such as autosuggestions. <br><br> The example value shown
@@ -229,7 +229,7 @@ paths:
             category ID. <br><br> You can percent encode spaces between terms as
             %20, or you can leave the spaces unencoded.  <br><br> If you use
             q=\*, the latency of the response will vary depending on your
-            catalog size and it may not adhere to Bloomreach's standard SLA.
+            catalog size and it may not adhere to {user.br}'s standard SLA.
             Additionally, most merchandising operations do not work on \* query
             parameters, except for include/exclude operations. <br><br> The
             example value shown here, <i>cable</i>, is included for your
@@ -251,7 +251,7 @@ paths:
             This parameter enables the [Personalized media in grid](https://documentation.bloomreach.com/discovery/docs/personalized-media-in-the-grid) feature.
             <br>If `true`, the API response includes media objects along with product results. The content and positions
             <br>of the media objects are governed by the [assets and media rules](https://documentation.bloomreach.com/discovery/docs/assets-and-media-rules)
-            configured in the Bloomreach dashboard. 
+            configured in the {user.br} dashboard. 
           required: false
           example: true
           schema:
@@ -260,7 +260,7 @@ paths:
           in: query
           description:
             An ID to track the API request for identification in logs.
-            <br><br> Bloomreach doesn't automatically enforce the requirements
+            <br><br> {user.br} doesn't automatically enforce the requirements
             for this parameter. For example, you can enter `test` as your value
             for each instance of the request_id parameter without triggering an
             error message. However, using a unique value (random number/Unix Timestamp) allows us to help you
@@ -335,7 +335,7 @@ paths:
             field if your particular integration tracks customers this way.  The
             parameter captures user IDs from the customer side, and reuses the
             information when powering apps or enhancing cross-device linking. In
-            this way, Bloomreach recognizes users in a way that's aligned with
+            this way, {user.br} recognizes users in a way that's aligned with
             your system. <br><br> Use an anonymous string. Don't use email or
             other personally identifiable information. If you do not track users
             this way, then omit this field.
@@ -347,7 +347,7 @@ paths:
             A unique identifier for a specific view of your product catalog. If
             you have multiple versions of your site, each with their own product
             catalog characteristics like product titles and prices, then add
-            view_id to your call. <br><br> Bloomreach uses your view_id
+            view_id to your call. <br><br> {user.br} uses your view_id
             parameter value to display the right product information for your
             customers based on their individual site views.  You can enter any
             string value to identify the specific site catalog view. This string
@@ -468,7 +468,7 @@ components:
         only when the feature is enabled for the query. The content and
         position of each injected document are governed by the
         [assets and media rules](https://documentation.bloomreach.com/discovery/docs/assets-and-media-rules)
-        configured in the Bloomreach dashboard.
+        configured in the {user.br} dashboard.
       properties:
         docType:
           type: string

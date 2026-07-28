@@ -71,7 +71,7 @@ paths:
             You only need to pass this field if your particular integration tracks customers this way.
             
             The parameter captures user IDs from the customer side and reuses the information when powering apps or enhancing cross-device linking.
-            This way, Bloomreach recognizes users in a way that's aligned with your system.
+            This way, {user.br} recognizes users in a way that's aligned with your system.
             
             Use an anonymous string. Don't use email or other personally identifiable information.
           schema:
@@ -124,7 +124,7 @@ paths:
             The universal customer ID of the user.
             You only need to pass this field if your particular integration tracks customers this way.
             
-            The parameter captures user IDs from the customer side and reuses the information when powering apps or enhancing cross-device linking. This way, Bloomreach recognizes users in a way that's aligned with your system.
+            The parameter captures user IDs from the customer side and reuses the information when powering apps or enhancing cross-device linking. This way, {user.br} recognizes users in a way that's aligned with your system.
             
             Use an anonymous string. Don't use email or other personally identifiable information.
           schema:
@@ -198,7 +198,7 @@ paths:
             You only need to pass this field if your particular integration tracks customers this way.
             
             The parameter captures user IDs from the customer side and reuses the information when powering apps or enhancing cross-device linking.
-            This way, Bloomreach recognizes users in a way that is aligned with your system.
+            This way, {user.br} recognizes users in a way that is aligned with your system.
             
             Use an anonymous string. Don't use email or other personally identifiable information.
           schema:
@@ -231,7 +231,7 @@ paths:
             The universal customer ID of the user. Required for Personalization-based widgets.
             
             The parameter captures user IDs from the customer side and reuses the information when powering apps or enhancing cross-device linking.
-            This way, Bloomreach recognizes users in a way that's aligned with your system.
+            This way, {user.br} recognizes users in a way that's aligned with your system.
             
             Use an anonymous string. Don't use email or other personally identifiable information.
             The example value shown here, <i>abc123</i>, is included for your convenience to send a request with <b>Try It</b>.
@@ -299,7 +299,7 @@ paths:
         - name: auth_key
           in: query
           description: |
-            The Bloomreach-provided authentication key for the Bloomreach account that's sending the request.
+            The {user.br}-provided authentication key for the {user.br} account that's sending the request.
             
             Widget API calls are client-side, so you can leave `auth_key` empty.
           schema:
@@ -310,7 +310,7 @@ paths:
             The universal customer ID of the user. Required for Personalization-based Recommendation widgets.
             
             The parameter captures user IDs from the customer side and reuses the information when powering apps or enhancing cross-device linking.
-            This way, Bloomreach recognizes users in a way that's aligned with your system.
+            This way, {user.br} recognizes users in a way that's aligned with your system.
             
             Use an anonymous string. Don't use email or other personally identifiable information.
             The example value shown here, <i>abc123</i>, is included for your convenience to send a request with <b>Try It</b>.
@@ -726,7 +726,7 @@ components:
       description: |
             This parameter enables the [Personalized media in grid](https://documentation.bloomreach.com/discovery/docs/personalized-media-in-the-grid) feature.
             <br>If `true`, the API response includes media objects along with product results.
-            The content and positions of the media objects are governed by the [assets and media rules](https://documentation.bloomreach.com/discovery/docs/assets-and-media-rules) configured in the Bloomreach dashboard. 
+            The content and positions of the media objects are governed by the [assets and media rules](https://documentation.bloomreach.com/discovery/docs/assets-and-media-rules) configured in the {user.br} dashboard. 
       required: false
       example: true
       schema:
@@ -736,9 +736,9 @@ components:
       name: account_id
       in: query
       description: |
-        Your site's numerical Bloomreach account ID.
+        Your site's numerical {user.br} account ID.
         
-        Your Bloomreach representative gives your site's account ID to you before or during your integration kickoff meeting.
+        Your {user.br} representative gives your site's account ID to you before or during your integration kickoff meeting.
         The example value shown here, <i>6276</i>, is included for your convenience to send a request with <b>Try It</b>.
       required: true
       example: 6276
@@ -751,7 +751,7 @@ components:
       name: _br_uid_2
       in: query
       description: |
-        A first-party cookie created by the Bloomreach tracking pixel library (BrTrk).
+        A first-party cookie created by the {user.br} tracking pixel library (BrTrk).
         This cookie creates a unique, anonymous identifier for every browser or device.
         Use the default value provided, which is already encoded.
       required: true
@@ -764,7 +764,7 @@ components:
       name: domain_key
       in: query
       description: |
-        Your site domain's ID, which is provided by Bloomreach. This ID is for the domain that you want to receive your Bloomreach API requests.
+        Your site domain's ID, which is provided by {user.br}. This ID is for the domain that you want to receive your {user.br} API requests.
         
         This parameter identifies the specific site version when one account ID hosts multiple site versions with unique characteristics, such as language versions.
         The example value shown here, <i>bloomreach_devdocs</i>, is included for your convenience to send a request with <b>Try It</b>.
@@ -816,8 +816,8 @@ components:
       description: |
         The filter parameter applies a faceted filter to the returned products, searching for products that fit your parameter values.
         
-        Any facet that you want to filter must be in your feed. Attributes must be enabled and mapped by Bloomreach.
-        Let your Bloomreach representative know which attributes in your content feed you want to apply as filters to search results.
+        Any facet that you want to filter must be in your feed. Attributes must be enabled and mapped by {user.br}.
+        Let your {user.br} representative know which attributes in your content feed you want to apply as filters to search results.
         
         You can filter results based on numeric ranges. For example, `&filter=(price:["100" TO "*"])`.
         Note that a negative filter on ranges isn't supported.
@@ -853,7 +853,7 @@ components:
       description: |
         A unique identifier for a specific view of your product catalog.
         If you have multiple versions of your site, each with its own product catalog characteristics like product titles and prices, then add `view_id` to your call.
-        Bloomreach uses your `view_id` parameter value to display the right product information for your customers based on their individual site views.
+        {user.br} uses your `view_id` parameter value to display the right product information for your customers based on their individual site views.
         
         You can enter any string value to identify the specific site catalog view. This string must be consistent in your pixel, API, and product catalog.
       schema:
