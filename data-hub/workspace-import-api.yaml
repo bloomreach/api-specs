@@ -133,7 +133,7 @@ components:
       in: path
       required: true
       description: |
-        The ID of your Bloomreach Engagement workspace. Must match the
+        The ID of your {user.mkg} workspace. Must match the
         workspace the API key was issued for; otherwise the request is
         rejected with HTTP 403.
       schema:
