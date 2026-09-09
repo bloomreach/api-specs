@@ -1,0 +1,871 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Unified Tracking",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://unt.api.exponea.dev/track/u/v1/",
+      "description": "UNT Dev instance"
+    },
+    {
+      "url": "https://cloud-api.exponea.com/track/u/v1/",
+      "description": "Cloud instance"
+    }
+  ],
+  "components": {
+    "parameters": {
+      "streamIDParam": {
+        "in": "query",
+        "name": "stream_id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "description": "Data stream identifier"
+      }
+    },
+    "schemas": {
+      "basicResult": {
+        "type": "object",
+        "required": [
+          "success"
+        ],
+        "properties": {
+          "success": {
+            "description": "Whether the command was processed successfully",
+            "type": "boolean"
+          },
+          "error": {
+            "description": "Error message if the command was not processed successfully",
+            "type": "string"
+          },
+          "errors": {
+            "description": "List of errors that occurred while processing the command",
+            "type": "array",
+            "minItems": 0,
+            "items": {
+              "type": "string"
+            }
+          },
+          "command_id": {
+            "description": "Identifier of the command, if provided in the request",
+            "type": "string"
+          }
+        }
+      },
+      "getIDsRequest": {
+        "type": "object",
+        "properties": {
+          "cookie": {
+            "description": "Cookie to identify the user (either a new one or the existing one)",
+            "type": "string"
+          },
+          "expires": {
+            "description": "UNIX timestamp of when the cookie expires",
+            "type": "number"
+          },
+          "cookieOptions": {
+            "description": "Additional options for the cookie",
+            "type": "object",
+            "properties": {
+              "domain": {
+                "description": "Domain of the cookie",
+                "type": "string"
+              },
+              "path": {
+                "description": "Path of the cookie",
+                "type": "string"
+              }
+            }
+          },
+          "customer": {
+            "description": "Customer IDs of the user.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "tifc": {
+            "description": "TIFC token of the user.",
+            "type": "string"
+          }
+        }
+      },
+      "getIDsResult": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/basicResult"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "cookie": {
+                "description": "Cookie to identify the user (either a new one or the existing one)",
+                "type": "string"
+              },
+              "data": {
+                "type": "object",
+                "description": "Customer IDs of the user. Usually extracted from the TIFC token.",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "properties": {
+        "type": "object",
+        "additionalProperties": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "object"
+            },
+            {
+              "type": "array"
+            }
+          ]
+        }
+      },
+      "customerUpdate": {
+        "type": "object",
+        "required": [
+          "customer_ids",
+          "properties"
+        ],
+        "properties": {
+          "customer_ids": {
+            "description": "One or more hard and/or soft IDs identifying the customer.",
+            "type": "object",
+            "minProperties": 1,
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "properties": {
+            "description": "One or more customer properties that you wish to update.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/properties"
+              }
+            ]
+          },
+          "update_timestamp": {
+            "description": "The timestamp of the update. If not provided, the current time is used.",
+            "type": "number"
+          }
+        }
+      },
+      "addEvent": {
+        "type": "object",
+        "required": [
+          "type",
+          "customer_ids"
+        ],
+        "properties": {
+          "type": {
+            "description": "The type of the event.",
+            "type": "string"
+          },
+          "event_type": {
+            "description": "The type of the event.",
+            "type": "string",
+            "deprecated": true
+          },
+          "customer_ids": {
+            "description": "One or more hard and/or soft IDs identifying the customer.",
+            "type": "object",
+            "minProperties": 1,
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "properties": {
+            "description": "Additional properties of the event.",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/properties"
+              }
+            ]
+          },
+          "timestamp": {
+            "description": "UNIX timestamp of when the event was created. If not provided, the current time is used.",
+            "type": "number"
+          },
+          "age": {
+            "description": "How long in the past the event occurred. If provided, this will be used to calculate the timestamp.",
+            "type": "number",
+            "deprecated": true
+          },
+          "deferred_event": {
+            "description": "An additional event that should be processed after the main one",
+            "type": "object",
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "description": "The type of the event.",
+                "type": "string"
+              },
+              "event_type": {
+                "description": "The type of the event.",
+                "type": "string",
+                "deprecated": true
+              },
+              "properties": {
+                "description": "Additional properties of the deferred event.",
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/properties"
+                  }
+                ]
+              },
+              "timestamp": {
+                "description": "UNIX timestamp of when the event was created. If not provided, the current time is used.",
+                "type": "number"
+              },
+              "metadata": {
+                "description": "Additional metadata for the event.",
+                "type": "object",
+                "properties": {
+                  "domain_key": {
+                    "description": "Domain from which the event originated.",
+                    "type": "string"
+                  },
+                  "view_id": {
+                    "description": "View ID under which the event should belong.",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "metadata": {
+            "description": "Additional metadata for the event.",
+            "type": "object",
+            "properties": {
+              "_br_uid_2": {
+                "description": "Unique identifier for the customer used by {user.search}.",
+                "type": "string"
+              },
+              "domain_key": {
+                "description": "Domain from which the event originated.",
+                "type": "string"
+              },
+              "view_id": {
+                "description": "View ID under which the event should belong.",
+                "type": "string"
+              },
+              "test_data": {
+                "description": "Whether the event is used for testing & should be excluded from production.",
+                "type": "boolean"
+              },
+              "debug": {
+                "description": "Whether the event should be tracked in debugging mode & excluded from production.",
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      },
+      "sdkOptions": {
+        "type": "object",
+        "properties": {
+          "sdk": {
+            "description": "The variant of the SDK that is sending the request.",
+            "type": "string"
+          },
+          "sdk_version": {
+            "description": "The version of the SDK that is sending the request.",
+            "type": "string"
+          }
+        }
+      },
+      "command": {
+        "type": "object",
+        "description": "A command to be processed in a batch request.",
+        "required": [
+          "name",
+          "data"
+        ],
+        "properties": {
+          "name": {
+            "description": "Route name of the command, e.g. `customers`, `customers/events`.",
+            "type": "string"
+          },
+          "data": {
+            "description": "Command payload, same format as if tracked individually.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/customerUpdate"
+              },
+              {
+                "$ref": "#/components/schemas/addEvent"
+              },
+              {
+                "$ref": "#/components/schemas/getIDsRequest"
+              }
+            ]
+          },
+          "command_id": {
+            "description": "Identifier of the command, to be used in the batch response.",
+            "type": "string"
+          }
+        }
+      },
+      "batchRequest": {
+        "allOf": [
+          {
+            "type": "object",
+            "required": [
+              "commands"
+            ],
+            "properties": {
+              "commands": {
+                "description": "List of commands to be processed in the batch request.",
+                "type": "array",
+                "minItems": 1,
+                "maxItems": 50,
+                "items": {
+                  "$ref": "#/components/schemas/command"
+                }
+              }
+            }
+          },
+          {
+            "$ref": "#/components/schemas/sdkOptions"
+          }
+        ]
+      },
+      "batchResponse": {
+        "type": "object",
+        "required": [
+          "results"
+        ],
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/basicResult"
+                },
+                {
+                  "$ref": "#/components/schemas/getIDsResult"
+                }
+              ]
+            }
+          },
+          "start_time": {
+            "description": "UNIX timestamp of when the batch request was received.",
+            "type": "number"
+          },
+          "end_time": {
+            "description": "UNIX timestamp of when the batch request was processed.",
+            "type": "number"
+          },
+          "success": {
+            "description": "Whether the batch request was valid and processed successfully. Each command result should be checked for individual success.",
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/system/time": {
+      "get": {
+        "summary": "Get current server time",
+        "description": "Returns the current server time as a UNIX timestamp",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/streamIDParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/basicResult"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "time": {
+                          "description": "Current server time as UNIX timestamp",
+                          "type": "number"
+                        }
+                      }
+                    }
+                  ],
+                  "example": {
+                    "success": true,
+                    "errors": [],
+                    "time": 1743067286.55737
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/basicResult"
+                    }
+                  ],
+                  "example": {
+                    "success": false,
+                    "error": "access key not provided"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/cookie": {
+      "get": {
+        "summary": "Get cookie for the user",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/streamIDParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/basicResult"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "cookie": {
+                          "description": "Cookie to identify the user (either a new one or the existing one)",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  ],
+                  "example": {
+                    "success": true,
+                    "errors": [],
+                    "cookie": "d5fa6627-ad67-4bc0-b9c2-1e123d17e3b7"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/basicResult"
+                    }
+                  ],
+                  "example": {
+                    "success": false,
+                    "error": "access key not provided"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/ids": {
+      "get": {
+        "summary": "Get cookie & customer IDs for the user",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/streamIDParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/getIDsResult"
+                    }
+                  ],
+                  "example": {
+                    "success": true,
+                    "errors": [],
+                    "cookie": "d5fa6627-ad67-4bc0-b9c2-1e123d17e3b7",
+                    "data": {
+                      "cookie": "d5fa6627-ad67-4bc0-b9c2-1e123d17e3b7",
+                      "email": "john.doe@example.com"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/basicResult"
+                    }
+                  ],
+                  "example": {
+                    "success": false,
+                    "error": "access key not provided"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Get cookie & customer IDs for the user",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/streamIDParam"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/getIDsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/getIDsResult"
+                    }
+                  ],
+                  "example": {
+                    "success": true,
+                    "errors": [],
+                    "cookie": "d5fa6627-ad67-4bc0-b9c2-1e123d17e3b7",
+                    "data": {
+                      "cookie": "d5fa6627-ad67-4bc0-b9c2-1e123d17e3b7",
+                      "email": "john.doe@example.com"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/basicResult"
+                    }
+                  ],
+                  "example": {
+                    "success": false,
+                    "error": "access key not provided"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/system/tracking": {
+      "get": {
+        "summary": "Get tracking information",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/streamIDParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/basicResult"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "description": "Tracking information",
+                          "type": "object"
+                        }
+                      }
+                    }
+                  ],
+                  "example": {
+                    "success": true,
+                    "errors": [],
+                    "data": []
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/basicResult"
+                    }
+                  ],
+                  "example": {
+                    "success": false,
+                    "error": "access key not provided"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers": {
+      "post": {
+        "summary": "Update customer properties",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/streamIDParam"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/customerUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/basicResult"
+                    }
+                  ],
+                  "example": {
+                    "success": false,
+                    "error": "access key not provided"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/events": {
+      "post": {
+        "summary": "Add an event for a customer",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/streamIDParam"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/addEvent"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/basicResult"
+                    }
+                  ],
+                  "example": {
+                    "success": false,
+                    "error": "access key not provided"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/batch": {
+      "description": "This endpoint allows you to send multiple commands in a single request. \nThe commands are processed in the order they are received. \nThe response contains the results of each command, as well as the overall success of the batch request.\n",
+      "post": {
+        "summary": "Process multiple commands in a single request",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/streamIDParam"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/batchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/batchResponse"
+                },
+                "example": {
+                  "results": [
+                    {
+                      "success": true,
+                      "errors": [],
+                      "command_id": "1"
+                    },
+                    {
+                      "success": false,
+                      "errors": [
+                        "customer_id not provided"
+                      ],
+                      "command_id": "2"
+                    }
+                  ],
+                  "start_time": 1743067286.55737,
+                  "end_time": 1743067286.55737,
+                  "success": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/batchResponse"
+                    }
+                  ],
+                  "example": {
+                    "success": false,
+                    "error": "too many commands in the batch request"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/batchResponse"
+                    }
+                  ],
+                  "example": {
+                    "success": false,
+                    "error": "access key not provided"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
