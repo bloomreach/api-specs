@@ -201,7 +201,7 @@
             ]
           },
           "timestamp": {
-            "description": "UNIX timestamp of when the event was created. If not provided, the current time is used.",
+            "description": "UNIX timestamp of when the event was created. If not provided, the current time is used.<br><br>**Note:** You can also pass negative timestamps and timestamps before 1.1.1970.",
             "type": "number"
           },
           "age": {
