@@ -163,7 +163,7 @@
             ]
           },
           "update_timestamp": {
-            "description": "The timestamp of the update. If not provided, the current time is used.<br><br>**Note:** Negative timestamps, and timestamps before 1.1.1970 are not supported.",
+            "description": "The UNIX timestamp of the update. If not provided, the current time is used.<br><br>**Note:** Negative timestamps, and timestamps before 1.1.1970 are not supported.",
             "type": "number"
           }
         }
