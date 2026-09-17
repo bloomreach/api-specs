@@ -1,0 +1,803 @@
+openapi: 3.0.3
+info:
+  title: External Segments API
+  version: 2.0.0
+
+servers:
+  - url: '{instance_base_url}'
+    description: Customer's Bloomreach Marketing instance
+    variables:
+      instance_base_url:
+        default: https://api.example.bloomreach.com
+        description: Base URL provided during integration setup
+
+tags:
+  - name: Segments and memberships
+    description: |
+      Register external segments and push segment membership updates into {user.mkg}.
+
+paths:
+  /intg/external-segments/v1.0/{integration_id}/segments:
+    post:
+      operationId: postExternalSegmentCreate
+      tags:
+        - Segments and memberships
+      summary: Register a segment
+      description: |
+        Registers an external segment on the integration.
+
+        Send the segment display **`name`** (e.g. `Tier Gold`). Optionally send **`external_url`** (a link to this segment on your platform) and set the segment lifetime via **`expiration`** or **`permanent`**. {user.br} returns a server-generated **`id`** and **`bloomreach_url`** (a link to this segment in {user.mkg}, for example in your admin UI or audit logs).
+
+        ## URLs
+
+        - **`external_url`** (request, optional): deep link on **your** platform. When provided, {user.br} uses it in the UI so users can open the segment in your system.
+        - **`bloomreach_url`** (response, server-generated): deep link in **{user.mkg}** for this registered segment. Your systems can store or display it so users can open the segment in {user.br}.
+
+        ## Expiration
+
+        Segment lifetime is determined as follows (mutually exclusive: do not send both **`expiration`** and **`permanent: true`**):
+
+        - **`permanent: true`**: the segment does not expire; `expiration` must not be sent
+        - **`expiration`** omitted and **`permanent`** not set: expiration defaults to **30 days** from registration; the computed timestamp is returned in the `201` response
+        - **`expiration`** provided: Unix timestamp in **seconds** when the segment registration expires; must be a positive integer greater than the request time
+
+        The **`expiration`** returned in the `201` response reflects the value at registration time. It may be changed later in {user.mkg}. Do not treat it as the source of truth for when to stop membership updates. Continue sending updates until the API returns **`segment_expired`**.
+
+        Sending both `expiration` and `permanent: true` returns **`400 Bad Request`**.
+
+        ## Segment name
+
+        Send the segment display **`name`** as used in your system. {user.br} normalizes it before registration. If the input contains a **zero byte**, **dot** (`.`), or **dollar sign** (`$`), each occurrence is replaced with `__` as part of that normalization. You do not need to strip or escape these characters before sending the request. Different display names can normalize to the same value and return **`409 Conflict`**.
+
+        If the name is not valid after normalization (for example whitespace-only, empty after normalization, or not accepted as a segment identifier in {user.mkg}), the API returns **`400 Bad Request`** with **`invalid_segment_name`**.
+
+        If a segment with the same normalized name is already registered on this integration, the API returns **`409 Conflict`**. This duplicate-name check is a **temporary restriction** and may be relaxed in a future API version.
+
+        Call this endpoint **before** pushing membership updates for a new segment.
+      parameters:
+        - $ref: '#/components/parameters/IntegrationId'
+      security:
+        - AccessKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SegmentCreateRequest'
+            examples:
+              withExpiration:
+                summary: Segment with explicit expiration
+                value:
+                  name: Tier Gold
+                  external_url: https://partner.example.com/segments/tier-gold
+                  expiration: 1784536000
+              defaultExpiration:
+                summary: Segment with default 30-day expiration
+                value:
+                  name: Tier Gold
+              permanent:
+                summary: Permanent segment (no expiration)
+                value:
+                  name: Tier Gold
+                  external_url: https://partner.example.com/segments/tier-gold
+                  permanent: true
+      responses:
+        '201':
+          description: Segment registered on the integration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentCreatedResponse'
+              examples:
+                withExpiration:
+                  summary: Segment registered with explicit expiration
+                  value:
+                    id: 507f1f77bcf86cd799439011
+                    name: Tier Gold
+                    external_url: https://partner.example.com/segments/tier-gold
+                    bloomreach_url: https://app.example.bloomreach.com/p/tier-gold-project/analytics/external-segments/507f1f77bcf86cd799439011
+                    expiration: 1784536000
+                    permanent: false
+                defaultExpiration:
+                  summary: Segment registered with default 30-day expiration
+                  value:
+                    id: 507f1f77bcf86cd799439011
+                    name: Tier Gold
+                    bloomreach_url: https://app.example.bloomreach.com/p/tier-gold-project/analytics/external-segments/507f1f77bcf86cd799439011
+                    expiration: 1755596800
+                    permanent: false
+                permanent:
+                  summary: Permanent segment registered
+                  value:
+                    id: 674a1b2c3d4e5f678901234
+                    name: Tier Gold
+                    external_url: https://partner.example.com/segments/tier-gold
+                    bloomreach_url: https://app.example.bloomreach.com/p/tier-gold-project/analytics/external-segments/674a1b2c3d4e5f678901234
+                    permanent: true
+        '400':
+          $ref: '#/components/responses/BadRequestSegmentCreate'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '409':
+          $ref: '#/components/responses/SegmentAlreadyExists'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  /intg/external-segments/v1.0/{integration_id}/membership-updates:
+    post:
+      operationId: postExternalSegmentMembershipUpdate
+      tags:
+        - Segments and memberships
+      summary: Push membership updates batch
+      description: |
+        Sends batches of segment membership changes.
+
+        Request body is a JSON object with **`emitted_at`**, **`sync_type`**, and an **`updates`** array of membership changes. Segments must be registered via `POST …/v1.0/…/segments` before membership updates are accepted.
+
+        ## Request restrictions
+
+        Do not send both **`join`** and **`leave`** for the **same segment** and the **same customer ID** in one request. Processing order is not guaranteed; the outcome is non-deterministic.
+
+        ## Response semantics
+
+        - **`200 OK`**: every customer ID in the request was processed successfully
+        - **`207 Multi-Status`**: partial success; see the `207` response for processing error codes and retry vs non-retry guidance
+
+        ## Rate limiting
+
+        Two limits apply to every membership update request per workspace (respect **both**).
+
+        - **Request rate**: at most **one request per second** per workspace. Checked first. A second request within one second returns **`429 Too Many Requests`** with **`Retry-After: 1`**, even when the batch is small.
+        - **Customer ID allowance**: a shared per-workspace budget for customer IDs in **`updates`**. Refills at **1,000 IDs/s**, up to **10,000** at a time. Each `join` and `leave` entry counts every ID in `customer_ids` toward the budget. Exceeding the remaining allowance returns **`429`** with **`Retry-After`** set to when capacity is available.
+
+        Each request may include at most **10,000** customer identifiers in total across all `updates` entries. The raw JSON request body must not exceed **22 MiB (23,068,672 bytes)**. Split larger syncs across multiple requests and stay within all limits above.
+
+        Honor **`Retry-After`** (seconds) before retrying a **`429`** response.
+      parameters:
+        - $ref: '#/components/parameters/IntegrationId'
+      security:
+        - AccessKeyAuth: []
+      requestBody:
+        required: true
+        description: |
+          JSON object with `emitted_at`, `sync_type`, and an `updates` array. At most **10,000** customer identifiers in total across all `updates` entries per request. Raw body size must not exceed **22 MiB (23,068,672 bytes)**.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MembershipSyncRequest'
+            examples:
+              initialSync:
+                summary: Initial membership load for a segment
+                value:
+                  emitted_at: 1753000000
+                  sync_type: initial
+                  updates:
+                    - segment:
+                        id: 507f1f77bcf86cd799439011
+                      action: join
+                      customer_ids:
+                        - customer@example.com
+                        - cust_abc123
+                        - cust_def456
+              deltaUpdate:
+                summary: Delta membership update
+                value:
+                  emitted_at: 1753000100
+                  sync_type: delta
+                  updates:
+                    - segment:
+                        id: 507f1f77bcf86cd799439011
+                      action: join
+                      customer_ids:
+                        - customer@example.com
+                    - segment:
+                        id: 507f1f77bcf86cd799439011
+                      action: leave
+                      customer_ids:
+                        - cust_removed789
+      responses:
+        '200':
+          description: All customer IDs processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MembershipSyncSuccessResponse'
+              example:
+                status: ok
+        '207':
+          description: |
+            Partial success. One or more customer IDs failed processing. The response lists failed `customer_ids` grouped by `segment_id` and `error`. `segment_id` is the server-generated segment `id` from `POST …/segments`.
+
+            ## Processing errors
+
+            - **`internal_server_error`**: transient failure while processing membership for one or more customer IDs in the group
+            - **`throttled_on_upstream`**: {user.mkg} rate limit reached while processing one or more customer IDs in the group
+            - **`segment_expired`**: membership update targets a segment whose registration has expired
+            - **`unknown_segment`**: segment `id` is not registered on this integration
+            - **`invalid_configuration`**: integration is not configured to process membership updates
+            - **`invalid_customer_id`**: one or more customer identifiers in the group are not valid identifiers: longer than **256 bytes**, containing no alphanumeric character (whitespace-only included), or the literal `null` / `undefined`. The remaining identifiers in the request are processed normally
+
+            ## Retryable
+
+            - **`internal_server_error`**: retry only the failed `customer_ids` for that `segment_id` (exponential backoff recommended)
+            - **`throttled_on_upstream`**: retry only the failed `customer_ids` for that `segment_id` after backoff (respect any rate limits in your integration)
+
+            Other customer IDs in the same request that succeeded must not be resent unless your integration policy requires a full-batch replay.
+
+            ## Non-retryable
+
+            - **`segment_expired`**: do not retry the same payload. If the segment is needed in {user.br} again, re-create it via `POST …/segments` (the expired registration cannot be reused) and push the **complete** membership for that segment with **`sync_type: initial`**. Delta updates are insufficient. {user.br} has already removed the membership data.
+            - **`unknown_segment`**: do not retry until the segment is registered via `POST …/segments` for the referenced `segment.id`
+            - **`invalid_configuration`**: non-retryable; integration is not configured to process membership updates (resolve via {user.br} integration setup)
+            - **`invalid_customer_id`**: do not resend these identifiers unchanged. Correct them at the source (shorten to **256 bytes or fewer**, supply a real identifier instead of a blank or placeholder value, or map a different identifier field at integration setup) and send them again
+
+            On **`5xx`**, retry the full request body after backoff.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MembershipSyncPartialResponse'
+              example:
+                status: partial
+                failures:
+                  - segment_id: 507f1f77bcf86cd799439011
+                    error: internal_server_error
+                    customer_ids:
+                      - cust_abc123
+                      - cust_def456
+                  - segment_id: 674a1b2c3d4e5f678901234
+                    error: segment_expired
+                    customer_ids:
+                      - cust_xyz789
+                  - segment_id: 674a1b2c3d4e5f678901235
+                    error: unknown_segment
+                    customer_ids:
+                      - cust_unknown1
+                  - segment_id: 507f1f77bcf86cd799439011
+                    error: throttled_on_upstream
+                    customer_ids:
+                      - cust_retry1
+                  - segment_id: 507f1f77bcf86cd799439011
+                    error: invalid_customer_id
+                    customer_ids:
+                      - cust_identifier_longer_than_256_bytes
+        '400':
+          $ref: '#/components/responses/BadRequestMembership'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '413':
+          $ref: '#/components/responses/PayloadTooLarge'
+        '429':
+          $ref: '#/components/responses/RateLimited'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '502':
+          description: |
+            Bad gateway. The request did not reach the API application. The response body may not be JSON. Retry later without parsing the body.
+        '503':
+          description: |
+            Service temporarily unavailable. The request did not reach the API application. The response body may not be JSON. Retry later without parsing the body.
+        '504':
+          description: |
+            Gateway timeout. Processing did not complete in time. Retry later.
+
+components:
+  securitySchemes:
+    AccessKeyAuth:
+      type: http
+      scheme: bearer
+      description: |
+        Access key issued when the external segments integration is configured in {user.br}. Send as `Authorization: Bearer <access_key>`.
+
+  parameters:
+    IntegrationId:
+      name: integration_id
+      in: path
+      required: true
+      description: Integration identifier embedded in the endpoint URL provided at setup
+      schema:
+        type: string
+        format: uuid
+      example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+
+  responses:
+    BadRequestSegmentCreate:
+      description: |
+        Invalid payload (malformed body or validation failure), invalid segment name (`invalid_segment_name`), or the per-integration segment registry limit has been reached (`segment_limit_exceeded`).
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            nameRequired:
+              summary: Missing name
+              value:
+                errors:
+                  - error: invalid_request
+                    message: name is required
+            invalidSegmentName:
+              summary: Segment name not valid after normalization
+              value:
+                errors:
+                  - error: invalid_segment_name
+                    message: name is not a valid segment name after normalization
+            invalidExternalUrl:
+              summary: Invalid external segment URL
+              value:
+                errors:
+                  - error: invalid_request
+                    message: external_url must be a valid http or https URL
+            tooManySegments:
+              summary: Segment registry limit reached
+              value:
+                errors:
+                  - error: segment_limit_exceeded
+                    message: The maximum number of segments for this integration has been reached
+            invalidExpiration:
+              summary: Invalid expiration when provided
+              value:
+                errors:
+                  - error: invalid_request
+                    message: expiration must be a positive unix timestamp in seconds in the future
+            expirationAndPermanent:
+              summary: Both expiration and permanent set
+              value:
+                errors:
+                  - error: invalid_request
+                    message: expiration and permanent cannot both be set
+    BadRequestMembership:
+      description: |
+        Invalid payload (malformed body or validation failure). Field paths in `message` use the `updates[N].…` prefix where `N` is the zero-based index in the `updates` array. Top-level fields (for example `emitted_at`, `sync_type`) appear without that prefix.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            missingCustomerIds:
+              summary: Empty customer_ids on first update
+              value:
+                errors:
+                  - error: invalid_request
+                    message: updates[0].customer_ids must contain at least one customer identifier
+            validationErrors:
+              summary: Multiple validation failures on first update
+              value:
+                errors:
+                  - error: invalid_request
+                    message: sync_type must be initial or delta
+                  - error: invalid_request
+                    message: updates[0].action must be join or leave
+                  - error: invalid_request
+                    message: updates[0].segment.id is required
+                  - error: invalid_request
+                    message: updates[0].customer_ids must contain at least one customer identifier
+            missingEmittedAt:
+              summary: Missing or invalid emitted_at
+              value:
+                errors:
+                  - error: invalid_request
+                    message: emitted_at is required and must be a positive unix timestamp in seconds
+            tooManyCustomerIds:
+              summary: More than 10,000 customer identifiers in one request
+              value:
+                errors:
+                  - error: invalid_request
+                    message: request must not contain more than 10,000 customer identifiers in total
+    Unauthorized:
+      description: Missing or invalid access key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            errors:
+              - error: unauthorized
+                message: Invalid access key
+    Forbidden:
+      description: Integration disabled or not authorized for this instance
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            errors:
+              - error: forbidden
+                message: Integration is disabled or not authorized for this instance
+    NotFound:
+      description: Integration not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            errors:
+              - error: not_found
+                message: Integration not found
+    MethodNotAllowed:
+      description: HTTP method not allowed (only `POST` is supported on these endpoints)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            errors:
+              - error: method_not_allowed
+                message: Method not allowed
+    SegmentAlreadyExists:
+      description: A segment with the same normalized name is already registered on this integration.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            errors:
+              - error: conflict
+                message: A segment with this name is already registered on the integration
+    PayloadTooLarge:
+      description: |
+        Request body exceeds the maximum allowed size of **22 MiB (23,068,672 bytes)** for membership update batches.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            errors:
+              - error: payload_too_large
+                message: Request body must not exceed 23068672 bytes
+    RateLimited:
+      description: |
+        Rate limit exceeded. For membership updates this may be the **one request per second** cap per workspace (`Retry-After: 1`) or exhaustion of the shared customer-ID allowance.
+
+        Retry only after the number of seconds in **`Retry-After`**.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            errors:
+              - error: rate_limit_exceeded
+                message: Rate limit exceeded; retry after the period indicated by Retry-After
+      headers:
+        Retry-After:
+          schema:
+            type: integer
+          description: Seconds to wait before retrying (often `1` for the per-second request cap)
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            errors:
+              - error: internal_server_error
+                message: An unexpected error occurred while processing the request
+
+  schemas:
+    MembershipUpdatesBatch:
+      type: array
+      description: |
+        Batch of segment membership changes. Each element lists customer IDs to join or leave one segment. May span multiple segments in one request. Each entry carries its own `emitted_at`. Validation error messages refer to entries as `updates[N].…` where `N` is the array index.
+      minItems: 1
+      items:
+        $ref: '#/components/schemas/MembershipUpdate'
+
+    MembershipUpdate:
+      type: object
+      required:
+        - emitted_at
+        - segment
+        - action
+        - customer_ids
+      properties:
+        emitted_at:
+          $ref: '#/components/schemas/EmittedAt'
+        segment:
+          $ref: '#/components/schemas/Segment'
+        action:
+          $ref: '#/components/schemas/MembershipUpdateAction'
+        customer_ids:
+          $ref: '#/components/schemas/CustomerIds'
+
+    MembershipSyncRequest:
+      type: object
+      required:
+        - emitted_at
+        - sync_type
+        - updates
+      description: |
+        Membership update request. Do not include both `join` and `leave` for the same segment and the same customer ID in `updates`. Processing order is not guaranteed and the result is non-deterministic.
+      properties:
+        emitted_at:
+          $ref: '#/components/schemas/EmittedAt'
+        sync_type:
+          $ref: '#/components/schemas/MembershipUpdateSyncType'
+        updates:
+          type: array
+          description: |
+            Membership changes to process. Each entry applies one action to one segment. Do not list the same customer ID under both `join` and `leave` for the same segment in this array. Validation error messages refer to entries as `updates[N].…` where `N` is the zero-based index in this array.
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/MembershipSyncUpdateEntry'
+
+    MembershipSyncUpdateEntry:
+      type: object
+      required:
+        - segment
+        - action
+        - customer_ids
+      properties:
+        segment:
+          $ref: '#/components/schemas/Segment'
+        action:
+          $ref: '#/components/schemas/MembershipUpdateAction'
+        customer_ids:
+          $ref: '#/components/schemas/CustomerIds'
+
+    MembershipUpdateSyncType:
+      type: string
+      enum:
+        - initial
+        - delta
+      description: |
+        Declares whether this batch is the **first membership load** for the affected segment(s) or an **incremental update**. Used for tracking and processing semantics; applies to all entries in `updates`.
+
+        - **`initial`**: use when pushing membership for a segment **for the first time** after `POST …/segments`. Send the complete current membership with **`action: join`** only (`leave` is not used on initial load). Large memberships may require multiple `initial` requests until the full snapshot is sent.
+        - **`delta`**: use for **all subsequent** membership changes after the initial load. Send **`join`** and/or **`leave`** entries for adds and removals since the last sync.
+
+    MembershipUpdateAction:
+      type: string
+      enum:
+        - join
+        - leave
+      description: |
+        Membership change to apply for all customer IDs in `customer_ids` for this segment. Do not send both `join` and `leave` for the same segment and customer in one request.
+
+    EmittedAt:
+      type: integer
+      format: int64
+      minimum: 1
+      maximum: 999999999999
+      description: |
+        Unix timestamp in **seconds** when the source system emitted this batch. Must be a positive integer. Values above `999999999999` are rejected (typically indicates a millisecond timestamp sent by mistake).
+      example: 1753000000
+
+    Expiration:
+      type: integer
+      format: int64
+      minimum: 1
+      maximum: 999999999999
+      description: |
+        Unix timestamp in **seconds** when the segment registration expires. Optional on segment creation; mutually exclusive with `permanent: true`.
+
+        When omitted and `permanent` is not set, the server applies a **30-day** default from registration time. When provided, must be a positive integer in the future at registration time. Values above `999999999999` are rejected (typically indicates a millisecond timestamp sent by mistake).
+
+        May be changed later in {user.mkg}; do not use it as the source of truth for stopping membership updates.
+      example: 1784536000
+
+    SegmentPermanent:
+      type: boolean
+      description: |
+        When `true`, the segment never expires. Mutually exclusive with `expiration`. Must not be sent together with `expiration`.
+      example: true
+
+    CustomerIds:
+      type: array
+      description: |
+        Customer identifiers in the field mapped at integration setup. Depending on the integration configuration, identifiers with no matching {user.br} profile are either upserted (a new profile is created) or ignored.
+
+        Each identifier must not exceed **256 bytes**, must contain at least one alphanumeric character, and must not be the literal `null` or `undefined`.
+
+        An identifier that breaks any of these does not fail the request: it is reported on its own as **`invalid_customer_id`** in a `207` response while every other identifier is processed. The size limit is measured in **bytes**, so multi-byte characters count more than once.
+      minItems: 1
+      items:
+        type: string
+        minLength: 1
+      example:
+        - customer@example.com
+        - cust_abc123
+
+    SegmentId:
+      type: string
+      description: |
+        Server-generated segment identifier (MongoDB ObjectId, a 24-character hexadecimal string). Returned from `POST …/segments`; use as `segment.id` in membership updates and as `segment_id` in `207` failure groups.
+      pattern: '^[a-fA-F0-9]{24}$'
+      example: 507f1f77bcf86cd799439011
+
+    ExternalSegmentUrl:
+      type: string
+      format: uri
+      description: |
+        HTTP or HTTPS deep link to this segment on the partner platform. Optional on segment registration. When provided in the request, echoed in the `201` response; omitted from the response when not sent.
+      maxLength: 2048
+      example: https://partner.example.com/segments/tier-gold
+
+    BloomreachSegmentUrl:
+      type: string
+      format: uri
+      description: |
+        HTTPS deep link to this segment in {user.mkg}. Server-generated on registration; returned in the `201` response only (not sent in the request).
+
+        Format: `https://<engagement app domain>/p/<project slug>/analytics/external-segments/<id>`, where `<id>` is the segment `id` from this response. The domain and project slug are those of the {user.mkg} project the integration belongs to.
+
+        Treat the value as opaque: store and open it, do not build it yourself.
+      maxLength: 2048
+      example: https://app.example.bloomreach.com/p/tier-gold-project/analytics/external-segments/507f1f77bcf86cd799439011
+
+    Segment:
+      type: object
+      required:
+        - id
+      description: "Segment reference in a membership update: the `id` from `POST …/segments`."
+      properties:
+        id:
+          $ref: '#/components/schemas/SegmentId'
+
+    SegmentCreateRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: |
+            Segment display name (e.g. `Tier Gold`) as used in your system. {user.br} normalizes the name before registration, including replacing zero byte, dot (`.`), and dollar sign (`$`) with `__`; you do not need to pre-process those characters. Returns **`400`** with **`invalid_segment_name`** when the name is not valid after normalization.
+
+            Set lifetime via optional `expiration` or `permanent` (mutually exclusive). If neither is sent, expiration defaults to 30 days from registration.
+
+            If the normalized name is already registered on the integration, the request fails with `409 Conflict`.
+
+            The normalized name must not exceed **243 characters**: it becomes the {user.br} customer property `ext_segment_<normalized name>`, and that property name is limited to 255 characters. A longer name returns **`400`** with **`invalid_request`**.
+          minLength: 1
+          maxLength: 256
+          example: Tier Gold
+        external_url:
+          $ref: '#/components/schemas/ExternalSegmentUrl'
+        expiration:
+          $ref: '#/components/schemas/Expiration'
+        permanent:
+          $ref: '#/components/schemas/SegmentPermanent'
+
+    SegmentCreatedResponse:
+      type: object
+      required:
+        - id
+        - name
+        - bloomreach_url
+        - permanent
+      properties:
+        id:
+          $ref: '#/components/schemas/SegmentId'
+        name:
+          type: string
+          description: Echo of the registered display name
+          minLength: 1
+          maxLength: 256
+          example: Tier Gold
+        external_url:
+          $ref: '#/components/schemas/ExternalSegmentUrl'
+        bloomreach_url:
+          $ref: '#/components/schemas/BloomreachSegmentUrl'
+        expiration:
+          $ref: '#/components/schemas/Expiration'
+          description: |
+            Segment expiry as Unix timestamp in seconds at registration time. Omitted when `permanent` is `true`. When the request omits `expiration` and `permanent`, this is registration time plus **30 days**.
+
+            May differ from the current expiry if changed in {user.mkg}. Rely on **`segment_expired`** rather than this field to decide when to stop membership updates.
+        permanent:
+          $ref: '#/components/schemas/SegmentPermanent'
+
+    MembershipSyncSuccessResponse:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          enum:
+            - ok
+          description: All customer IDs in the request were processed successfully
+
+    MembershipSyncPartialResponse:
+      type: object
+      required:
+        - status
+        - failures
+      properties:
+        status:
+          type: string
+          enum:
+            - partial
+          description: One or more customer IDs failed processing
+        failures:
+          type: array
+          minItems: 1
+          description: |
+            Failed customer IDs grouped by `segment_id` and processing error code. See the `207` response description for error meanings and retry vs non-retry guidance.
+          items:
+            $ref: '#/components/schemas/MembershipProcessingFailureGroup'
+
+    MembershipProcessingFailureGroup:
+      type: object
+      required:
+        - segment_id
+        - error
+        - customer_ids
+      properties:
+        segment_id:
+          $ref: '#/components/schemas/SegmentId'
+        error:
+          $ref: '#/components/schemas/ProcessingErrorCode'
+        customer_ids:
+          type: array
+          minItems: 1
+          items:
+            type: string
+            minLength: 1
+          description: Customer identifiers that failed for this segment with this error
+
+    ProcessingErrorCode:
+      type: string
+      enum:
+        - internal_server_error
+        - throttled_on_upstream
+        - segment_expired
+        - unknown_segment
+        - invalid_configuration
+        - invalid_customer_id
+      description: |
+        Machine-readable processing error for membership updates in `207` responses.
+
+        - **`internal_server_error`**: retryable; transient processing failure
+        - **`throttled_on_upstream`**: retryable; upstream rate limit; retry with backoff
+        - **`segment_expired`**: non-retryable; re-register only if the segment is needed again (`POST …/segments` + full membership with `sync_type: initial`); see the `207` response description
+        - **`unknown_segment`**: non-retryable; segment `id` not registered on the integration
+        - **`invalid_configuration`**: non-retryable; integration not configured for membership processing
+        - **`invalid_customer_id`**: non-retryable; the customer identifier is not valid (over **256 bytes**, no alphanumeric character, or the literal `null` / `undefined`)
+
+        See the `207` response description for retry guidance.
+
+    BatchAcceptedResponse:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          enum:
+            - accepted
+          description: Membership update accepted for processing
+
+    ErrorResponse:
+      type: object
+      required:
+        - errors
+      properties:
+        errors:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/Error'
+
+    Error:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+          description: Machine-readable error code
+        message:
+          type: string
+          description: Human-readable error detail

@@ -11,6 +11,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Upload External segments API to Readme
+        uses: readmeio/rdme@v10
+        with:
+          rdme:
+            openapi upload marketing/external-segments-openapi.yaml --key=${{ secrets.MARKETING_API_KEY }} --slug=external-segments-openapi --branch=v2
+
       - name: Upload Workspace Import API to Readme
         uses: readmeio/rdme@v10
         with:
