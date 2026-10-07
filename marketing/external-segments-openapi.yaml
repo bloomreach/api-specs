@@ -45,6 +45,10 @@ paths:
 
         Sending both `expiration` and `permanent: true` returns **`400 Bad Request`**.
 
+        > ⚠️ Important
+        >
+        > **Expiration isn't enforced:** {user.mkg} doesn't automatically enforce the `expiration` value. You need to manually delete the properties that store external segment information.
+
         ## Segment name
 
         Send the segment display **`name`** as used in your system. {user.br} normalizes it before registration. If the input contains a **zero byte**, **dot** (`.`), or **dollar sign** (`$`), each occurrence is replaced with `__` as part of that normalization. You do not need to strip or escape these characters before sending the request. Different display names can normalize to the same value and return **`409 Conflict`**.
