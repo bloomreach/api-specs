@@ -29,18 +29,11 @@ paths:
       description: |
         Trigger the run of an existing workspace-scoped import programmatically.
 
-        The following types of imports can be triggered: [URL](https://documentation.bloomreach.com/data-hub/docs/url-imports), [File storage
-        (GCS, S3, SFTP)](https://documentation.bloomreach.com/data-hub/docs/file-storage-imports), [Data warehouse](https://documentation.bloomreach.com/data-hub/docs/data-warehouse-imports).
+        The following types of imports can be triggered: [URL](https://documentation.bloomreach.com/data-hub/docs/url-imports), [File storage (GCS, S3, SFTP)](https://documentation.bloomreach.com/data-hub/docs/file-storage-imports), [Data warehouse](https://documentation.bloomreach.com/data-hub/docs/data-warehouse-imports).
 
-        If you're using a URL or File storage (GCS, SFTP) import, you can
-        override its original path or URL. When overridden, the path
-        applies only to this specific run and does not modify the import
-        definition.
+        If you're using a URL or File storage (GCS, SFTP) import, you can override its original path or URL. When overridden, the path applies only to this specific run and does not modify the import definition.
 
-        Use this endpoint with a [**workspace** API key](https://documentation.bloomreach.com/data-hub/reference/data-hub-api-prerequisites) (issued in
-        Workspace settings → Access management → API). The
-        `{workspaceId}` in the path must match the workspace the API key
-        was issued for.
+        Use this endpoint with a [**workspace** API key](https://documentation.bloomreach.com/data-hub/reference/data-hub-api-prerequisites) (issued in Workspace settings → Access management → API). The `{workspaceId}` in the path must match the workspace the API key was issued for.
 
         ### Authorization
         - **Access type:** Private access (workspace API key)
@@ -123,8 +116,7 @@ paths:
           required: true
           in: path
           description: |
-            The ID of your {user.dh} workspace. Must match the
-            workspace the API key was issued for.
+            The ID of your {user.dh} workspace. Must match the workspace the API key was issued for.
           schema:
             type: string
       responses:
@@ -149,8 +141,7 @@ paths:
           required: true
           in: path
           description: |
-            The ID of your {user.dh} workspace. Must match the
-            workspace the API key was issued for.
+            The ID of your {user.dh} workspace. Must match the workspace the API key was issued for.
           schema:
             type: string
       responses:
@@ -179,18 +170,13 @@ components:
       type: http
       scheme: basic
       description: |
-        HTTP Basic authentication using your Key ID and Key Secret, sent
-        in the `Authorization` header:
+        HTTP Basic authentication using your Key ID and Key Secret, sent in the `Authorization` header:
 
         `Authorization: Basic base64(<Key-ID>:<Key-Secret>)`
 
-        For instructions on how to build the header, see
-        [Authorization header](https://documentation.bloomreach.com/engagement/reference/technical-information).
+        For instructions on how to build the header, see [Authorization header](https://documentation.bloomreach.com/engagement/reference/technical-information).
 
-        For these workspace-scoped endpoints, use a workspace API key. To
-        start an import, the API key must have the **Imports → Allow
-        trigger imports** permission enabled in Workspace settings →
-        Access management → API.
+        For these workspace-scoped endpoints, use a workspace API key. To start an import, the API key must have the **Imports → Allow trigger imports** permission enabled in Workspace settings → Access management → API.
 
   parameters:
     WorkspaceId:
@@ -198,9 +184,7 @@ components:
       in: path
       required: true
       description: |
-        The ID of your {user.dh} workspace. Must match the
-        workspace the API key was issued for; otherwise the request is
-        rejected with HTTP 403.
+        The ID of your {user.dh} workspace. Must match the workspace the API key was issued for; otherwise the request is rejected with HTTP 403.
       schema:
         type: string
         example: "12345678-1234-1234-1234-123456789abc"
@@ -217,8 +201,7 @@ components:
     StartImportBody:
       required: false
       description: |
-        Optional body to override the source path or skip the
-        connection-test step. The body may be omitted entirely.
+        Optional body to override the source path or skip the connection-test step. The body may be omitted entirely.
       content:
         application/json:
           schema:
@@ -267,9 +250,7 @@ components:
                 success: true
     BadRequest:
       description: |
-        Bad request — the request was malformed, contained invalid
-        parameters, or the underlying import service rejected the run
-        (for example, an invalid override path).
+        Bad request — the request was malformed, contained invalid parameters, or the underlying import service rejected the run (for example, an invalid override path).
       content:
         application/json:
           schema:
@@ -288,8 +269,7 @@ components:
                 error: "bad path"
     Unauthorized:
       description: |
-        Authentication is missing or invalid. Provide HTTP Basic
-        credentials with a valid Key ID and Key Secret.
+        Authentication is missing or invalid. Provide HTTP Basic credentials with a valid Key ID and Key Secret.
       headers:
         WWW-Authenticate:
           description: 'Basic realm="Login Required"'
@@ -297,9 +277,7 @@ components:
             type: string
     Forbidden:
       description: |
-        The API key lacks the **Imports → Allow trigger imports**
-        permission, or the `workspaceId` in the path does not match the
-        workspace the API key was issued for.
+        The API key lacks the **Imports → Allow trigger imports** permission, or the `workspaceId` in the path does not match the workspace the API key was issued for.
       content:
         application/json:
           schema:
@@ -313,8 +291,7 @@ components:
                     - "No permission to allow trigger imports. Check Workspace settings -> Access management -> API -> Imports -> Allow trigger imports."
     NotFound:
       description: |
-        No import with the given `import_id` exists in the addressed
-        workspace.
+        No import with the given `import_id` exists in the addressed workspace.
       content:
         application/json:
           schema:
@@ -335,19 +312,12 @@ components:
         path:
           type: string
           description: |
-            URL, GCS, or SFTP path that overrides the import's configured
-            source. The override applies only to this run — it does not
-            modify the import definition. Only applicable for URL and
-            Filestorage (GCS, SFTP) imports.
+            URL, GCS, or SFTP path that overrides the import's configured source. The override applies only to this run — it does not modify the import definition. Only applicable for URL and Filestorage (GCS, SFTP) imports.
           example: "https://example.com/data.csv"
         test_connection:
           type: boolean
           description: |
-            When `true` (default), the API tests the import-source
-            connection before starting the run. Set to `false` to skip
-            the check — useful for sources that may otherwise time out.
-            With the check skipped, the import can still fail later if
-            the source is unreachable.
+            When `true` (default), the API tests the import-source connection before starting the run. Set to `false` to skip the check — useful for sources that may otherwise time out. With the check skipped, the import can still fail later if the source is unreachable.
           default: true
 
     SuccessResponse:
@@ -362,9 +332,7 @@ components:
     ErrorResponse:
       type: object
       description: |
-        Error response. Most errors use the `success` + `errors._global`
-        shape; some failures returned by the underlying import service
-        are surfaced verbatim and use the alternative `error` shape.
+        Error response. Most errors use the `success` + `errors._global` shape; some failures returned by the underlying import service are surfaced verbatim and use the alternative `error` shape.
       properties:
         success:
           type: boolean
@@ -381,8 +349,7 @@ components:
         error:
           type: string
           description: |
-            Single error message returned by the underlying import
-            service for some failure modes.
+            Single error message returned by the underlying import service for some failure modes.
 
     NotFoundErrorResponse:
       type: object
