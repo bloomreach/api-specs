@@ -2,7 +2,7 @@ openapi: 3.1.0
 info:
   title: Workspace API
   description: |
-    API to programmatically work with a workspace's data.
+    API to programmatically work with a {user.dh} workspace.
   version: "2.1"
 
 servers:
