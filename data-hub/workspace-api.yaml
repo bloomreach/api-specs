@@ -17,8 +17,7 @@ tags:
     description: Operations to work with existing workspace imports.
   - name: IP addresses
     description: Operations to work with IP addresses for a workspace.
-  - name: Revoke access keys
-  - name: Rotate access keys
+  - name: API keys (JWT signing keys)
 
 paths:
   /data/v2/workspaces/{workspaceId}/imports/{import_id}/start:
@@ -52,7 +51,6 @@ paths:
       parameters:
         - $ref: '#/components/parameters/WorkspaceId'
         - $ref: '#/components/parameters/ImportId'
-        - $ref: '#/components/parameters/Authorization'
       requestBody:
         $ref: '#/components/requestBodies/StartImportBody'
       responses:
@@ -118,8 +116,8 @@ paths:
   /data/v2/workspaces/{workspace_id}/access-keys/revoke:
     post:
       tags:
-        - Revoke access keys
-      summary: Revoke key secret
+        - API keys (JWT signing keys)
+      summary: Revoke all API keys
       parameters:
         - name: workspace_id
           required: true
@@ -129,11 +127,9 @@ paths:
             workspace the API key was issued for.
           schema:
             type: string
-        - $ref: '#/components/parameters/Authorization'
-        - $ref: '#/components/parameters/Accept'
       responses:
         '200':
-          description: Revocation successful
+          description: All API keys revoked successfully.
           content:
             application/json:
               schema:
@@ -146,8 +142,8 @@ paths:
   /data/v2/workspaces/{workspace_id}/access-keys/rotate:
     post:
       tags:
-        - Rotate access keys
-      summary: Rotate key secret
+        - API keys (JWT signing keys)
+      summary: Create new API keys
       parameters:
         - name: workspace_id
           required: true
@@ -157,11 +153,9 @@ paths:
             workspace the API key was issued for.
           schema:
             type: string
-        - $ref: '#/components/parameters/Authorization'
-        - $ref: '#/components/parameters/Accept'
       responses:
         '200':
-          description: Rotation successful
+          description: API keys created successfully. `public_key` is the Key ID, and `private_key` is the Key Secret.
           content:
             application/json:
               schema:
@@ -185,38 +179,20 @@ components:
       type: http
       scheme: basic
       description: |
-        HTTP Basic authentication using a Key ID and Key Secret.
-        For this workspace-scoped endpoint, use a workspace API key.
+        HTTP Basic authentication using your Key ID and Key Secret, sent
+        in the `Authorization` header:
 
         `Authorization: Basic base64(<Key-ID>:<Key-Secret>)`
 
-        The API key must have the **Imports → Allow trigger imports**
-        permission enabled in Workspace settings → Access management →
-        API.
-
-  parameters:
-    Authorization:
-      name: authorization
-      in: header
-      required: true
-      description: |
-        HTTP Basic authentication using your Key ID and Key Secret:
-        `<Key-ID>:<Key-Secret>`.
         For instructions on how to build the header, see
         [Authorization header](https://documentation.bloomreach.com/engagement/reference/technical-information).
-      schema:
-        type: string
-        default: Basic ••••
-    Accept:
-      name: accept
-      in: header
-      required: false
-      description: |
-        The response format you want to receive. Leave this set to
-        `application/json`.
-      schema:
-        type: string
-        default: application/json
+
+        For these workspace-scoped endpoints, use a workspace API key. To
+        start an import, the API key must have the **Imports → Allow
+        trigger imports** permission enabled in Workspace settings →
+        Access management → API.
+
+  parameters:
     WorkspaceId:
       name: workspaceId
       in: path
