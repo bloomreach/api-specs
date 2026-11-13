@@ -17,11 +17,11 @@ jobs:
           rdme:
             openapi upload marketing/external-segments-openapi.yaml --key=${{ secrets.MARKETING_API_KEY }} --slug=external-segments-openapi --branch=v2
 
-      - name: Upload Workspace Import API to Readme
+      - name: Upload Workspace API to Readme
         uses: readmeio/rdme@v10
         with:
           rdme:
-            openapi upload data-hub/workspace-import-api.yaml --key=${{ secrets.DATA_HUB_API_KEY }} --slug=workspace-import-api --branch=v1.0
+            openapi upload data-hub/workspace-api.yaml --key=${{ secrets.DATA_HUB_API_KEY }} --slug=workspace-api --branch=v1.0
 
       - name: Upload Tracking API to Readme
         uses: readmeio/rdme@v10
