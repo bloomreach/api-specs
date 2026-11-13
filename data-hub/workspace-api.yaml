@@ -17,6 +17,8 @@ tags:
     description: Operations to work with existing workspace imports.
   - name: IP addresses
     description: Operations to work with IP addresses for a workspace.
+  - name: Revoke access keys
+  - name: Rotate access keys
 
 paths:
   /data/v2/workspaces/{workspaceId}/imports/{import_id}/start:
@@ -50,6 +52,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/WorkspaceId'
         - $ref: '#/components/parameters/ImportId'
+        - $ref: '#/components/parameters/Authorization'
       requestBody:
         $ref: '#/components/requestBodies/StartImportBody'
       responses:
@@ -79,7 +82,7 @@ paths:
           required: true
           schema:
             type: string
-          description: The workspace ID.
+          description: The ID of your {user.dh} workspace.
       responses:
         '200':
           description: Outbound IP groups
@@ -112,28 +115,114 @@ paths:
         '404':
           description: Workspace not found
           
+  /data/v2/workspaces/{workspace_id}/access-keys/revoke:
+    post:
+      tags:
+        - Revoke access keys
+      summary: Revoke key secret
+      parameters:
+        - name: workspace_id
+          required: true
+          in: path
+          description: |
+            The ID of your {user.dh} workspace. Must match the
+            workspace the API key was issued for.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/Accept'
+      responses:
+        '200':
+          description: Revocation successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+        '401':
+          $ref: '#/components/responses/AccessKeysUnauthorized'
+        '500':
+          $ref: '#/components/responses/AccessKeysServerError'
+
+  /data/v2/workspaces/{workspace_id}/access-keys/rotate:
+    post:
+      tags:
+        - Rotate access keys
+      summary: Rotate key secret
+      parameters:
+        - name: workspace_id
+          required: true
+          in: path
+          description: |
+            The ID of your {user.dh} workspace. Must match the
+            workspace the API key was issued for.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/Accept'
+      responses:
+        '200':
+          description: Rotation successful
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [success, public_key, private_key]
+                properties:
+                  success:
+                    type: boolean
+                  public_key:
+                    type: string
+                  private_key:
+                    type: string
+        '401':
+          $ref: '#/components/responses/AccessKeysUnauthorized'
+        '500':
+          $ref: '#/components/responses/AccessKeysServerError'
+
 components:
   securitySchemes:
     basicAuth:
       type: http
       scheme: basic
       description: |
-        HTTP Basic authentication using an API Key ID and API Secret.
+        HTTP Basic authentication using a Key ID and Key Secret.
         For this workspace-scoped endpoint, use a workspace API key.
 
-        `Authorization: Basic <base64(APIKeyID:APISecret)>`
+        `Authorization: Basic base64(<Key-ID>:<Key-Secret>)`
 
         The API key must have the **Imports → Allow trigger imports**
         permission enabled in Workspace settings → Access management →
         API.
 
   parameters:
+    Authorization:
+      name: authorization
+      in: header
+      required: true
+      description: |
+        HTTP Basic authentication using your Key ID and Key Secret:
+        `<Key-ID>:<Key-Secret>`.
+        For instructions on how to build the header, see
+        [Authorization header](https://documentation.bloomreach.com/engagement/reference/technical-information).
+      schema:
+        type: string
+        default: Basic ••••
+    Accept:
+      name: accept
+      in: header
+      required: false
+      description: |
+        The response format you want to receive. Leave this set to
+        `application/json`.
+      schema:
+        type: string
+        default: application/json
     WorkspaceId:
       name: workspaceId
       in: path
       required: true
       description: |
-        The ID of your {user.mkg} workspace. Must match the
+        The ID of your {user.dh} workspace. Must match the
         workspace the API key was issued for; otherwise the request is
         rejected with HTTP 403.
       schema:
@@ -170,6 +259,26 @@ components:
                 test_connection: false
 
   responses:
+    AccessKeysUnauthorized:
+      description: Unauthorized
+      content:
+        text/plain:
+          schema:
+            type: string
+            example: |
+              Could not verify your access level for that URL.
+              You have to login with proper credentials using HTTP Basic Auth (public key as username and private key as password)
+    AccessKeysServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [success]
+            properties:
+              success:
+                type: boolean
+                example: false
     Started:
       description: Import triggered successfully.
       content:
@@ -204,7 +313,7 @@ components:
     Unauthorized:
       description: |
         Authentication is missing or invalid. Provide HTTP Basic
-        credentials with a valid API Key ID and Secret.
+        credentials with a valid Key ID and Key Secret.
       headers:
         WWW-Authenticate:
           description: 'Basic realm="Login Required"'
