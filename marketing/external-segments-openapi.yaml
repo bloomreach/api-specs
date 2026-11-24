@@ -87,7 +87,7 @@ paths:
         - **`expiration`** omitted and **`permanent`** not set: expiration defaults to **30 days** from registration; the computed timestamp is returned in the `201` response
         - **`expiration`** provided: Unix timestamp in **seconds** when the segment registration expires; must be a positive integer greater than the request time
 
-        The **`expiration`** returned in the `201` response reflects the value at registration time. It may be changed later in {user.mkg}. Do not treat it as the source of truth for when to stop membership updates. Continue sending updates until the API returns **`segment_expired`**.
+        The **`expiration`** returned in the `201` response reflects the value at registration time. It may be changed later in {user.mkg}. Do not treat it as the source of truth for when to stop membership updates. The API accepts membership updates for a segment after its **`expiration`**.
 
         Sending both `expiration` and `permanent: true` returns **`400 Bad Request`**.
 
@@ -276,7 +276,6 @@ paths:
 
             - **`internal_server_error`**: transient failure while processing membership for one or more customer IDs in the group
             - **`throttled_on_upstream`**: {user.mkg} rate limit reached while processing one or more customer IDs in the group
-            - **`segment_expired`**: membership update targets a segment whose registration has expired
             - **`unknown_segment`**: segment `id` is not registered on this integration
             - **`invalid_configuration`**: integration is not configured to process membership updates
             - **`invalid_customer_id`**: one or more customer identifiers in the group are not valid identifiers: longer than **256 bytes**, containing no alphanumeric character (whitespace-only included), or the literal `null` / `undefined`. The remaining identifiers in the request are processed normally
@@ -290,7 +289,6 @@ paths:
 
             ## Non-retryable
 
-            - **`segment_expired`**: do not retry the same payload. If the segment is needed in {user.br} again, re-create it via `POST …/segments` (the expired registration cannot be reused) and push the **complete** membership for that segment with **`sync_type: initial`**. Delta updates are insufficient. {user.br} has already removed the membership data.
             - **`unknown_segment`**: do not retry until the segment is registered via `POST …/segments` for the referenced `segment.id`
             - **`invalid_configuration`**: non-retryable; integration is not configured to process membership updates (resolve via {user.br} integration setup)
             - **`invalid_customer_id`**: do not resend these identifiers unchanged. Correct them at the source (shorten to **256 bytes or fewer**, supply a real identifier instead of a blank or placeholder value, or map a different identifier field at integration setup) and send them again
@@ -308,10 +306,6 @@ paths:
                     customer_ids:
                       - cust_abc123
                       - cust_def456
-                  - segment_id: 674a1b2c3d4e5f6789012345
-                    error: segment_expired
-                    customer_ids:
-                      - cust_xyz789
                   - segment_id: 674a1b2c3d4e5f6789012346
                     error: unknown_segment
                     customer_ids:
@@ -801,7 +795,7 @@ components:
           description: |
             Segment expiry as Unix timestamp in seconds at registration time. Omitted when `permanent` is `true`. When the request omits `expiration` and `permanent`, this is registration time plus **30 days**.
 
-            May differ from the current expiry if changed in {user.mkg}. Rely on **`segment_expired`** rather than this field to decide when to stop membership updates.
+            May differ from the current expiry if changed in {user.mkg}. Do not use this field to decide when to stop membership updates.
         permanent:
           $ref: '#/components/schemas/SegmentPermanent'
 
@@ -870,7 +864,6 @@ components:
       enum:
         - internal_server_error
         - throttled_on_upstream
-        - segment_expired
         - unknown_segment
         - invalid_configuration
         - invalid_customer_id
@@ -879,7 +872,6 @@ components:
 
         - **`internal_server_error`**: retryable; transient processing failure
         - **`throttled_on_upstream`**: retryable; upstream rate limit; retry with backoff
-        - **`segment_expired`**: non-retryable; re-register only if the segment is needed again (`POST …/segments` + full membership with `sync_type: initial`); see the `207` response description
         - **`unknown_segment`**: non-retryable; segment `id` not registered on the integration
         - **`invalid_configuration`**: non-retryable; integration not configured for membership processing
         - **`invalid_customer_id`**: non-retryable; the customer identifier is not valid (over **256 bytes**, no alphanumeric character, or the literal `null` / `undefined`)
