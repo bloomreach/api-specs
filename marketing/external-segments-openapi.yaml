@@ -14,9 +14,57 @@ servers:
 tags:
   - name: Segments and memberships
     description: |
-      Register external segments and push segment membership updates into {user.mkg}.
+      Register external segments and push segment membership updates into {user.mkg}. Use the status endpoint to test the connection.
 
 paths:
+  /intg/external-segments/v1.0/{integration_id}/status:
+    get:
+      operationId: getExternalSegmentConnectionStatus
+      tags:
+        - Segments and memberships
+      summary: Test the connection
+      description: |
+        Checks that the endpoint URL and the access key are valid for the integration. Use this endpoint for the connection test and for the health checks of your connector.
+
+        The request has no body. It does not register a segment and it does not change segment membership. It does not count toward the membership update rate limits.
+
+        ## Response semantics
+
+        - **`200 OK`**: the integration exists, the access key is valid, and the integration can accept requests
+        - **`401 Unauthorized`**: the access key is missing or it is not valid for this integration
+        - **`404 Not Found`**: the instance has no integration with this **`integration_id`**. Make sure that the endpoint URL is the URL from the integration setup
+
+        Do not send a membership update with an empty **`customer_ids`** array to test the connection. That request returns **`400 Bad Request`**.
+      parameters:
+        - $ref: '#/components/parameters/IntegrationId'
+      security:
+        - AccessKeyAuth: []
+      responses:
+        '200':
+          description: The endpoint URL and the access key are valid for the integration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionStatusResponse'
+              example:
+                status: ok
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '502':
+          description: |
+            Bad gateway. The request did not reach the API application. The response body may not be JSON. Retry later without parsing the body.
+        '503':
+          description: |
+            Service temporarily unavailable. The request did not reach the API application. The response body may not be JSON. Retry later without parsing the body.
+        '504':
+          description: |
+            Gateway timeout. Processing did not complete in time. Retry later.
   /intg/external-segments/v1.0/{integration_id}/segments:
     post:
       operationId: postExternalSegmentCreate
@@ -428,7 +476,7 @@ components:
               - error: not_found
                 message: Integration not found
     MethodNotAllowed:
-      description: HTTP method not allowed (only `POST` is supported on these endpoints)
+      description: HTTP method not allowed (the status endpoint supports only `GET`, the other endpoints support only `POST`)
       content:
         application/json:
           schema:
@@ -700,6 +748,17 @@ components:
             May differ from the current expiry if changed in {user.mkg}. Rely on **`segment_expired`** rather than this field to decide when to stop membership updates.
         permanent:
           $ref: '#/components/schemas/SegmentPermanent'
+
+    ConnectionStatusResponse:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          enum:
+            - ok
+          description: The endpoint URL and the access key are valid for the integration
 
     MembershipSyncSuccessResponse:
       type: object
