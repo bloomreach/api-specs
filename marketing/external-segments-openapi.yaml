@@ -33,8 +33,6 @@ paths:
         - **`200 OK`**: the integration exists, the access key is valid, and the integration can accept requests
         - **`401 Unauthorized`**: the access key is missing or it is not valid for this integration
         - **`404 Not Found`**: the instance has no integration with this **`integration_id`**. Make sure that the endpoint URL is the URL from the integration setup
-
-        Do not send a membership update with an empty **`customer_ids`** array to test the connection. That request returns **`400 Bad Request`**.
       parameters:
         - $ref: '#/components/parameters/IntegrationId'
       security:
