@@ -168,6 +168,8 @@ paths:
           $ref: '#/components/responses/BadRequestSegmentCreate'
         '401':
           $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
         '405':
@@ -326,6 +328,8 @@ paths:
           $ref: '#/components/responses/BadRequestMembership'
         '401':
           $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
         '405':
@@ -458,6 +462,16 @@ components:
             errors:
               - error: unauthorized
                 message: Invalid access key
+    Forbidden:
+      description: Integration disabled or not authorized for this instance
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            errors:
+              - error: forbidden
+                message: Integration is disabled or not authorized for this instance
     NotFound:
       description: Integration not found
       content:
